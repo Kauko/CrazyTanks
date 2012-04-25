@@ -16,7 +16,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 #endregion
 
-namespace GameStateManagement
+namespace TileWorld
 {
     /// <summary>
     /// This screen implements the actual game logic. It is just a

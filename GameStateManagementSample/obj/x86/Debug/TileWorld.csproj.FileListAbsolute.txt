@@ -1,0 +1,11 @@
+G:\Tileworld\GameStateManagementSample\bin\x86\Debug\Content\background.xnb
+G:\Tileworld\GameStateManagementSample\bin\x86\Debug\Content\blank.xnb
+G:\Tileworld\GameStateManagementSample\bin\x86\Debug\Content\gradient.xnb
+G:\Tileworld\GameStateManagementSample\bin\x86\Debug\Content\menufont.xnb
+G:\Tileworld\GameStateManagementSample\bin\x86\Debug\Content\gamefont.xnb
+G:\Tileworld\GameStateManagementSample\bin\x86\Debug\TileWorld.exe
+G:\Tileworld\GameStateManagementSample\bin\x86\Debug\TileWorld.pdb
+G:\Tileworld\GameStateManagementSample\obj\x86\Debug\ResolveAssemblyReference.cache
+G:\Tileworld\GameStateManagementSample\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+G:\Tileworld\GameStateManagementSample\obj\x86\Debug\TileWorld.exe
+G:\Tileworld\GameStateManagementSample\obj\x86\Debug\TileWorld.pdb
