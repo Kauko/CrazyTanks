@@ -1,0 +1,11 @@
+C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\bin\x86\Debug\Content\background.xnb
+C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\bin\x86\Debug\Content\blank.xnb
+C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\bin\x86\Debug\Content\gradient.xnb
+C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\bin\x86\Debug\Content\menufont.xnb
+C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\bin\x86\Debug\Content\gamefont.xnb
+C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\bin\x86\Debug\GameStateManagementSample.exe
+C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\bin\x86\Debug\GameStateManagementSample.pdb
+C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\obj\x86\Debug\GameStateManagementSample.exe
+C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\obj\x86\Debug\GameStateManagementSample.pdb
