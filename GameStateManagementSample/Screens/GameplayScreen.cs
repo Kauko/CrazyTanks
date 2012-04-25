@@ -195,9 +195,9 @@ namespace GameStateManagement
 
             spriteBatch.Begin();
 
-            spriteBatch.DrawString(gameFont, "// TODO", playerPosition, Color.Green);
+            spriteBatch.DrawString(gameFont, "FOO", playerPosition, Color.Green);
 
-            spriteBatch.DrawString(gameFont, "Insert Gameplay Here",
+            spriteBatch.DrawString(gameFont, "BAR",
                                    enemyPosition, Color.DarkRed);
 
             spriteBatch.End();

@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\bin\x86\Debug\Content\background.xnb</Output>
-      <Time>2010-09-15T14:43:52+03:00</Time>
+      <Output>G:\Tileworld\GameStateManagementSample\bin\x86\Debug\Content\background.xnb</Output>
+      <Time>2012-04-25T18:45:45.0480155+03:00</Time>
     </Item>
     <Item>
       <Source>blank.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\bin\x86\Debug\Content\blank.xnb</Output>
-      <Time>2010-09-15T14:43:52+03:00</Time>
+      <Output>G:\Tileworld\GameStateManagementSample\bin\x86\Debug\Content\blank.xnb</Output>
+      <Time>2012-04-25T18:45:45.058016+03:00</Time>
     </Item>
     <Item>
       <Source>gradient.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\bin\x86\Debug\Content\gradient.xnb</Output>
-      <Time>2010-09-15T14:43:52+03:00</Time>
+      <Output>G:\Tileworld\GameStateManagementSample\bin\x86\Debug\Content\gradient.xnb</Output>
+      <Time>2012-04-25T18:45:45.0610162+03:00</Time>
     </Item>
     <Item>
       <Source>menufont.spritefont</Source>
@@ -34,8 +34,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\bin\x86\Debug\Content\menufont.xnb</Output>
-      <Time>2010-09-15T14:43:52+03:00</Time>
+      <Output>G:\Tileworld\GameStateManagementSample\bin\x86\Debug\Content\menufont.xnb</Output>
+      <Time>2012-04-25T18:45:45.0630163+03:00</Time>
     </Item>
     <Item>
       <Source>gamefont.spritefont</Source>
@@ -43,8 +43,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\bin\x86\Debug\Content\gamefont.xnb</Output>
-      <Time>2010-09-15T14:43:52+03:00</Time>
+      <Output>G:\Tileworld\GameStateManagementSample\bin\x86\Debug\Content\gamefont.xnb</Output>
+      <Time>2012-04-25T18:45:45.0600161+03:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -52,10 +52,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\Content\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\GameStateManagementSample\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>G:\Tileworld\Content\</RootDirectory>
+      <LoggerRootDirectory>G:\Tileworld\GameStateManagementSample\</LoggerRootDirectory>
+      <IntermediateDirectory>G:\Tileworld\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>G:\Tileworld\GameStateManagementSample\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
