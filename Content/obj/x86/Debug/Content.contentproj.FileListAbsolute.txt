@@ -1,2 +1,0 @@
-C:\Users\Kauko\Downloads\GSMSample_4_0_WIN_XBOX\Content\obj\x86\Debug\ResolveAssemblyReference.cache
-G:\Tileworld\Content\obj\x86\Debug\ResolveAssemblyReference.cache

@@ -1,0 +1,6 @@
+Content\Placeholder\Koala.xnb
+Content\Tutorial\background.xnb
+Content\Tutorial\blank.xnb
+Content\Tutorial\gradient.xnb
+Content\Tutorial\gamefont.xnb
+Content\Tutorial\menufont.xnb
