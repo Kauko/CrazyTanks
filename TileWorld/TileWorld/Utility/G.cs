@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TileWorld.Camera;
+using Tileworld;
 
 namespace TileWorld.Utility
 {
@@ -14,6 +15,7 @@ namespace TileWorld.Utility
     {
         /* One time init variables (can a variable be called a variable if it's not varied?)*/
         public static Camera2d cam;
+        public static Game1 gameInstance;
         /* End of one time init variables */
 
         /* Global variables */

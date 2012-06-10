@@ -1,6 +1,6 @@
 using System;
 
-namespace TileWorld
+namespace Tileworld
 {
 #if WINDOWS || XBOX
     static class Program

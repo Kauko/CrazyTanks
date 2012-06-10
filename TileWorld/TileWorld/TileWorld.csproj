@@ -1,24 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <ProjectGuid>{4FCE8193-5F86-42FF-8537-121D83EF11A3}</ProjectGuid>
+    <ProjectGuid>{97730032-1848-4F60-A697-BF9BD2FB0B9D}</ProjectGuid>
     <ProjectTypeGuids>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TileWorld</RootNamespace>
-    <AssemblyName>TileWorld</AssemblyName>
+    <RootNamespace>Tileworld</RootNamespace>
+    <AssemblyName>Tileworld</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
     <XnaProfile>HiDef</XnaProfile>
-    <XnaCrossPlatformGroupID>981e71f5-77e1-4ef3-ab51-437f72bc9b87</XnaCrossPlatformGroupID>
+    <XnaCrossPlatformGroupID>cc83d75b-972d-465f-82e5-6626148bd08c</XnaCrossPlatformGroupID>
     <XnaOutputType>Game</XnaOutputType>
     <ApplicationIcon>Game.ico</ApplicationIcon>
     <Thumbnail>GameThumbnail.png</Thumbnail>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -31,6 +30,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -110,24 +110,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Screens\BackgroundScreen.cs" />
     <Compile Include="Camera\Camera2d.cs" />
-    <Compile Include="Screens\GameplayScreen.cs" />
-    <Compile Include="Screens\LoadingScreen.cs" />
-    <Compile Include="Screens\MainMenuScreen.cs" />
-    <Compile Include="Screens\MenuEntry.cs" />
-    <Compile Include="Screens\MenuScreen.cs" />
-    <Compile Include="Screens\MessageBoxScreen.cs" />
-    <Compile Include="Screens\OptionsMenuScreen.cs" />
-    <Compile Include="Screens\PauseMenuScreen.cs" />
-    <Compile Include="Screens\PlayerIndexEventArgs.cs" />
-    <Compile Include="ScreenManager\GameScreen.cs" />
-    <Compile Include="ScreenManager\InputState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="ScreenManager\ScreenManager.cs" />
-    <Compile Include="Terrain\Grid.cs" />
     <Compile Include="Utility\C.cs" />
     <Compile Include="Utility\G.cs" />
     <Compile Include="Utility\TextureRefs.cs" />
@@ -137,8 +123,8 @@
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TileWorldContent\TileWorldContent.contentproj">
-      <Name>TileWorldContent</Name>
+    <ProjectReference Include="..\TileworldContent\TileworldContent.contentproj">
+      <Name>TileworldContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>
     </ProjectReference>
   </ItemGroup>

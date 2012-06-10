@@ -7,53 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kauko\Dropbox\TileWorld\TileWorld\TileWorld\bin\x86\Debug\Content\Placeholder\Koala.xnb</Output>
-      <Time>2012-03-05T20:39:06.6998649+02:00</Time>
-    </Item>
-    <Item>
-      <Source>Tutorial\background.png</Source>
-      <Name>Tutorial\background</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Kauko\Dropbox\TileWorld\TileWorld\TileWorld\bin\x86\Debug\Content\Tutorial\background.xnb</Output>
-      <Time>2012-04-25T17:39:33.4523224+03:00</Time>
-    </Item>
-    <Item>
-      <Source>Tutorial\blank.png</Source>
-      <Name>Tutorial\blank</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Kauko\Dropbox\TileWorld\TileWorld\TileWorld\bin\x86\Debug\Content\Tutorial\blank.xnb</Output>
-      <Time>2012-04-25T17:39:33.4523224+03:00</Time>
-    </Item>
-    <Item>
-      <Source>Tutorial\gradient.png</Source>
-      <Name>Tutorial\gradient</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Kauko\Dropbox\TileWorld\TileWorld\TileWorld\bin\x86\Debug\Content\Tutorial\gradient.xnb</Output>
-      <Time>2012-04-25T17:39:33.4523224+03:00</Time>
-    </Item>
-    <Item>
-      <Source>Tutorial\gamefont.spritefont</Source>
-      <Name>Tutorial\gamefont</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Kauko\Dropbox\TileWorld\TileWorld\TileWorld\bin\x86\Debug\Content\Tutorial\gamefont.xnb</Output>
-      <Time>2012-04-25T17:39:33.4523224+03:00</Time>
-    </Item>
-    <Item>
-      <Source>Tutorial\menufont.spritefont</Source>
-      <Name>Tutorial\menufont</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Kauko\Dropbox\TileWorld\TileWorld\TileWorld\bin\x86\Debug\Content\Tutorial\menufont.xnb</Output>
-      <Time>2012-04-25T17:39:33.4623225+03:00</Time>
+      <Output>c:\users\kauko\documents\DELETE\Projects\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Content\Placeholder\Koala.xnb</Output>
+      <Time>2012-06-10T22:11:59.8763743+03:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -61,10 +16,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Kauko\Dropbox\TileWorld\TileWorld\TileWorldContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Kauko\Dropbox\TileWorld\TileWorld\TileWorld\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Kauko\Dropbox\TileWorld\TileWorld\TileWorldContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Kauko\Dropbox\TileWorld\TileWorld\TileWorld\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>c:\users\kauko\documents\DELETE\Projects\Tileworld\Tileworld\TileworldContent\</RootDirectory>
+      <LoggerRootDirectory>c:\users\kauko\documents\DELETE\Projects\Tileworld\Tileworld\Tileworld\</LoggerRootDirectory>
+      <IntermediateDirectory>c:\users\kauko\documents\DELETE\Projects\Tileworld\Tileworld\TileworldContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>c:\users\kauko\documents\DELETE\Projects\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

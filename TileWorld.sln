@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TileWorld", "TileWorld\TileWorld\TileWorld.csproj", "{4FCE8193-5F86-42FF-8537-121D83EF11A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tileworld", "Tileworld\Tileworld\Tileworld.csproj", "{97730032-1848-4F60-A697-BF9BD2FB0B9D}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "TileWorldContent", "TileWorld\TileWorldContent\TileWorldContent.contentproj", "{F85C6EAA-4861-43CD-A282-B54ABA7FAA26}"
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "TileworldContent", "Tileworld\TileworldContent\TileworldContent.contentproj", "{C7A20BD6-EB72-4CC9-AC23-4EECEFECC5CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +11,12 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4FCE8193-5F86-42FF-8537-121D83EF11A3}.Debug|x86.ActiveCfg = Debug|x86
-		{4FCE8193-5F86-42FF-8537-121D83EF11A3}.Debug|x86.Build.0 = Debug|x86
-		{4FCE8193-5F86-42FF-8537-121D83EF11A3}.Release|x86.ActiveCfg = Release|x86
-		{4FCE8193-5F86-42FF-8537-121D83EF11A3}.Release|x86.Build.0 = Release|x86
-		{F85C6EAA-4861-43CD-A282-B54ABA7FAA26}.Debug|x86.ActiveCfg = Debug|x86
-		{F85C6EAA-4861-43CD-A282-B54ABA7FAA26}.Release|x86.ActiveCfg = Release|x86
+		{97730032-1848-4F60-A697-BF9BD2FB0B9D}.Debug|x86.ActiveCfg = Debug|x86
+		{97730032-1848-4F60-A697-BF9BD2FB0B9D}.Debug|x86.Build.0 = Debug|x86
+		{97730032-1848-4F60-A697-BF9BD2FB0B9D}.Release|x86.ActiveCfg = Release|x86
+		{97730032-1848-4F60-A697-BF9BD2FB0B9D}.Release|x86.Build.0 = Release|x86
+		{C7A20BD6-EB72-4CC9-AC23-4EECEFECC5CE}.Debug|x86.ActiveCfg = Debug|x86
+		{C7A20BD6-EB72-4CC9-AC23-4EECEFECC5CE}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
