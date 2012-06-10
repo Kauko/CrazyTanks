@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 #endregion
 
-namespace TileWorld
+namespace GameStateManagement
 {
     /// <summary>
     /// Sample showing how to manage different game states, with transitions
@@ -20,7 +20,7 @@ namespace TileWorld
     /// menu. This main game class is extremely simple: all the interesting
     /// stuff happens in the ScreenManager component.
     /// </summary>
-    public class TileWorld : Microsoft.Xna.Framework.Game
+    public class GameStateManagementGame : Microsoft.Xna.Framework.Game
     {
         #region Fields
 
@@ -44,7 +44,7 @@ namespace TileWorld
         /// <summary>
         /// The main game constructor.
         /// </summary>
-        public TileWorld()
+        public GameStateManagementGame()
         {
             Content.RootDirectory = "Content";
 
@@ -105,7 +105,7 @@ namespace TileWorld
     {
         static void Main()
         {
-            using (TileWorld game = new TileWorld())
+            using (GameStateManagementGame game = new GameStateManagementGame())
             {
                 game.Run();
             }

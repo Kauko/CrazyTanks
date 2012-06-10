@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework.Input.Touch;
 using System.IO;
 #endregion
 
-namespace TileWorld
+namespace GameStateManagement
 {
     /// <summary>
     /// Enum describes the screen transition state.
