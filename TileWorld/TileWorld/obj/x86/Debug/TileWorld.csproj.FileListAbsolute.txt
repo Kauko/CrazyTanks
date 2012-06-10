@@ -5,3 +5,10 @@ c:\users\kauko\documents\DELETE\Projects\Tileworld\Tileworld\Tileworld\obj\x86\D
 c:\users\kauko\documents\DELETE\Projects\Tileworld\Tileworld\Tileworld\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 c:\users\kauko\documents\DELETE\Projects\Tileworld\Tileworld\Tileworld\obj\x86\Debug\Tileworld.exe
 c:\users\kauko\documents\DELETE\Projects\Tileworld\Tileworld\Tileworld\obj\x86\Debug\Tileworld.pdb
+G:\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Content\Placeholder\Koala.xnb
+G:\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Tileworld.exe
+G:\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Tileworld.pdb
+G:\Tileworld\Tileworld\Tileworld\obj\x86\Debug\ResolveAssemblyReference.cache
+G:\Tileworld\Tileworld\Tileworld\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+G:\Tileworld\Tileworld\Tileworld\obj\x86\Debug\Tileworld.exe
+G:\Tileworld\Tileworld\Tileworld\obj\x86\Debug\Tileworld.pdb

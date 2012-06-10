@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TileWorld.Camera;
+using Tileworld.Camera;
 using Tileworld;
+using Tileworld.Logging;
 
-namespace TileWorld.Utility
+namespace Tileworld.Utility
 {
     /*  Utility class for global variables
      * some of these should be set only once (such as the camera variable)
@@ -16,9 +17,11 @@ namespace TileWorld.Utility
         /* One time init variables (can a variable be called a variable if it's not varied?)*/
         public static Camera2d cam;
         public static Game1 gameInstance;
+        public static Logger log;
         /* End of one time init variables */
 
         /* Global variables */
+        public static GameState gameState;
 
         /* End of global variables */
     }

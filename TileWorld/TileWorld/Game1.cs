@@ -8,11 +8,14 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using TileWorld.Utility;
-using TileWorld.Camera;
+using Tileworld.Camera;
+using Tileworld.Utility;
+using Tileworld.Logging;
 
 namespace Tileworld
 {
+
+    public enum GameState { playing, paused };
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -24,7 +27,7 @@ namespace Tileworld
 
         KeyboardState oldKeyboard;
         MouseState oldMouse;
-        float oldFramerate = 0.0f;
+        GameState gameState;
 
         public Game1()
         {
@@ -34,7 +37,9 @@ namespace Tileworld
             this.IsMouseVisible = true;
 
             G.cam = new Camera2d();
+            G.log = new Logger();
             G.gameInstance = this;
+            G.gameState = GameState.playing;
         }
 
         /// <summary>
@@ -47,9 +52,12 @@ namespace Tileworld
         {
             device = graphics.GraphicsDevice;
 
-            graphics.PreferredBackBufferWidth = device.DisplayMode.Width;
-            graphics.PreferredBackBufferHeight = device.DisplayMode.Height;
-            graphics.IsFullScreen = true;
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 720;
+
+            //graphics.PreferredBackBufferWidth = device.DisplayMode.Width;
+            //graphics.PreferredBackBufferHeight = device.DisplayMode.Height;
+            //graphics.IsFullScreen = true;
             graphics.ApplyChanges();
 
             base.Initialize();
@@ -86,15 +94,24 @@ namespace Tileworld
         {
             KeyboardState keyboard = Keyboard.GetState();
             MouseState mouse = Mouse.GetState();
+            G.log.gameTime = gameTime;
 
             if (keyboard.IsKeyDown(Keys.Escape))
                 Exit();
+            switch(G.gameState){
+                case GameState.paused:
+                    break;
+                case GameState.playing:
+                    if(this.IsActive)
+                        G.cam.updateCamera(keyboard, mouse);
+                    G.log.logFPS();
+                    break;
+            }
 
-            
-            G.cam.updateCamera(keyboard, mouse);
 
             oldMouse = mouse;
             oldKeyboard = keyboard;
+            
 
             base.Update(gameTime);
         }
@@ -109,12 +126,6 @@ namespace Tileworld
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, G.cam.get_transformation());
             spriteBatch.Draw(TextureRefs.koala, new Vector2(0.0f, 0.0f), Color.White);
-
-            //Writes framerate to console
-            float frameRate = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (frameRate - oldFramerate > 3.0f || frameRate - oldFramerate < -3.0f)
-                Console.WriteLine("frame rate: " + frameRate);
-            oldFramerate = frameRate;
 
             spriteBatch.End();
 

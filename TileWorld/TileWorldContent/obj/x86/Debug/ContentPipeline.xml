@@ -7,7 +7,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>c:\users\kauko\documents\DELETE\Projects\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Content\Placeholder\Koala.xnb</Output>
+      <Output>G:\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Content\Placeholder\Koala.xnb</Output>
       <Time>2012-06-10T22:11:59.8763743+03:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
@@ -16,10 +16,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>c:\users\kauko\documents\DELETE\Projects\Tileworld\Tileworld\TileworldContent\</RootDirectory>
-      <LoggerRootDirectory>c:\users\kauko\documents\DELETE\Projects\Tileworld\Tileworld\Tileworld\</LoggerRootDirectory>
-      <IntermediateDirectory>c:\users\kauko\documents\DELETE\Projects\Tileworld\Tileworld\TileworldContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>c:\users\kauko\documents\DELETE\Projects\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>G:\Tileworld\Tileworld\TileworldContent\</RootDirectory>
+      <LoggerRootDirectory>G:\Tileworld\Tileworld\Tileworld\</LoggerRootDirectory>
+      <IntermediateDirectory>G:\Tileworld\Tileworld\TileworldContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>G:\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using TileWorld.Utility;
+using Tileworld.Utility;
 
-namespace TileWorld.Camera
+namespace Tileworld.Camera
 {
     public class Camera2d
     {
@@ -118,6 +118,7 @@ namespace TileWorld.Camera
                 if (G.cam.Zoom > C.camZoomSpeedThreshold)
                 {
                     G.cam.Zoom += C.camKeyboardCloseZoomSpeed;
+                    G.log.logMsg("zoom in");
                 }
                 //zoom for far away
                 else

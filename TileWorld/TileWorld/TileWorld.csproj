@@ -116,6 +116,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Utility\C.cs" />
     <Compile Include="Utility\G.cs" />
+    <Compile Include="Logging\Logger.cs" />
     <Compile Include="Utility\TextureRefs.cs" />
   </ItemGroup>
   <ItemGroup>
