@@ -15,9 +15,7 @@ namespace Tileworld.Utility
     public static class G
     {
         /* One time init variables (can a variable be called a variable if it's not varied?)*/
-        public static Camera2d cam;
-        public static Game1 gameInstance;
-        public static Logger log;
+        //Moved this to services for now
         /* End of one time init variables */
 
         /* Global variables */

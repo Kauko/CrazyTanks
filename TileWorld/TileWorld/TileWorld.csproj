@@ -116,7 +116,8 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Utility\C.cs" />
     <Compile Include="Utility\G.cs" />
-    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Utility\GameServices.cs" />
+    <Compile Include="Utility\Logger.cs" />
     <Compile Include="Utility\TextureRefs.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +156,9 @@
       <ProductName>Microsoft XNA Framework Redistributable 4.0</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Logging\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

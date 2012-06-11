@@ -22,24 +22,17 @@ namespace Tileworld
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        GraphicsDevice device;
         SpriteBatch spriteBatch;
 
         KeyboardState oldKeyboard;
         MouseState oldMouse;
-        GameState gameState;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             this.Window.Title = "Tile World";
-            this.IsMouseVisible = true;
-
-            G.cam = new Camera2d();
-            G.log = new Logger();
-            G.gameInstance = this;
-            G.gameState = GameState.playing;
+            this.IsMouseVisible = true;          
         }
 
         /// <summary>
@@ -50,7 +43,12 @@ namespace Tileworld
         /// </summary>
         protected override void Initialize()
         {
-            device = graphics.GraphicsDevice;
+
+            GameServices.AddService<Camera2d>(new Camera2d());
+            GameServices.AddService<Logger>(new Logger());
+            GameServices.AddService<GraphicsDevice>(graphics.GraphicsDevice);
+
+            G.gameState = GameState.playing;
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
@@ -94,7 +92,7 @@ namespace Tileworld
         {
             KeyboardState keyboard = Keyboard.GetState();
             MouseState mouse = Mouse.GetState();
-            G.log.gameTime = gameTime;
+            GameServices.GetService<Logger>().gameTime = gameTime;
 
             if (keyboard.IsKeyDown(Keys.Escape))
                 Exit();
@@ -103,8 +101,8 @@ namespace Tileworld
                     break;
                 case GameState.playing:
                     if(this.IsActive)
-                        G.cam.updateCamera(keyboard, mouse);
-                    G.log.logFPS();
+                        GameServices.GetService<Camera2d>().updateCamera(keyboard, mouse);
+                    GameServices.GetService<Logger>().logFPS();
                     break;
             }
 
@@ -124,7 +122,7 @@ namespace Tileworld
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, G.cam.get_transformation());
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, GameServices.GetService<Camera2d>().get_transformation());
             spriteBatch.Draw(TextureRefs.koala, new Vector2(0.0f, 0.0f), Color.White);
 
             spriteBatch.End();
