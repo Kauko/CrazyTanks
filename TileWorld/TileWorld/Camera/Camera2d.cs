@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Tileworld.Utility;
+using Tileworld.Input;
+using Tileworld.Logging;
 /*  Thanks to David Amador and others
  *  http://www.david-amador.com/2009/10/xna-camera-2d-with-zoom-and-rotation/
  */
@@ -21,13 +23,12 @@ namespace Tileworld.Camera
         public Vector2 _pos; // Camera Position
         protected float _rotation; // Camera Rotation
 
-        private MouseState oldMouse;
-
         public Camera2d()
         {
             _zoom = 1.0f;
             _rotation = 0.0f;
             _pos = Vector2.Zero;
+
         }
 
         // Sets and gets zoom
@@ -97,26 +98,24 @@ namespace Tileworld.Camera
             return Vector2.Transform(position, _transform);
         }
 
-        public void updateCamera(KeyboardState keyboard, MouseState mouse)
+        public void updateCamera()
         {
 
-            //oldMouse = (oldMouse == null) ? mouse : oldMouse;
-
             //Keyboard camera movement
-            if (keyboard.IsKeyDown(Keys.A))
+            if (GameServices.GetService<KeyboardDevice>().State.IsKeyDown(Keys.A))
                 GameServices.GetService<Camera2d>().MoveLeft(C.camKeyboardScrollSpeed * 2 / GameServices.GetService<Camera2d>().Zoom);
 
-            if (keyboard.IsKeyDown(Keys.D))
+            if (GameServices.GetService<KeyboardDevice>().State.IsKeyDown(Keys.D))
                 GameServices.GetService<Camera2d>().MoveRight(C.camKeyboardScrollSpeed * 2 / GameServices.GetService<Camera2d>().Zoom);
 
-            if (keyboard.IsKeyDown(Keys.W))
+            if (GameServices.GetService<KeyboardDevice>().State.IsKeyDown(Keys.W))
                 GameServices.GetService<Camera2d>().MoveUp(C.camKeyboardScrollSpeed * 2 / GameServices.GetService<Camera2d>().Zoom);
 
-            if (keyboard.IsKeyDown(Keys.S))
+            if (GameServices.GetService<KeyboardDevice>().State.IsKeyDown(Keys.S))
                 GameServices.GetService<Camera2d>().MoveDown(C.camKeyboardScrollSpeed * 2 / GameServices.GetService<Camera2d>().Zoom);
 
             //Keyboard zoom
-            if (keyboard.IsKeyDown(Keys.R))
+            if (GameServices.GetService<KeyboardDevice>().State.IsKeyDown(Keys.R))
                 if (GameServices.GetService<Camera2d>().Zoom > C.camZoomSpeedThreshold)
                 {
                     GameServices.GetService<Camera2d>().Zoom += C.camKeyboardCloseZoomSpeed;
@@ -127,7 +126,7 @@ namespace Tileworld.Camera
                     GameServices.GetService<Camera2d>().Zoom += C.camKeyboardFarZoomSpeed;
                 }
 
-            if (keyboard.IsKeyDown(Keys.F))
+            if (GameServices.GetService<KeyboardDevice>().State.IsKeyDown(Keys.F))
                 if (GameServices.GetService<Camera2d>().Zoom > C.camZoomSpeedThreshold)
                 {
                     GameServices.GetService<Camera2d>().Zoom -= C.camKeyboardCloseZoomSpeed;
@@ -139,60 +138,58 @@ namespace Tileworld.Camera
                 }
 
             //Keyboard camera rotation
-            if (keyboard.IsKeyDown(Keys.Q))
+            if (GameServices.GetService<KeyboardDevice>().State.IsKeyDown(Keys.Q))
                 GameServices.GetService<Camera2d>().Rotation -= C.camKeyboardRotationSpeed;
 
-            if (keyboard.IsKeyDown(Keys.E))
+            if (GameServices.GetService<KeyboardDevice>().State.IsKeyDown(Keys.E))
                 GameServices.GetService<Camera2d>().Rotation += C.camKeyboardRotationSpeed;
 
             //Mouse camera movement
-            if (mouse.Y < C.camMouseScrollBorderWidth && mouse.Y > 0)
+            if (GameServices.GetService<MouseDevice>().State.Y < C.camMouseScrollBorderWidth && GameServices.GetService<MouseDevice>().State.Y > 0)
                 GameServices.GetService<Camera2d>().MoveUp(C.camKeyboardScrollSpeed);
 
-            if (mouse.Y > GameServices.GetService<GraphicsDevice>().Viewport.Height - C.camMouseScrollBorderWidth && mouse.Y < GameServices.GetService<GraphicsDevice>().Viewport.Height)
+            if (GameServices.GetService<MouseDevice>().State.Y > GameServices.GetService<GraphicsDevice>().Viewport.Height - C.camMouseScrollBorderWidth && GameServices.GetService<MouseDevice>().State.Y < GameServices.GetService<GraphicsDevice>().Viewport.Height)
                 GameServices.GetService<Camera2d>().MoveDown(C.camKeyboardScrollSpeed);
 
-            if (mouse.X < C.camMouseScrollBorderWidth && mouse.X > 0)
+            if (GameServices.GetService<MouseDevice>().State.X < C.camMouseScrollBorderWidth && GameServices.GetService<MouseDevice>().State.X > 0)
                 GameServices.GetService<Camera2d>().MoveLeft(C.camKeyboardScrollSpeed);
 
-            if (mouse.X > GameServices.GetService<GraphicsDevice>().Viewport.Width - C.camMouseScrollBorderWidth && mouse.X < GameServices.GetService<GraphicsDevice>().Viewport.Width)
+            if (GameServices.GetService<MouseDevice>().State.X > GameServices.GetService<GraphicsDevice>().Viewport.Width - C.camMouseScrollBorderWidth && GameServices.GetService<MouseDevice>().State.X < GameServices.GetService<GraphicsDevice>().Viewport.Width)
                 GameServices.GetService<Camera2d>().MoveRight(C.camKeyboardScrollSpeed);
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (GameServices.GetService<MouseDevice>().State.LeftButton == ButtonState.Pressed)
             {
-                if (Mouse.GetState().X - oldMouse.X > 0)
-                    GameServices.GetService<Camera2d>().MoveLeft((Mouse.GetState().X - oldMouse.X) * (C.camMouseDragSpeed * 2 / GameServices.GetService<Camera2d>().Zoom));
-                else if (Mouse.GetState().X - oldMouse.X < 0)
-                    GameServices.GetService<Camera2d>().MoveRight(-((Mouse.GetState().X - oldMouse.X) * (C.camMouseDragSpeed * 2 / GameServices.GetService<Camera2d>().Zoom))); //NOTE: If you want to change how mousedrag works,
+                if (GameServices.GetService<MouseDevice>().State.X - GameServices.GetService<MouseDevice>().LastState.X > 0)
+                    GameServices.GetService<Camera2d>().MoveLeft((GameServices.GetService<MouseDevice>().State.X - GameServices.GetService<MouseDevice>().LastState.X) * (C.camMouseDragSpeed * 2 / GameServices.GetService<Camera2d>().Zoom));
+                else if (GameServices.GetService<MouseDevice>().State.X - GameServices.GetService<MouseDevice>().LastState.X < 0)
+                    GameServices.GetService<Camera2d>().MoveRight(-((GameServices.GetService<MouseDevice>().State.X - GameServices.GetService<MouseDevice>().LastState.X) * (C.camMouseDragSpeed * 2 / GameServices.GetService<Camera2d>().Zoom))); //NOTE: If you want to change how mousedrag works,
                 //It's probably better to change C.camDragSpeed than touch these method calls
 
-                if (Mouse.GetState().Y - oldMouse.Y > 0)
-                    GameServices.GetService<Camera2d>().MoveUp((Mouse.GetState().Y - oldMouse.Y) * (C.camMouseDragSpeed * 2 / GameServices.GetService<Camera2d>().Zoom));
-                else if (Mouse.GetState().Y - oldMouse.Y < 0)
-                    GameServices.GetService<Camera2d>().MoveDown(-((Mouse.GetState().Y - oldMouse.Y) * (C.camMouseDragSpeed * 2 / GameServices.GetService<Camera2d>().Zoom))); //Drag is slower if we are zoomed in
+                if (GameServices.GetService<MouseDevice>().State.Y - GameServices.GetService<MouseDevice>().LastState.Y > 0)
+                    GameServices.GetService<Camera2d>().MoveUp((GameServices.GetService<MouseDevice>().State.Y - GameServices.GetService<MouseDevice>().LastState.Y) * (C.camMouseDragSpeed * 2 / GameServices.GetService<Camera2d>().Zoom));
+                else if (GameServices.GetService<MouseDevice>().State.Y - GameServices.GetService<MouseDevice>().LastState.Y < 0)
+                    GameServices.GetService<Camera2d>().MoveDown(-((GameServices.GetService<MouseDevice>().State.Y - GameServices.GetService<MouseDevice>().LastState.Y) * (C.camMouseDragSpeed * 2 / GameServices.GetService<Camera2d>().Zoom))); //Drag is slower if we are zoomed in
 
             }
 
-            if (Mouse.GetState().ScrollWheelValue != oldMouse.ScrollWheelValue)
+            if (GameServices.GetService<MouseDevice>().State.ScrollWheelValue != GameServices.GetService<MouseDevice>().LastState.ScrollWheelValue)
             {
                 //Zoom for close distance
                 if (GameServices.GetService<Camera2d>().Zoom > C.camZoomSpeedThreshold)
                 {
-                    GameServices.GetService<Camera2d>().Zoom += (Mouse.GetState().ScrollWheelValue - oldMouse.ScrollWheelValue) / 120.0f / C.camMouseCloseZoomSpeed;
+                    GameServices.GetService<Camera2d>().Zoom += (GameServices.GetService<MouseDevice>().State.ScrollWheelValue - GameServices.GetService<MouseDevice>().LastState.ScrollWheelValue) / 120.0f / C.camMouseCloseZoomSpeed;
                 }
                 //zoom for far away
                 else
                 {
-                    GameServices.GetService<Camera2d>().Zoom *= 1 + (Mouse.GetState().ScrollWheelValue - oldMouse.ScrollWheelValue) / 120.0f / C.camMouseFarZoomSpeed; //120.0f is some weird magic number..
+                    GameServices.GetService<Camera2d>().Zoom *= 1 + (GameServices.GetService<MouseDevice>().State.ScrollWheelValue - GameServices.GetService<MouseDevice>().LastState.ScrollWheelValue) / 120.0f / C.camMouseFarZoomSpeed; //120.0f is some weird magic number..
                 }
             }
-            if (Mouse.GetState().RightButton == ButtonState.Pressed)
+            if (GameServices.GetService<MouseDevice>().State.RightButton == ButtonState.Pressed)
             {
-                GameServices.GetService<Camera2d>().Rotation += ((Mouse.GetState().X - oldMouse.X) / C.camMouseRotateSpeed);
-                GameServices.GetService<Camera2d>().Rotation += ((Mouse.GetState().Y - oldMouse.Y) / C.camMouseRotateSpeed);
+                GameServices.GetService<Camera2d>().Rotation += ((GameServices.GetService<MouseDevice>().State.X - GameServices.GetService<MouseDevice>().LastState.X) / C.camMouseRotateSpeed);
+                GameServices.GetService<Camera2d>().Rotation += ((GameServices.GetService<MouseDevice>().State.Y - GameServices.GetService<MouseDevice>().LastState.Y) / C.camMouseRotateSpeed);
             }
-
-            oldMouse = mouse;
         }
 
     }

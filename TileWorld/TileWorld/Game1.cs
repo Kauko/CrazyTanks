@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using Tileworld.Camera;
 using Tileworld.Utility;
 using Tileworld.Logging;
+using Tileworld.Input;
 
 namespace Tileworld
 {
@@ -23,9 +24,6 @@ namespace Tileworld
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
-        KeyboardState oldKeyboard;
-        MouseState oldMouse;
 
         public Game1()
         {
@@ -43,10 +41,13 @@ namespace Tileworld
         /// </summary>
         protected override void Initialize()
         {
+            GameServices.AddService<GraphicsDevice>(graphics.GraphicsDevice);
+            GameServices.AddService<KeyboardDevice>(new KeyboardDevice());
+            GameServices.AddService<MouseDevice>(new MouseDevice());
 
             GameServices.AddService<Camera2d>(new Camera2d());
             GameServices.AddService<Logger>(new Logger());
-            GameServices.AddService<GraphicsDevice>(graphics.GraphicsDevice);
+
 
             G.gameState = GameState.playing;
 
@@ -90,27 +91,22 @@ namespace Tileworld
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            KeyboardState keyboard = Keyboard.GetState();
-            MouseState mouse = Mouse.GetState();
             GameServices.GetService<Logger>().gameTime = gameTime;
+            GameServices.GetService<KeyboardDevice>().Update();
+            GameServices.GetService<MouseDevice>().Update();
 
-            if (keyboard.IsKeyDown(Keys.Escape))
+            if (GameServices.GetService<KeyboardDevice>().State.IsKeyDown(Keys.Escape))
                 Exit();
             switch(G.gameState){
                 case GameState.paused:
                     break;
                 case GameState.playing:
                     if(this.IsActive)
-                        GameServices.GetService<Camera2d>().updateCamera(keyboard, mouse);
+                        GameServices.GetService<Camera2d>().updateCamera();
                     GameServices.GetService<Logger>().logFPS();
                     break;
             }
-
-
-            oldMouse = mouse;
-            oldKeyboard = keyboard;
             
-
             base.Update(gameTime);
         }
 

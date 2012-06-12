@@ -23,6 +23,7 @@ namespace Tileworld.Input
         // Public properties for the above members
         public override MouseState State { get { return current; } }
         public MouseButtons[] PressedButtons { get { return currentButtons; } }
+        public MouseState LastState { get; set; }
 
         // The position in (X,Y) coordinates of the mouse. Setting the mouse
         // position will tell XNA to move the mouse
@@ -42,14 +43,14 @@ namespace Tileworld.Input
 
         // Whether to reset the mouse to the middle of the screen on each
         // update to simulate a screen with no borders
-        public bool ResetMouseAfterUpdate = true;
+        public bool ResetMouseAfterUpdate = false;
 
         // The current position of the scroll wheel
         public float ScrollPosition { get { return current.ScrollWheelValue; } }
 
         // The change in position of the scroll wheel between the last two
         // frames
-        public float ScrollDelta = 0;
+        public float ScrollDelta { get; set; }
 
         // Events for when a button is pressed, released, or held
         public event InputEventHandler<MouseButtons, MouseState> ButtonPressed;
@@ -66,13 +67,14 @@ namespace Tileworld.Input
                     GameServices.GetService<GraphicsDevice>().Viewport.Height / 2);
 
             current = Mouse.GetState();
+            ScrollDelta = 0;
             Update();
         }
 
         // List of pressed buttons used to setup currentButtons
         List<MouseButtons> pressed = new List<MouseButtons>();
 
-        public override void Update()
+        public void Update()
         {
             // Update the last state
             last = current;
@@ -214,4 +216,17 @@ namespace Tileworld.Input
             return ButtonState.Released;
         }
     }
+/*
+    public class MouseScrollEventArgs<S, F> : EventArgs{
+        public InputDevice<S> Device;
+        public S State;
+        public F OldScrollValue;
+
+        public MouseScrollEventArgs(InputDevice<S> Device, F Scrollvalue){
+            this.Device = Device;
+            this.OldScrollValue = Scrollvalue;
+        }
+    }
+
+    public delegate void MouseScrollEventHandler<S, F>(object sender, MouseScrollEventArgs<S,F> e);*/
 }

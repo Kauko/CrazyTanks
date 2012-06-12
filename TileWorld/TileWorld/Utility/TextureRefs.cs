@@ -8,9 +8,6 @@ namespace Tileworld.Utility
 {
     class TextureRefs
     {
-        public static Texture2D grass;
         public static Texture2D koala;
-
-
     }
 }

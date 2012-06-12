@@ -31,7 +31,7 @@ namespace Tileworld.Input
             Update();
         }
 
-        public override void Update()
+        public void Update()
         {
             // Set the last state to the current one and update the
             // current state

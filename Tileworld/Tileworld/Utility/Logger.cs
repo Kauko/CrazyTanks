@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Tileworld.Utility;
+using Tileworld.Input;
+using Microsoft.Xna.Framework.Input;
 
 namespace Tileworld.Logging
 {
@@ -12,6 +15,10 @@ namespace Tileworld.Logging
         int fpsRounds = 0;
 
         public GameTime gameTime { get; set; }
+
+        public Logger(){
+            GameServices.GetService<KeyboardDevice>().KeyPressed += LogKeyPress;
+        }
 
         public void logFPS()
         {
@@ -25,6 +32,9 @@ namespace Tileworld.Logging
                 fpsRounds++;
             }
             oldFramerate = frameRate;
+
+            if (gameTime.IsRunningSlowly)
+                this.logMsg("WARNING !!! GAME RUNNING SLOW");
         }
 
         private string getTimestamp()
@@ -32,11 +42,16 @@ namespace Tileworld.Logging
             return "[" + gameTime.TotalGameTime.ToString("c") +"]: ";
         }
 
-        public void logMsg(String msg){
+        public void logMsg(String msg)
+        {
             Console.Write(getTimestamp());
             Console.WriteLine(msg);
         }
 
+        void LogKeyPress(object sender,InputDeviceEventArgs<Keys, KeyboardState> e)
+        {
+            this.logMsg(e.Object.ToString());
+        }
 
     }
 }

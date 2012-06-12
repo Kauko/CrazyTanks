@@ -66,7 +66,7 @@ namespace Tileworld.Input
         // List of pressed buttons used to setup currentButtons
         List<Buttons> pressed = new List<Buttons>();
 
-        public override void Update()
+        public void Update()
         {
             // Update the last state
             last = current;
