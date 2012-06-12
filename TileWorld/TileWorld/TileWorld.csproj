@@ -111,6 +111,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Camera\Camera2d.cs" />
+    <Compile Include="Input\GamepadDevice.cs" />
+    <Compile Include="Input\InputDevice.cs" />
+    <Compile Include="Input\KeyboardDevice.cs" />
+    <Compile Include="Input\MouseDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
