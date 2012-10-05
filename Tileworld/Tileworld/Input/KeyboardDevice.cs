@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace Tileworld.Input
+namespace Solum.Input
 {
     // An input device that manages the Keyboard and KeyboardState
     public class KeyboardDevice : InputDevice<KeyboardState>

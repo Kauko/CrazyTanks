@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Tileworld.Utility;
+using Solum.Utility;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Tileworld.Input
+namespace Solum.Input
 {
     // An enum of buttons on the mouse, since XNA doesn't provide one
     public enum MouseButtons { Left, Right, Middle, X1, X2 };

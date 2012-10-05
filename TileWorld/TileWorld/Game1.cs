@@ -8,15 +8,16 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using Tileworld.Camera;
-using Tileworld.Utility;
-using Tileworld.Logging;
-using Tileworld.Input;
+using Solum.Camera;
+using Solum.Utility;
+using Solum.Logging;
+using Solum.Input;
+using Solum.Menu;
 
-namespace Tileworld
+namespace Solum
 {
 
-    public enum GameState { playing, paused };
+    public enum GameState { playing, paused, menu };
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -24,6 +25,7 @@ namespace Tileworld
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        MenuManager menuManager;
 
         public Game1()
         {
@@ -48,6 +50,7 @@ namespace Tileworld
             GameServices.AddService<Camera2d>(new Camera2d());
             GameServices.AddService<Logger>(new Logger());
 
+            menuManager = new MenuManager();
 
             G.gameState = GameState.playing;
 
@@ -72,7 +75,38 @@ namespace Tileworld
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             TextureRefs.koala = this.Content.Load<Texture2D>("Placeholder/Koala");
-            // TODO: use this.Content to load your game content here
+
+
+            //We create our menus here.
+            string BGImage = "Graphics\\Backgrounds\\MainMenuBG";
+            string BGM = "Audio\\MainMenuBGM";
+            string menuOpenPath = "Audio\\MenuOpen";
+            string menuClosePath = "Audio\\MenuClose";
+
+            /*MainMenu mainMenu = new MainMenu("Main Menu");
+            mainMenu.Load(Content, BGImage, BGM, menuOpenPath, menuClosePath);
+            mainMenu.LoadButtons(Content,
+                new int[] { 1, 2, 3 },
+                new List<Rectangle>() { new Rectangle(325, 150, 150, 50), new Rectangle(325, 210, 150, 50), new Rectangle(325, 270, 150, 50) },
+                new List<string>() { "Continue", "Save", "Quit" }
+                );
+            menuManager.AddMenu("Main Menu", mainMenu);
+
+            SaveMenu save = new SaveMenu("Save Menu");
+            save.Load(Content, BGImage, BGM, menuOpenPath, menuClosePath);
+            save.LoadButtons(Content,
+                new int[] { 1, 2 },
+                new List<Rectangle>() { new Rectangle(325, 150, 150, 50), new Rectangle(325, 210, 150, 50) },
+                new List<string>() { "Return", "Go Deeper" });
+            menuManager.AddMenu("Save Menu", save);
+
+            DeepMenu deep = new DeepMenu("Deep Menu");
+            deep.Load(Content, BGImage, BGM, menuOpenPath, menuClosePath);
+            deep.LoadButtons(Content,
+                new int[] { 1 },
+                new List<Rectangle>() { new Rectangle(325, 150, 150, 50) },
+                new List<string>() { "Return" });
+            menuManager.AddMenu("Deep Menu", deep);*/
         }
 
         /// <summary>
@@ -94,10 +128,14 @@ namespace Tileworld
             GameServices.GetService<Logger>().gameTime = gameTime;
             GameServices.GetService<KeyboardDevice>().Update();
             GameServices.GetService<MouseDevice>().Update();
+            GameServices.GetService<GamepadDevice>().Update();
 
             if (GameServices.GetService<KeyboardDevice>().State.IsKeyDown(Keys.Escape))
                 Exit();
+
             switch(G.gameState){
+                case GameState.menu:
+                    break;
                 case GameState.paused:
                     break;
                 case GameState.playing:

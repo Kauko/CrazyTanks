@@ -8,13 +8,13 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using Tileworld.Utility;
-using Tileworld.Input;
-using Tileworld.Logging;
+using Solum.Utility;
+using Solum.Input;
+using Solum.Logging;
 /*  Thanks to David Amador and others
  *  http://www.david-amador.com/2009/10/xna-camera-2d-with-zoom-and-rotation/
  */
-namespace Tileworld.Camera
+namespace Solum.Camera
 {
     public class Camera2d
     {

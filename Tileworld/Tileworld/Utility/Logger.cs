@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Tileworld.Utility;
-using Tileworld.Input;
+using Solum.Utility;
+using Solum.Input;
 using Microsoft.Xna.Framework.Input;
 
-namespace Tileworld.Logging
+namespace Solum.Logging
 {
     public class Logger
     {

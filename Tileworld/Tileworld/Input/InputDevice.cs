@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Tileworld.Input
+namespace Solum.Input
 {
     // The base input device class. Other input device types will
     // inherit from it. The <T> generic allows us to specify what

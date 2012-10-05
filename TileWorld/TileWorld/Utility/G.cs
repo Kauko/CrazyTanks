@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Tileworld.Camera;
-using Tileworld;
-using Tileworld.Logging;
+using Solum.Camera;
+using Solum;
+using Solum.Logging;
 
-namespace Tileworld.Utility
+namespace Solum.Utility
 {
     /*  Utility class for global variables
      * some of these should be set only once (such as the camera variable)

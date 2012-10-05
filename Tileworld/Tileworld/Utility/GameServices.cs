@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 /*  Thanks to Roy Triesscheijn 
     http://roy-t.nl/index.php/2010/08/25/xna-accessing-contentmanager-and-graphicsdevice-anywhere-anytime-the-gameservicecontainer/
  */
-namespace Tileworld.Utility
+namespace Solum.Utility
 {
     public static class GameServices
     {

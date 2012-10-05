@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace Tileworld.Input
+namespace Solum.Input
 {
     // An input device that keeps track of the GamePad and GamePadState
     public class GamepadDevice : InputDevice<GamePadState>
