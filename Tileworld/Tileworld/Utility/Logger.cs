@@ -25,8 +25,12 @@ namespace Solum.Logging
             float frameRate = 1 / (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (frameRate - oldFramerate > 3.0f || frameRate - oldFramerate < -3.0f)
             {
+                
                 Console.Write(getTimestamp());
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("FPS: " + oldFramerate +" for " + fpsRounds + " rounds. New FPS: "+frameRate );
+                Console.ResetColor();
                 fpsRounds = 0;
             }else{
                 fpsRounds++;
@@ -34,18 +38,46 @@ namespace Solum.Logging
             oldFramerate = frameRate;
 
             if (gameTime.IsRunningSlowly)
-                this.logMsg("WARNING !!! GAME RUNNING SLOW");
+            {             
+                Console.Write(getTimestamp());
+                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("WARNING !!! GAME RUNNING SLOW");
+                Console.ResetColor();
+            }
         }
 
         private string getTimestamp()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             return "[" + gameTime.TotalGameTime.ToString("c") +"]: ";
         }
 
         public void logMsg(String msg)
         {
             Console.Write(getTimestamp());
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(msg);
+            Console.ResetColor();
+        }
+
+        public void logMsg(String msg, ConsoleColor foreground){
+            Console.Write(getTimestamp());
+            Console.ResetColor();
+            Console.ForegroundColor = foreground;
+            Console.WriteLine(msg);
+            Console.ResetColor();
+        }
+
+        public void logMsg(String msg, ConsoleColor foreground, ConsoleColor background)
+        {
+            Console.Write(getTimestamp());
+            Console.ResetColor();
+            Console.ForegroundColor = foreground;
+            Console.BackgroundColor = background;
+            Console.WriteLine(msg);
+            Console.ResetColor();
         }
 
         void LogKeyPress(object sender,InputDeviceEventArgs<Keys, KeyboardState> e)

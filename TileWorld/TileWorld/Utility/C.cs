@@ -22,5 +22,13 @@ namespace Solum.Utility
         public const float camMouseRotateSpeed = 500.0f; //bigger = slower
 
         /* End of camera variables */
+
+        /* Variables used in the menus */
+        public const int menuButtonWidth = 150; //width of a menu button
+        public const int menuButtonHeight = 50; // height of a menu button
+        public const int menuButtonVerticalOffset = 170; //if this is 0, the first button will be in the middle of the screen. Higher value means the first button is towards the top of the screen
+        public const int menuButtonVerticalAddition = menuButtonHeight + 30; //the space between the menu buttons
+
+        /* End of menu variables */
     }
 }

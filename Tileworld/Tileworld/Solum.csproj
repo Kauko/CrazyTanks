@@ -133,6 +133,8 @@
     <Compile Include="Utility\G.cs" />
     <Compile Include="Utility\GameServices.cs" />
     <Compile Include="Utility\Logger.cs" />
+    <Compile Include="Utility\SoundRefs.cs" />
+    <Compile Include="Utility\SpriteFontRefs.cs" />
     <Compile Include="Utility\TextureRefs.cs" />
   </ItemGroup>
   <ItemGroup>

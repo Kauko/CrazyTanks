@@ -1,11 +1,18 @@
-﻿using System;
+﻿///
+/// Based on the code by Roy Triesscheijn
+/// http://roy-t.nl/index.php/2010/08/25/xna-accessing-contentmanager-and-graphicsdevice-anywhere-anytime-the-gameservicecontainer/
+/// 
+/// Modified by Teemu Kaukoranta, member of the Oulu GamedevClub Stage
+/// http://www.gamedevcenter.org
+/// 
+/// Part of the Solum project
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-/*  Thanks to Roy Triesscheijn 
-    http://roy-t.nl/index.php/2010/08/25/xna-accessing-contentmanager-and-graphicsdevice-anywhere-anytime-the-gameservicecontainer/
- */
+
 namespace Solum.Utility
 {
     public static class GameServices

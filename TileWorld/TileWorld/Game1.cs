@@ -12,7 +12,7 @@ using Solum.Camera;
 using Solum.Utility;
 using Solum.Logging;
 using Solum.Input;
-using Solum.Menu;
+using Solum.Menus;
 
 namespace Solum
 {
@@ -46,13 +46,14 @@ namespace Solum
             GameServices.AddService<GraphicsDevice>(graphics.GraphicsDevice);
             GameServices.AddService<KeyboardDevice>(new KeyboardDevice());
             GameServices.AddService<MouseDevice>(new MouseDevice());
+            //GameServices.AddService<GamepadDevice>(new GamepadDevice(PlayerIndex.One));
 
             GameServices.AddService<Camera2d>(new Camera2d());
             GameServices.AddService<Logger>(new Logger());
 
             menuManager = new MenuManager();
 
-            G.gameState = GameState.playing;
+            G.gameState = GameState.menu;
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
@@ -74,39 +75,51 @@ namespace Solum
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            TextureRefs.koala = this.Content.Load<Texture2D>("Placeholder/Koala");
+            #region Content paths
+            TextureRefs.koala = this.Content.Load<Texture2D>("Placeholder/Images/Koala");
+            TextureRefs.menuBgImage = this.Content.Load<Texture2D>("Placeholder/Images/MainMenuBG");
+            TextureRefs.menuButton = this.Content.Load<Texture2D>("Placeholder/Images/Button");
+
+            SpriteFontRefs.textFont = Content.Load<SpriteFont>("Placeholder/Fonts/textFont");
+            SpriteFontRefs.titleFont = Content.Load<SpriteFont>("Placeholder/Fonts/titleFont");
+
+            SoundRefs.menuOpen = Content.Load<SoundEffect>("Placeholder/Audio/MenuOpen");
+            SoundRefs.menuClose = Content.Load<SoundEffect>("Placeholder/Audio/MenuClose");
+
+            SoundRefs.bgm = Content.Load<Song>("Placeholder/Audio/MainMenuBGM");
+            #endregion
 
 
-            //We create our menus here.
-            string BGImage = "Graphics\\Backgrounds\\MainMenuBG";
-            string BGM = "Audio\\MainMenuBGM";
-            string menuOpenPath = "Audio\\MenuOpen";
-            string menuClosePath = "Audio\\MenuClose";
+            int screenHeight = graphics.GraphicsDevice.Viewport.Height;
+            int screenWidth = graphics.GraphicsDevice.Viewport.Width;
 
-            /*MainMenu mainMenu = new MainMenu("Main Menu");
-            mainMenu.Load(Content, BGImage, BGM, menuOpenPath, menuClosePath);
+            int screenVerticalCenter = screenHeight / 2;
+            int screenHorizontalCenter = screenWidth / 2;
+
+            int firstY = screenVerticalCenter - C.menuButtonVerticalOffset - (C.menuButtonHeight / 2);
+            int firstX = screenHorizontalCenter - (C.menuButtonWidth / 2);
+
+            Menu mainMenu = new Menu("Main Menu");
             mainMenu.LoadButtons(Content,
-                new int[] { 1, 2, 3 },
-                new List<Rectangle>() { new Rectangle(325, 150, 150, 50), new Rectangle(325, 210, 150, 50), new Rectangle(325, 270, 150, 50) },
+                new ButtonAction[] { ButtonAction.Close, ButtonAction.Other, ButtonAction.Quit },
+                new List<Rectangle>() { new Rectangle(firstX, firstY, C.menuButtonWidth, C.menuButtonHeight), new Rectangle(firstX, firstY + C.menuButtonVerticalAddition, C.menuButtonWidth, C.menuButtonHeight), new Rectangle(firstX, firstY + C.menuButtonVerticalAddition * 2, C.menuButtonWidth, C.menuButtonHeight) },
                 new List<string>() { "Continue", "Save", "Quit" }
                 );
             menuManager.AddMenu("Main Menu", mainMenu);
 
-            SaveMenu save = new SaveMenu("Save Menu");
-            save.Load(Content, BGImage, BGM, menuOpenPath, menuClosePath);
+            Menu save = new Menu("Save Menu");
             save.LoadButtons(Content,
-                new int[] { 1, 2 },
-                new List<Rectangle>() { new Rectangle(325, 150, 150, 50), new Rectangle(325, 210, 150, 50) },
+                new ButtonAction[] { ButtonAction.Close, ButtonAction.Other },
+                new List<Rectangle>() { new Rectangle(firstX, firstY, C.menuButtonWidth, C.menuButtonHeight), new Rectangle(firstX, firstY + C.menuButtonVerticalAddition, C.menuButtonWidth, C.menuButtonHeight) },
                 new List<string>() { "Return", "Go Deeper" });
-            menuManager.AddMenu("Save Menu", save);
+            menuManager.AddMenu("Save", save);
 
-            DeepMenu deep = new DeepMenu("Deep Menu");
-            deep.Load(Content, BGImage, BGM, menuOpenPath, menuClosePath);
+            Menu deep = new Menu("Deep Menu");
             deep.LoadButtons(Content,
-                new int[] { 1 },
-                new List<Rectangle>() { new Rectangle(325, 150, 150, 50) },
+                new ButtonAction[] { ButtonAction.Close},
+                new List<Rectangle>() { new Rectangle(firstX, firstY, C.menuButtonWidth, C.menuButtonHeight) },
                 new List<string>() { "Return" });
-            menuManager.AddMenu("Deep Menu", deep);*/
+            menuManager.AddMenu("Go Deeper", deep);
         }
 
         /// <summary>
@@ -128,13 +141,16 @@ namespace Solum
             GameServices.GetService<Logger>().gameTime = gameTime;
             GameServices.GetService<KeyboardDevice>().Update();
             GameServices.GetService<MouseDevice>().Update();
-            GameServices.GetService<GamepadDevice>().Update();
+            //GameServices.GetService<GamepadDevice>().Update();
 
-            if (GameServices.GetService<KeyboardDevice>().State.IsKeyDown(Keys.Escape))
+            if (GameServices.GetService<KeyboardDevice>().State.IsKeyDown(Keys.F10) || menuManager.MenuState == MenuManager.MenuStates.Exit)
                 Exit();
 
             switch(G.gameState){
                 case GameState.menu:
+                    if (menuManager.ActiveMenu == null)
+                        menuManager.Show("Main Menu");
+                    menuManager.Update();
                     break;
                 case GameState.paused:
                     break;
@@ -155,10 +171,19 @@ namespace Solum
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, GameServices.GetService<Camera2d>().get_transformation());
-            spriteBatch.Draw(TextureRefs.koala, new Vector2(0.0f, 0.0f), Color.White);
-
+            switch(G.gameState){
+                case GameState.menu:
+                    spriteBatch.Begin();
+                    menuManager.Draw(spriteBatch);
+                    break;
+                case GameState.paused:
+                    break;
+                case GameState.playing:
+                    spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, GameServices.GetService<Camera2d>().get_transformation());
+                    spriteBatch.Draw(TextureRefs.koala, new Vector2(0.0f, 0.0f), Color.White);
+                    break;
+            }
+            
             spriteBatch.End();
 
             base.Draw(gameTime);

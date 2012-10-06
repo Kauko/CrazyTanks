@@ -1,8 +1,11 @@
-﻿///=============================================================///
-///Author:  Jonathan Deaves ("garfunkle")                       ///
-///Date:    13-June-2011                                        ///
-///Version: 0.1a                                                ///
-///=============================================================///
+﻿///
+/// Based on the code by Jonathan Deaves ("garfunkle") 
+/// http://www.gmaker.org/tutorials/downloads.asp?id=173
+/// 
+/// Modified by Teemu Kaukoranta, member of the Oulu GamedevClub Stage
+/// http://www.gamedevcenter.org
+/// 
+/// Part of the Solum project
 
 using System;
 using System.Collections.Generic;
@@ -11,8 +14,10 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
+using Solum.Utility;
+using Solum.Logging;
 
-namespace Solum.Menu
+namespace Solum.Menus
 {
     class MenuManager
     {
@@ -47,8 +52,12 @@ namespace Solum.Menu
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if(activeMenu != null)
+            if (activeMenu != null)
+            {
                 activeMenu.Draw(spriteBatch);
+            }
+            else
+                GameServices.GetService<Logger>().logMsg("activeMenu is null");
         }
 
         /// <summary>
@@ -111,6 +120,7 @@ namespace Solum.Menu
             {
                 activeMenu.StopBGM();
                 activeMenu = null;
+                G.gameState = GameState.playing;
             }
         }
 

@@ -1,0 +1,15 @@
+G:\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Solum.exe
+G:\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Solum.pdb
+G:\Tileworld\Tileworld\Tileworld\obj\x86\Debug\ResolveAssemblyReference.cache
+G:\Tileworld\Tileworld\Tileworld\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+G:\Tileworld\Tileworld\Tileworld\obj\x86\Debug\Solum.exe
+G:\Tileworld\Tileworld\Tileworld\obj\x86\Debug\Solum.pdb
+G:\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Content\Placeholder\Images\Koala.xnb
+G:\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Content\Placeholder\Images\Button.xnb
+G:\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Content\Placeholder\Images\MainMenuBG.xnb
+G:\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Content\Placeholder\Fonts\textFont.xnb
+G:\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Content\Placeholder\Fonts\titleFont.xnb
+G:\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Content\Placeholder\Audio\MainMenuBGM.xnb
+G:\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Content\Placeholder\Audio\MenuClose.xnb
+G:\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Content\Placeholder\Audio\MenuOpen.xnb
+G:\Tileworld\Tileworld\Tileworld\bin\x86\Debug\Content\Placeholder\Audio\MainMenuBGM.wma

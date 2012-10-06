@@ -6,10 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Solum.Utility
 {
-    class TextureRefs
+    class SpriteFontRefs
     {
-        public static Texture2D koala;
-        public static Texture2D menuBgImage;
-        public static Texture2D menuButton;
+        public static SpriteFont titleFont;
+        public static SpriteFont textFont;
     }
 }

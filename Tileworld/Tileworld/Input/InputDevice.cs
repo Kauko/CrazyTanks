@@ -1,4 +1,13 @@
-﻿using System;
+﻿///
+/// Based on the code by Sean James
+/// http://www.innovativegames.net/blog/blog/category/game-engine-tutorial/
+/// 
+/// Modified by Teemu Kaukoranta, member of the Oulu GamedevClub Stage
+/// http://www.gamedevcenter.org
+/// 
+/// Part of the Solum project
+
+using System;
 using System.ComponentModel;
 
 namespace Solum.Input

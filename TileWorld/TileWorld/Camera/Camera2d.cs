@@ -1,4 +1,13 @@
-﻿using System;
+﻿///
+/// Based on the code by David Amador and others
+/// http://www.david-amador.com/2009/10/xna-camera-2d-with-zoom-and-rotation/
+/// 
+/// Modified by Teemu Kaukoranta, member of the Oulu GamedevClub Stage
+/// http://www.gamedevcenter.org
+/// 
+/// Part of the Solum project
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
@@ -11,9 +20,7 @@ using Microsoft.Xna.Framework.Media;
 using Solum.Utility;
 using Solum.Input;
 using Solum.Logging;
-/*  Thanks to David Amador and others
- *  http://www.david-amador.com/2009/10/xna-camera-2d-with-zoom-and-rotation/
- */
+
 namespace Solum.Camera
 {
     public class Camera2d
@@ -162,7 +169,8 @@ namespace Solum.Camera
                 if (GameServices.GetService<MouseDevice>().State.X - GameServices.GetService<MouseDevice>().LastState.X > 0)
                     GameServices.GetService<Camera2d>().MoveLeft((GameServices.GetService<MouseDevice>().State.X - GameServices.GetService<MouseDevice>().LastState.X) * (C.camMouseDragSpeed * 2 / GameServices.GetService<Camera2d>().Zoom));
                 else if (GameServices.GetService<MouseDevice>().State.X - GameServices.GetService<MouseDevice>().LastState.X < 0)
-                    GameServices.GetService<Camera2d>().MoveRight(-((GameServices.GetService<MouseDevice>().State.X - GameServices.GetService<MouseDevice>().LastState.X) * (C.camMouseDragSpeed * 2 / GameServices.GetService<Camera2d>().Zoom))); //NOTE: If you want to change how mousedrag works,
+                    GameServices.GetService<Camera2d>().MoveRight(-((GameServices.GetService<MouseDevice>().State.X - GameServices.GetService<MouseDevice>().LastState.X) * (C.camMouseDragSpeed * 2 / GameServices.GetService<Camera2d>().Zoom))); 
+                //NOTE: If you want to change how mousedrag works,
                 //It's probably better to change C.camDragSpeed than touch these method calls
 
                 if (GameServices.GetService<MouseDevice>().State.Y - GameServices.GetService<MouseDevice>().LastState.Y > 0)

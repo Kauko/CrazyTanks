@@ -1,8 +1,11 @@
-﻿///=============================================================///
-///Author:  Jonathan Deaves ("garfunkle")                       ///
-///Date:    13-June-2011                                        ///
-///Version: 0.1a                                                ///
-///=============================================================///
+﻿///
+/// Based on the code by Jonathan Deaves ("garfunkle") 
+/// http://www.gmaker.org/tutorials/downloads.asp?id=173
+/// 
+/// Modified by Teemu Kaukoranta, member of the Oulu GamedevClub Stage
+/// http://www.gamedevcenter.org
+/// 
+/// Part of the Solum project
 
 using System;
 using System.Collections.Generic;
@@ -11,8 +14,9 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Solum.Utility;
 
-namespace Solum.Menu
+namespace Solum.Menus
 {
     
     /*public class MenuButtonPressedEventArgs : EventArgs{
@@ -32,7 +36,6 @@ namespace Solum.Menu
         ButtonAction action;
         //public event EventHandler<MenuButtonPressedEventArgs> MenuButtonPressed;
 
-        Texture2D texture;
         Rectangle bounds;
 
         public string text;
@@ -54,17 +57,12 @@ namespace Solum.Menu
             this.text = text;
         }
 
-        public void Load(ContentManager Content)
-        {
-            texture = Content.Load<Texture2D>("Graphics\\Buttons\\Button");
-        }
-
         public void Draw(SpriteBatch spriteBatch, SpriteFont spriteFont)
         {
             textPos = new Vector2(bounds.X, bounds.Y);
             textPos += new Vector2((bounds.Width / 2) - (spriteFont.MeasureString(text).X / 2), (bounds.Height / 2) - (spriteFont.MeasureString(text).Y / 2));
 
-            spriteBatch.Draw(texture, bounds, Color.White);
+            spriteBatch.Draw(TextureRefs.menuButton, bounds, Color.White);
             spriteBatch.DrawString(spriteFont, text, textPos, Color.Black);
         }
 

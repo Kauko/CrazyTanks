@@ -1,4 +1,13 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿///
+/// Based on the code by Sean James
+/// http://www.innovativegames.net/blog/blog/category/game-engine-tutorial/
+/// 
+/// Modified by Teemu Kaukoranta, member of the Oulu GamedevClub Stage
+/// http://www.gamedevcenter.org
+/// 
+/// Part of the Solum project
+
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
@@ -23,7 +32,7 @@ namespace Solum.Input
         // Public properties for the above members
         public override MouseState State { get { return current; } }
         public MouseButtons[] PressedButtons { get { return currentButtons; } }
-        public MouseState LastState { get; set; }
+        public MouseState LastState { get { return last; } }
 
         // The position in (X,Y) coordinates of the mouse. Setting the mouse
         // position will tell XNA to move the mouse
