@@ -149,7 +149,7 @@ namespace Solum.Logging
         }
 
         void logToFile(String msg){
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"\" + this.fileName, true))
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(this.fileName, true))
             {
                 file.Write(getTimestamp());
                 file.WriteLine(msg);
