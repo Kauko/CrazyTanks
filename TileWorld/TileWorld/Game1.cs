@@ -1,3 +1,11 @@
+/// By Teemu Kaukoranta, member of the Oulu GamedevClub Stage
+/// http://www.gamedevcenter.org
+/// 
+/// Part of the S.o.l.u.m project
+/// Licensed under WTFPL - Do What The Fuck You Want To Public License
+/// It would be nice if you don't remove this comment section though
+
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,10 +54,11 @@ namespace Solum
             GameServices.AddService<GraphicsDevice>(graphics.GraphicsDevice);
             GameServices.AddService<KeyboardDevice>(new KeyboardDevice());
             GameServices.AddService<MouseDevice>(new MouseDevice());
+            GameServices.AddService<Game>(this);
             //GameServices.AddService<GamepadDevice>(new GamepadDevice(PlayerIndex.One));
 
             GameServices.AddService<Camera2d>(new Camera2d());
-            GameServices.AddService<Logger>(new Logger());
+            GameServices.AddService<Logger>(new Logger(true));
 
             menuManager = new MenuManager();
 
