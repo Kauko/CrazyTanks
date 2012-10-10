@@ -82,12 +82,12 @@ namespace Solum.Menus
                 if (activeMenu == null)
                 {
                     //First menu open, so we play bgm.
-                    Menus[name].PlayBGM(true);
+                    //Menus[name].PlayBGM(true);
 
                     //Sets the active menu based on name
                     //then performs menus open method.
                     activeMenu = Menus[name];
-                    activeMenu.Open(true);
+                    activeMenu.Open(false);
                 }
                 else
                 {
@@ -99,7 +99,7 @@ namespace Solum.Menus
                     //Sets the active menu based on name
                     //then performs menus open method.
                     activeMenu = Menus[name];
-                    activeMenu.Open(true);
+                    activeMenu.Open(false);
                 }
 
             }
@@ -113,7 +113,7 @@ namespace Solum.Menus
         /// </summary>
         public void Close()
         {
-            activeMenu.Close(true);
+            activeMenu.Close(false);
             if (previousMenus.Count() > 0)
             {
                 activeMenu = previousMenus.Pop();
@@ -134,7 +134,7 @@ namespace Solum.Menus
         {
             activeMenu.StopBGM();
             previousMenus.Clear();
-            activeMenu.Close(true);
+            activeMenu.Close(false);
             activeMenu = null;
         }
 

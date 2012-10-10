@@ -34,6 +34,7 @@ namespace Solum
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         MenuManager menuManager;
+        MenuManager pauseMenuManager;
 
         public Game1()
         {
@@ -61,6 +62,7 @@ namespace Solum
             GameServices.AddService<Logger>(new Logger(true));
 
             menuManager = new MenuManager();
+            pauseMenuManager = new MenuManager();
 
             G.gameState = GameState.menu;
 
@@ -98,7 +100,7 @@ namespace Solum
             SoundRefs.bgm = Content.Load<Song>("Placeholder/Audio/MainMenuBGM");
             #endregion
 
-
+            #region screen Center location..
             int screenHeight = graphics.GraphicsDevice.Viewport.Height;
             int screenWidth = graphics.GraphicsDevice.Viewport.Width;
 
@@ -107,28 +109,41 @@ namespace Solum
 
             int firstY = screenVerticalCenter - C.menuButtonVerticalOffset - (C.menuButtonHeight / 2);
             int firstX = screenHorizontalCenter - (C.menuButtonWidth / 2);
+            #endregion
 
-            Menu mainMenu = new Menu("Main Menu");
-            mainMenu.LoadButtons(Content,
+            #region building main menu
+            MainMenu mainMenu = new MainMenu("Main Menu");
+            mainMenu.LoadButtons(
                 new ButtonAction[] { ButtonAction.Close, ButtonAction.Other, ButtonAction.Quit },
                 new List<Rectangle>() { new Rectangle(firstX, firstY, C.menuButtonWidth, C.menuButtonHeight), new Rectangle(firstX, firstY + C.menuButtonVerticalAddition, C.menuButtonWidth, C.menuButtonHeight), new Rectangle(firstX, firstY + C.menuButtonVerticalAddition * 2, C.menuButtonWidth, C.menuButtonHeight) },
-                new List<string>() { "Continue", "Save", "Quit" }
+                new List<string>() { "Start", "Save", "Quit" }
                 );
             menuManager.AddMenu("Main Menu", mainMenu);
 
-            Menu save = new Menu("Save Menu");
-            save.LoadButtons(Content,
+            MainMenu save = new MainMenu("Save Menu");
+            save.LoadButtons(
                 new ButtonAction[] { ButtonAction.Close, ButtonAction.Other },
                 new List<Rectangle>() { new Rectangle(firstX, firstY, C.menuButtonWidth, C.menuButtonHeight), new Rectangle(firstX, firstY + C.menuButtonVerticalAddition, C.menuButtonWidth, C.menuButtonHeight) },
                 new List<string>() { "Return", "Go Deeper" });
             menuManager.AddMenu("Save", save);
 
-            Menu deep = new Menu("Deep Menu");
-            deep.LoadButtons(Content,
+            MainMenu deep = new MainMenu("Deep Menu");
+            deep.LoadButtons(
                 new ButtonAction[] { ButtonAction.Close},
                 new List<Rectangle>() { new Rectangle(firstX, firstY, C.menuButtonWidth, C.menuButtonHeight) },
                 new List<string>() { "Return" });
             menuManager.AddMenu("Go Deeper", deep);
+            #endregion
+
+            #region building pause menu
+            PauseMenu mainPauseMenu = new PauseMenu("Pause menu");
+            mainPauseMenu.LoadButtons(
+                new ButtonAction[] { ButtonAction.Close, ButtonAction.Quit },
+                new List<Rectangle>() { new Rectangle(firstX, firstY, C.menuButtonWidth, C.menuButtonHeight), new Rectangle(firstX, firstY + C.menuButtonVerticalAddition, C.menuButtonWidth, C.menuButtonHeight) },
+                new List<string>() { "Continue", "Main Menu" });
+            pauseMenuManager.AddMenu("Pause Menu", mainPauseMenu);
+            #endregion
+
         }
 
         /// <summary>
@@ -162,11 +177,18 @@ namespace Solum
                     menuManager.Update();
                     break;
                 case GameState.paused:
+                    if(pauseMenuManager.ActiveMenu == null)
+                        pauseMenuManager.Show("Pause Menu");
+                    pauseMenuManager.Update();
+                    if (pauseMenuManager.MenuState == MenuManager.MenuStates.Exit)
+                        G.gameState = GameState.menu;
                     break;
                 case GameState.playing:
                     if(this.IsActive)
                         GameServices.GetService<Camera2d>().updateCamera();
                     GameServices.GetService<Logger>().logFPS();
+                    if (GameServices.GetService<KeyboardDevice>().State.IsKeyDown(Keys.Escape))
+                        G.gameState = GameState.paused;
                     break;
             }
             
@@ -179,13 +201,20 @@ namespace Solum
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.DimGray);
             switch(G.gameState){
                 case GameState.menu:
                     spriteBatch.Begin();
                     menuManager.Draw(spriteBatch);
                     break;
                 case GameState.paused:
+                    //All of playing draws here too;
+                    spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, GameServices.GetService<Camera2d>().get_transformation());
+                    spriteBatch.Draw(TextureRefs.koala, new Vector2(0.0f, 0.0f), Color.White);
+                    spriteBatch.End();
+                    //Drawing the pause menu on top
+                    spriteBatch.Begin();
+                    pauseMenuManager.Draw(spriteBatch);                 
                     break;
                 case GameState.playing:
                     spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, GameServices.GetService<Camera2d>().get_transformation());

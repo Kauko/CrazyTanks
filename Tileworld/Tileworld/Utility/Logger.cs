@@ -33,10 +33,11 @@ namespace Solum.Logging
             this.fileLoggingEnabled = logToFile;
             if(this.fileLoggingEnabled){
                 this.fileName = DateTime.Now + ".txt";
-                this.fileName = this.fileName.Replace(":", "");
+                //this.fileName = this.fileName.Replace(":", "");
+                this.fileName = this.fileName.Remove(this.fileName.IndexOf(" "));
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(this.fileName, true))
                 {
-                    file.WriteLine(this.fileName);
+                    file.WriteLine("Starting game at "+DateTime.Now);
                 }
             }
         }
@@ -93,7 +94,10 @@ namespace Solum.Logging
         private string getTimestamp()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
-            return "[" + gameTime.TotalGameTime.ToString("c") +"]: ";
+            if (gameTime != null)
+                return "[" + gameTime.TotalGameTime.ToString("c") + "]: ";
+            else
+                return "Initializing.. - ";
         }
 
         public void logMsg(String msg)

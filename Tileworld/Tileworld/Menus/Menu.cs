@@ -25,7 +25,7 @@ using Solum.Logging;
 
 namespace Solum.Menus
 {
-    class Menu
+    abstract class Menu
     {
         public enum ButtonStates
         {
@@ -37,7 +37,7 @@ namespace Solum.Menus
 
         public String pressedButtonName;            //Handle inputs
 
-        protected string title;                     //Title at top of menu
+        protected string title; //Title at top of menu
 
         protected List<Button> buttons = new List<Button>();
         /// <summary>
@@ -57,7 +57,7 @@ namespace Solum.Menus
         /// <param name="id"></param>
         /// <param name="bounds"></param>
         /// <param name="text"></param>
-        public void LoadButtons(ContentManager Content, ButtonAction[] actions, List<Rectangle> bounds, List<string> text)
+        public void LoadButtons(ButtonAction[] actions, List<Rectangle> bounds, List<string> text)
         {
             for (int i = 0; i < actions.Count(); i++)
             {
@@ -81,7 +81,7 @@ namespace Solum.Menus
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureRefs.menuBgImage, new Rectangle(0, 0, GameServices.GetService<GraphicsDevice>().Viewport.Width, GameServices.GetService<GraphicsDevice>().Viewport.Height), Color.White);
+            //spriteBatch.Draw(TextureRefs.menuBgImage, new Rectangle(0, 0, GameServices.GetService<GraphicsDevice>().Viewport.Width, GameServices.GetService<GraphicsDevice>().Viewport.Height), Color.Black);
 
             Vector2 titlePosition = new Vector2(GameServices.GetService<GraphicsDevice>().Viewport.Width / 2 - (SpriteFontRefs.titleFont.MeasureString(title).X / 2), 50);
             spriteBatch.DrawString(SpriteFontRefs.titleFont, title, titlePosition, Color.Black);
@@ -129,11 +129,6 @@ namespace Solum.Menus
             if (playSoundEffect)
                 SoundRefs.menuClose.Play();
         }
-
-        /*public void HandleMenuButtonPressed(object sender, MenuButtonPressedEventArgs args)
-        {
-
-        }*/
 
         public void PlayBGM(bool loop)
         {
