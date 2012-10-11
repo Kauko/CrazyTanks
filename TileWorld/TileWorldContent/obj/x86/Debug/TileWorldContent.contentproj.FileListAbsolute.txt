@@ -1,2 +1,0 @@
-c:\users\kauko\documents\DELETE\Projects\Tileworld\Tileworld\TileworldContent\obj\x86\Debug\ResolveAssemblyReference.cache
-G:\Tileworld\Tileworld\TileworldContent\obj\x86\Debug\ResolveAssemblyReference.cache
