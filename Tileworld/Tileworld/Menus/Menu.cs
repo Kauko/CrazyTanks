@@ -33,6 +33,7 @@ namespace Solum.Menus
             Close,
             Pressed,
             Quit,
+            Play
         }public ButtonStates ButtonState { get; set; }   //Feedback event to MenuManager
 
         public String pressedButtonName;            //Handle inputs
@@ -106,6 +107,9 @@ namespace Solum.Menus
                     break;
                 case ButtonAction.Close:
                     this.ButtonState = ButtonStates.Close;
+                    break;
+                case ButtonAction.Play:
+                    this.ButtonState = ButtonStates.Play;
                     break;
             }
         }

@@ -114,7 +114,7 @@ namespace Solum
             #region building main menu
             MainMenu mainMenu = new MainMenu("Main Menu");
             mainMenu.LoadButtons(
-                new ButtonAction[] { ButtonAction.Close, ButtonAction.Other, ButtonAction.Quit },
+                new ButtonAction[] { ButtonAction.Play, ButtonAction.Other, ButtonAction.Quit },
                 new List<Rectangle>() { new Rectangle(firstX, firstY, C.menuButtonWidth, C.menuButtonHeight), new Rectangle(firstX, firstY + C.menuButtonVerticalAddition, C.menuButtonWidth, C.menuButtonHeight), new Rectangle(firstX, firstY + C.menuButtonVerticalAddition * 2, C.menuButtonWidth, C.menuButtonHeight) },
                 new List<string>() { "Start", "Save", "Quit" }
                 );
@@ -138,7 +138,7 @@ namespace Solum
             #region building pause menu
             PauseMenu mainPauseMenu = new PauseMenu("Pause menu");
             mainPauseMenu.LoadButtons(
-                new ButtonAction[] { ButtonAction.Close, ButtonAction.Quit },
+                new ButtonAction[] { ButtonAction.Play, ButtonAction.Quit },
                 new List<Rectangle>() { new Rectangle(firstX, firstY, C.menuButtonWidth, C.menuButtonHeight), new Rectangle(firstX, firstY + C.menuButtonVerticalAddition, C.menuButtonWidth, C.menuButtonHeight) },
                 new List<string>() { "Continue", "Main Menu" });
             pauseMenuManager.AddMenu("Pause Menu", mainPauseMenu);
@@ -167,11 +167,13 @@ namespace Solum
             GameServices.GetService<MouseDevice>().Update();
             //GameServices.GetService<GamepadDevice>().Update();
 
-            if (GameServices.GetService<KeyboardDevice>().State.IsKeyDown(Keys.F10) || menuManager.MenuState == MenuManager.MenuStates.Exit)
+            if (GameServices.GetService<KeyboardDevice>().WasKeyPressed(Keys.F10) || menuManager.MenuState == MenuManager.MenuStates.Exit)
                 Exit();
 
             switch(G.gameState){
                 case GameState.menu:
+                    //If we dont reset pausemenumanagers state, the pause menu will keep on exiting when we access it
+                    pauseMenuManager.MenuState = MenuManager.MenuStates.None;
                     if (menuManager.ActiveMenu == null)
                         menuManager.Show("Main Menu");
                     menuManager.Update();
@@ -184,10 +186,13 @@ namespace Solum
                         G.gameState = GameState.menu;
                     break;
                 case GameState.playing:
-                    if(this.IsActive)
+                    if (this.IsActive)
+                    {
                         GameServices.GetService<Camera2d>().updateCamera();
+                    }/*else
+                        G.gameState = GameState.paused;*/
                     GameServices.GetService<Logger>().logFPS();
-                    if (GameServices.GetService<KeyboardDevice>().State.IsKeyDown(Keys.Escape))
+                    if (GameServices.GetService<KeyboardDevice>().WasKeyPressed(Keys.Escape))
                         G.gameState = GameState.paused;
                     break;
             }

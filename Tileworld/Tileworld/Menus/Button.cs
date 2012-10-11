@@ -30,7 +30,8 @@ namespace Solum.Menus
     enum ButtonAction{
         Close,
         Quit,
-        Other
+        Other,
+        Play
     }
 
     class Button

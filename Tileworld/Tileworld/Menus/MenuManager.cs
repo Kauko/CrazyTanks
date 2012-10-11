@@ -18,6 +18,8 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using Solum.Utility;
 using Solum.Logging;
+using Solum.Input;
+using Microsoft.Xna.Framework.Input;
 
 namespace Solum.Menus
 {
@@ -48,6 +50,9 @@ namespace Solum.Menus
         {
             if (activeMenu != null)
                 activeMenu.Update();
+
+            if (GameServices.GetService<KeyboardDevice>().WasKeyPressed(Keys.Escape))
+                this.Close();
 
             GetButtonEvent();
         }
@@ -118,12 +123,12 @@ namespace Solum.Menus
             {
                 activeMenu = previousMenus.Pop();
             }
-            else
-            {
-                activeMenu.StopBGM();
-                activeMenu = null;
-                G.gameState = GameState.playing;
-            }
+        }
+
+        public void Play(){
+            activeMenu.StopBGM();
+            activeMenu = null;
+            G.gameState = GameState.playing;
         }
 
         /// <summary>
@@ -157,6 +162,10 @@ namespace Solum.Menus
                     case Menu.ButtonStates.Pressed:
                         activeMenu.ButtonState = Menu.ButtonStates.None;
                         Show(activeMenu.pressedButtonName);
+                        break;
+                    case Menu.ButtonStates.Play:
+                        activeMenu.ButtonState = Menu.ButtonStates.None;
+                        Play();
                         break;
                 }
             }
