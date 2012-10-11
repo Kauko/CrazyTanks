@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solum", "Tileworld\Tileworld\Solum.csproj", "{97730032-1848-4F60-A697-BF9BD2FB0B9D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solum", "Solum\Solum\Solum.csproj", "{97730032-1848-4F60-A697-BF9BD2FB0B9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolumContent", "Tileworld\TileworldContent\SolumContent.contentproj", "{C7A20BD6-EB72-4CC9-AC23-4EECEFECC5CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolumContent", "Solum\SolumContent\SolumContent.contentproj", "{C7A20BD6-EB72-4CC9-AC23-4EECEFECC5CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
