@@ -19,3 +19,18 @@ G:\Tileworld\Solum\Solum\obj\x86\Debug\ResolveAssemblyReference.cache
 G:\Tileworld\Solum\Solum\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 G:\Tileworld\Solum\Solum\obj\x86\Debug\Solum.exe
 G:\Tileworld\Solum\Solum\obj\x86\Debug\Solum.pdb
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Images\Koala.xnb
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Images\Button.xnb
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Images\MainMenuBG.xnb
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Fonts\textFont.xnb
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Fonts\titleFont.xnb
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Audio\MainMenuBGM.xnb
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Audio\MenuClose.xnb
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Audio\MenuOpen.xnb
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Audio\MainMenuBGM.wma
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Solum.exe
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Solum.pdb
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\obj\x86\Debug\Solum.exe
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\obj\x86\Debug\Solum.pdb
