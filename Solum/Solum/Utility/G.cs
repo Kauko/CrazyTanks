@@ -12,6 +12,7 @@ using System.Text;
 using Solum.Camera;
 using Solum;
 using Solum.Logging;
+using Solum.Input;
 
 namespace Solum.Utility
 {
@@ -22,12 +23,17 @@ namespace Solum.Utility
     public static class G
     {
         /* One time init variables (can a variable be called a variable if it's not varied?)*/
-        //Moved this to services for now
+        //Gamepads have to be here instead of services, services cannot be used by instance     
+        public static GamepadDevice gamePadOne;
+        public static GamepadDevice gamePadTwo;
+        public static GamepadDevice gamePadThree;
+        public static GamepadDevice gamePadFour;
         /* End of one time init variables */
 
         /* Global variables */
         public static GameState gameState;
-
         /* End of global variables */
+
+        
     }
 }

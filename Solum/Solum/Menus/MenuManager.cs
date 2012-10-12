@@ -128,7 +128,7 @@ namespace Solum.Menus
         public void Play(){
             activeMenu.StopBGM();
             activeMenu = null;
-            G.gameState = GameState.playing;
+            G.gameState = GameState.playerSelection;
         }
 
         /// <summary>

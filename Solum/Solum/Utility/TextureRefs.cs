@@ -18,5 +18,8 @@ namespace Solum.Utility
         public static Texture2D koala;
         public static Texture2D menuBgImage;
         public static Texture2D menuButton;
+        public static Texture2D pressStart;
+        public static Texture2D ready;
+        public static Texture2D waitingReady;
     }
 }

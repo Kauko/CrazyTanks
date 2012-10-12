@@ -25,7 +25,7 @@ using Solum.Menus;
 namespace Solum
 {
 
-    public enum GameState { playing, paused, menu };
+    public enum GameState { playing, paused, menu, playerSelection };
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -57,6 +57,14 @@ namespace Solum
             GameServices.AddService<MouseDevice>(new MouseDevice());
             GameServices.AddService<Game>(this);
             //GameServices.AddService<GamepadDevice>(new GamepadDevice(PlayerIndex.One));
+            if(GamePad.GetState(PlayerIndex.One).IsConnected)
+                G.gamePadOne = new GamepadDevice(PlayerIndex.One);
+            if (GamePad.GetState(PlayerIndex.Two).IsConnected)
+                G.gamePadTwo = new GamepadDevice(PlayerIndex.Two);
+            if (GamePad.GetState(PlayerIndex.Three).IsConnected)
+                G.gamePadThree = new GamepadDevice(PlayerIndex.Three);
+            if (GamePad.GetState(PlayerIndex.Four).IsConnected)
+                G.gamePadFour = new GamepadDevice(PlayerIndex.Four);
 
             GameServices.AddService<Camera2d>(new Camera2d());
             GameServices.AddService<Logger>(new Logger(true));
@@ -90,6 +98,9 @@ namespace Solum
             TextureRefs.koala = this.Content.Load<Texture2D>("Placeholder/Images/Koala");
             TextureRefs.menuBgImage = this.Content.Load<Texture2D>("Placeholder/Images/MainMenuBG");
             TextureRefs.menuButton = this.Content.Load<Texture2D>("Placeholder/Images/Button");
+            TextureRefs.ready = this.Content.Load<Texture2D>("Placeholder/Images/Ready");
+            TextureRefs.pressStart = this.Content.Load<Texture2D>("Placeholder/Images/PressStart");
+            TextureRefs.waitingReady = this.Content.Load<Texture2D>("Placeholder/Images/WaitingReady");
 
             SpriteFontRefs.textFont = Content.Load<SpriteFont>("Placeholder/Fonts/textFont");
             SpriteFontRefs.titleFont = Content.Load<SpriteFont>("Placeholder/Fonts/titleFont");
@@ -178,6 +189,8 @@ namespace Solum
                         menuManager.Show("Main Menu");
                     menuManager.Update();
                     break;
+                case GameState.playerSelection:
+                    break;
                 case GameState.paused:
                     if(pauseMenuManager.ActiveMenu == null)
                         pauseMenuManager.Show("Pause Menu");
@@ -211,6 +224,8 @@ namespace Solum
                 case GameState.menu:
                     spriteBatch.Begin();
                     menuManager.Draw(spriteBatch);
+                    break;
+                case GameState.playerSelection:
                     break;
                 case GameState.paused:
                     //All of playing draws here too;

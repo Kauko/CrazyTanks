@@ -128,6 +128,8 @@
     <Compile Include="Menus\Menu.cs" />
     <Compile Include="Menus\MenuManager.cs" />
     <Compile Include="Menus\PauseMenu.cs" />
+    <Compile Include="Menus\PlayerSelectionMenu.cs" />
+    <Compile Include="Menus\PlayerSelectionWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
@@ -144,7 +146,7 @@
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TileworldContent\SolumContent.contentproj">
+    <ProjectReference Include="..\SolumContent\SolumContent.contentproj">
       <Name>SolumContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
       <Project>{C7A20BD6-EB72-4CC9-AC23-4EECEFECC5CE}</Project>
