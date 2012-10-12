@@ -29,7 +29,8 @@ namespace Solum.Logging
         public GameTime gameTime { get; set; }
 
         public Logger(bool logToFile){
-            GameServices.GetService<KeyboardDevice>().KeyPressed += LogKeyPress;
+            //GameServices.GetService<KeyboardDevice>().KeyPressed += LogKeyPress;
+            G.gamePadOne.ButtonPressed += LogKeyPress;
             this.fileLoggingEnabled = logToFile;
             if(this.fileLoggingEnabled){
                 this.fileName = DateTime.Now + ".txt";
@@ -142,7 +143,7 @@ namespace Solum.Logging
             }
         }
 
-        void LogKeyPress(object sender,InputDeviceEventArgs<Keys, KeyboardState> e)
+        void LogKeyPress(object sender,InputDeviceEventArgs<Buttons, GamePadState> e)
         {
             this.logMsg(e.Object.ToString());
 

@@ -41,8 +41,8 @@ namespace Solum
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            this.Window.Title = "Tile World";
-            this.IsMouseVisible = true;          
+            this.Window.Title = "Shared Tanks - Stage Fall Gamejam 2012";
+            this.IsMouseVisible = false;          
         }
 
         /// <summary>
@@ -54,8 +54,8 @@ namespace Solum
         protected override void Initialize()
         {
             GameServices.AddService<GraphicsDevice>(graphics.GraphicsDevice);
-            GameServices.AddService<KeyboardDevice>(new KeyboardDevice());
-            GameServices.AddService<MouseDevice>(new MouseDevice());
+            //GameServices.AddService<KeyboardDevice>(new KeyboardDevice());
+            //GameServices.AddService<MouseDevice>(new MouseDevice());
             GameServices.AddService<Game>(this);
             //GameServices.AddService<GamepadDevice>(new GamepadDevice(PlayerIndex.One));
             //if(GamePad.GetState(PlayerIndex.One).IsConnected)
@@ -100,6 +100,7 @@ namespace Solum
             TextureRefs.koala = this.Content.Load<Texture2D>("Placeholder/Images/Koala");
             TextureRefs.menuBgImage = this.Content.Load<Texture2D>("Placeholder/Images/MainMenuBG");
             TextureRefs.menuButton = this.Content.Load<Texture2D>("Placeholder/Images/Button");
+            TextureRefs.activeMenuButton = this.Content.Load<Texture2D>("Placeholder/Images/ActiveButton");
             TextureRefs.ready = this.Content.Load<Texture2D>("Placeholder/Images/Ready");
             TextureRefs.pressStart = this.Content.Load<Texture2D>("Placeholder/Images/PressStart");
             TextureRefs.waitingReady = this.Content.Load<Texture2D>("Placeholder/Images/WaitingReady");
@@ -127,7 +128,7 @@ namespace Solum
             #region building main menu
             MainMenu mainMenu = new MainMenu("Main Menu");
             mainMenu.LoadButtons(
-                new ButtonAction[] { ButtonAction.Play, ButtonAction.Other, ButtonAction.Quit },
+                new ButtonAction[] { ButtonAction.PlayerSelect, ButtonAction.Other, ButtonAction.Quit },
                 new List<Rectangle>() { new Rectangle(firstX, firstY, C.menuButtonWidth, C.menuButtonHeight), new Rectangle(firstX, firstY + C.menuButtonVerticalAddition, C.menuButtonWidth, C.menuButtonHeight), new Rectangle(firstX, firstY + C.menuButtonVerticalAddition * 2, C.menuButtonWidth, C.menuButtonHeight) },
                 new List<string>() { "Start", "Save", "Quit" }
                 );
@@ -176,12 +177,12 @@ namespace Solum
         protected override void Update(GameTime gameTime)
         {
             GameServices.GetService<Logger>().gameTime = gameTime;
-            GameServices.GetService<KeyboardDevice>().Update();
-            GameServices.GetService<MouseDevice>().Update();
+            //GameServices.GetService<KeyboardDevice>().Update();
+            //GameServices.GetService<MouseDevice>().Update();
             //GameServices.GetService<GamepadDevice>().Update();
             updateGamepads();
 
-            if (GameServices.GetService<KeyboardDevice>().WasKeyPressed(Keys.F10) || menuManager.MenuState == MenuManager.MenuStates.Exit)
+            if (menuManager.MenuState == MenuManager.MenuStates.Exit)
                 Exit();
 
             switch(G.gameState){
@@ -213,14 +214,20 @@ namespace Solum
                         G.gameState = GameState.playing;
                     break;
                 case GameState.playing:
+                   //GameServices.GetService<Logger>().logMsg("Playing");
                     if (this.IsActive)
                     {
-                        GameServices.GetService<Camera2d>().updateCamera();
+                        //GameServices.GetService<Camera2d>().updateCamera();
                     }/*else
                         G.gameState = GameState.paused;*/
                     GameServices.GetService<Logger>().logFPS();
-                    if (GameServices.GetService<KeyboardDevice>().WasKeyPressed(Keys.Escape))
-                        G.gameState = GameState.paused;
+                    foreach (GamepadDevice d in G.activeGamepads)
+                    {
+                        if (d.WasButtonPressed(Buttons.Start))
+                        {
+                            G.gameState = GameState.paused;
+                        }
+                    }
                     break;
             }
             
@@ -245,11 +252,9 @@ namespace Solum
                     break;
                 case GameState.paused:
                     //All of playing draws here too;
-                    spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, GameServices.GetService<Camera2d>().get_transformation());
-                    spriteBatch.Draw(TextureRefs.koala, new Vector2(0.0f, 0.0f), Color.White);
-                    spriteBatch.End();
-                    //Drawing the pause menu on top
                     spriteBatch.Begin();
+                    spriteBatch.Draw(TextureRefs.koala, new Vector2(0, 0), Color.White);
+                    //Drawing the pause menu on top
                     pauseMenuManager.Draw(spriteBatch);                 
                     break;
                 case GameState.controllerDisconnected:
@@ -260,8 +265,8 @@ namespace Solum
                     spriteBatch.DrawString(SpriteFontRefs.titleFont, "Controller disconnected", titlePosition, Color.Black);
                     break;
                 case GameState.playing:
-                    spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, GameServices.GetService<Camera2d>().get_transformation());
-                    spriteBatch.Draw(TextureRefs.koala, new Vector2(0.0f, 0.0f), Color.White);
+                    spriteBatch.Begin();
+                    spriteBatch.Draw(TextureRefs.koala, new Vector2(0, 0), Color.White);
                     break;
             }
             

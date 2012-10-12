@@ -31,6 +31,18 @@ namespace Solum.Menus
             this.started = started;
         }
 
+        public void resetWidget()
+        {
+            this.started = false;
+            this.oneReady = false;
+            this.twoReady = false;
+        }
+
+        public void setStarted(bool started)
+        {
+            this.started = started;
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             if (this.started)

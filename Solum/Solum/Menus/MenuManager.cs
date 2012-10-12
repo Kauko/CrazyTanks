@@ -51,7 +51,7 @@ namespace Solum.Menus
             if (activeMenu != null)
                 activeMenu.Update();
 
-            if (GameServices.GetService<KeyboardDevice>().WasKeyPressed(Keys.Escape))
+            if (G.gamePadOne.WasButtonPressed(Buttons.B))
                 this.Close();
 
             GetButtonEvent();
@@ -128,6 +128,13 @@ namespace Solum.Menus
         public void Play(){
             activeMenu.StopBGM();
             activeMenu = null;
+            G.gameState = GameState.playing;
+        }
+
+        public void PlayerSelection()
+        {
+            activeMenu.StopBGM();
+            activeMenu = null;
             G.gameState = GameState.playerSelection;
         }
 
@@ -166,6 +173,10 @@ namespace Solum.Menus
                     case Menu.ButtonStates.Play:
                         activeMenu.ButtonState = Menu.ButtonStates.None;
                         Play();
+                        break;
+                    case Menu.ButtonStates.PlayerSelection:
+                        activeMenu.ButtonState = Menu.ButtonStates.None;
+                        PlayerSelection();
                         break;
                 }
             }

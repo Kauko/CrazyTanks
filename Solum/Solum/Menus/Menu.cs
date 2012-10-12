@@ -19,6 +19,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Input;
 using Solum.Utility;
 using Solum.Input;
 using Solum.Logging;
@@ -33,7 +34,8 @@ namespace Solum.Menus
             Close,
             Pressed,
             Quit,
-            Play
+            Play,
+            PlayerSelection
         }public ButtonStates ButtonState { get; set; }   //Feedback event to MenuManager
 
         public String pressedButtonName;            //Handle inputs
@@ -41,6 +43,7 @@ namespace Solum.Menus
         protected string title; //Title at top of menu
 
         protected List<Button> buttons = new List<Button>();
+        private int selectedIndex = 0;
         /// <summary>
         /// Constructs a base menu item.
         /// </summary>
@@ -65,11 +68,42 @@ namespace Solum.Menus
                 this.buttons.Add(new Button(actions[i], bounds[i], text[i]));
                 //buttons[i].MenuButtonPressed += HandleMenuButtonPressed;
             }
+            buttons.ElementAt(this.selectedIndex).isActive = true;
         }
 
         public virtual void Update()
         {
-            if (GameServices.GetService<MouseDevice>().WasButtonPressed(MouseButtons.Left))
+            if (G.gamePadOne.WasButtonPressed(Buttons.DPadDown))
+            {
+                if (this.selectedIndex < buttons.Count - 1)
+                    this.selectedIndex++;
+                else
+                    this.selectedIndex = 0;
+
+                foreach (Button b in buttons)
+                    b.isActive = false;
+                buttons.ElementAt(this.selectedIndex).isActive = true;
+            }
+            else if (G.gamePadOne.WasButtonPressed(Buttons.DPadUp))
+            {
+                if (this.selectedIndex > 0)
+                    this.selectedIndex--;
+                else
+                    this.selectedIndex = buttons.Count - 1;
+
+                foreach (Button b in buttons)
+                    b.isActive = false;
+                buttons.ElementAt(this.selectedIndex).isActive = true;
+            }
+
+            
+
+            if (G.gamePadOne.WasButtonPressed(Buttons.A))
+            {
+                this.ButtonPush(buttons.ElementAt(selectedIndex));
+            }
+            
+            /*if (GameServices.GetService<MouseDevice>().WasButtonPressed(MouseButtons.Left))
             {
                 Point mousePos = new Point((int)GameServices.GetService<MouseDevice>().State.X, (int)GameServices.GetService<MouseDevice>().State.Y);
                 foreach (Button b in buttons)
@@ -77,7 +111,7 @@ namespace Solum.Menus
                     if (b.Bounds.Contains(mousePos))
                         this.ButtonPush(b);
                 }
-            }
+            }*/
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -110,6 +144,9 @@ namespace Solum.Menus
                     break;
                 case ButtonAction.Play:
                     this.ButtonState = ButtonStates.Play;
+                    break;
+                case ButtonAction.PlayerSelect:
+                    this.ButtonState = ButtonStates.PlayerSelection;
                     break;
             }
         }

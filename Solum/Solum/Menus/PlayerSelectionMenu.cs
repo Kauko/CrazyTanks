@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Solum.Utility;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace Solum.Menus
 {
@@ -19,6 +20,16 @@ namespace Solum.Menus
             widgets[2] = new PlayerSelectionWidget(new Vector2(C.playerSelectionWidgetPositionX, C.playerSelectionWidgetPositionY) + new Vector2(0,C.playerSelectionWidgetVerticalOffsetY), G.gamePadThree);
             widgets[3] = new PlayerSelectionWidget(new Vector2(C.playerSelectionWidgetPositionX, C.playerSelectionWidgetPositionY) + new Vector2(0,C.playerSelectionWidgetVerticalOffsetY) 
                 + new Vector2(C.playerSelectionWidgetHorizontalOffsetX,0), G.gamePadFour);
+        }
+
+        private void resetWidgets()
+        {
+            foreach (PlayerSelectionWidget w in widgets)
+            {
+                w.resetWidget();
+            }
+
+            widgets[0].setStarted(true);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -44,9 +55,16 @@ namespace Solum.Menus
             {
                 foreach (PlayerSelectionWidget p in widgets)
                 {
-                    G.activeGamepads.Add(p.getController());
+                    if(p.isStarted())
+                        G.activeGamepads.Add(p.getController());
                 }
                 G.gameState = GameState.playing;
+                resetWidgets();
+            }
+
+            if(G.gamePadOne.WasButtonPressed(Buttons.Back)){
+                G.gameState = GameState.menu;
+                resetWidgets();
             }
 
         }

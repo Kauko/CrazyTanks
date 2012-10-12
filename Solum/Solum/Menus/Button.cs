@@ -27,11 +27,13 @@ namespace Solum.Menus
     }*/
 
 
-    enum ButtonAction{
+    enum ButtonAction
+    {
         Close,
         Quit,
         Other,
-        Play
+        Play,
+        PlayerSelect
     }
 
     class Button
@@ -43,6 +45,7 @@ namespace Solum.Menus
 
         public string text;
         Vector2 textPos;
+        public bool isActive;
 
         public ButtonAction Action
         {
@@ -58,6 +61,7 @@ namespace Solum.Menus
             this.action = action;
             this.bounds = bounds;
             this.text = text;
+            this.isActive = false;
         }
 
         public void Draw(SpriteBatch spriteBatch, SpriteFont spriteFont)
@@ -65,7 +69,10 @@ namespace Solum.Menus
             textPos = new Vector2(bounds.X, bounds.Y);
             textPos += new Vector2((bounds.Width / 2) - (spriteFont.MeasureString(text).X / 2), (bounds.Height / 2) - (spriteFont.MeasureString(text).Y / 2));
 
-            spriteBatch.Draw(TextureRefs.menuButton, bounds, Color.White);
+            if(!this.isActive)
+                spriteBatch.Draw(TextureRefs.menuButton, bounds, Color.White);
+            else
+                spriteBatch.Draw(TextureRefs.activeMenuButton, bounds, Color.White);
             spriteBatch.DrawString(spriteFont, text, textPos, Color.Black);
         }
 

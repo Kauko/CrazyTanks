@@ -101,6 +101,15 @@
       <Output>C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Images\WaitingReady.xnb</Output>
       <Time>2012-10-12T21:40:29.4081486+03:00</Time>
     </Item>
+    <Item>
+      <Source>Placeholder\Images\ActiveButton.png</Source>
+      <Name>Placeholder\Images\ActiveButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Images\ActiveButton.xnb</Output>
+      <Time>2012-10-13T00:16:18.6598952+03:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
