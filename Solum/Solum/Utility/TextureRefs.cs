@@ -15,6 +15,7 @@ namespace Solum.Utility
 {
     class TextureRefs
     {
+        public static Texture2D tank;
         public static Texture2D koala;
         public static Texture2D menuBgImage;
         public static Texture2D menuButton;

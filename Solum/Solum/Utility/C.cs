@@ -37,6 +37,11 @@ namespace Solum.Utility
         public const int menuButtonVerticalOffset = 170; //if this is 0, the first button will be in the middle of the screen. Higher value means the first button is towards the top of the screen
         public const int menuButtonVerticalAddition = menuButtonHeight + 30; //the space between the menu buttons
 
+        /* Variables used in tanks */
+        public const float tankThrottleSpeed = 5f;
+        public const float tankReverseSpeed = 2f;
+        public const float tankRotationSpeed = 0.05f;
+
         /* End of menu variables */
     }
 }

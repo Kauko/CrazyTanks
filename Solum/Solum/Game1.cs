@@ -21,6 +21,7 @@ using Solum.Utility;
 using Solum.Logging;
 using Solum.Input;
 using Solum.Menus;
+using Solum.SharedTanks;
 
 namespace Solum
 {
@@ -35,6 +36,7 @@ namespace Solum
         SpriteBatch spriteBatch;
         MenuManager menuManager;
         MenuManager pauseMenuManager;
+        Tank tank;
 
         public Game1()
         {
@@ -56,7 +58,7 @@ namespace Solum
             GameServices.AddService<KeyboardDevice>(new KeyboardDevice());
             GameServices.AddService<MouseDevice>(new MouseDevice());
             GameServices.AddService<Game>(this);
-            //GameServices.AddService<GamepadDevice>(new GamepadDevice(PlayerIndex.One));
+            GameServices.AddService<GamepadDevice>(new GamepadDevice(PlayerIndex.One));
             if(GamePad.GetState(PlayerIndex.One).IsConnected)
                 G.gamePadOne = new GamepadDevice(PlayerIndex.One);
             if (GamePad.GetState(PlayerIndex.Two).IsConnected)
@@ -71,6 +73,9 @@ namespace Solum
 
             menuManager = new MenuManager();
             pauseMenuManager = new MenuManager();
+
+            tank = new Tank();
+            tank.pos = new Vector2(100.0f, 100.0f);
 
             G.gameState = GameState.menu;
 
@@ -95,6 +100,7 @@ namespace Solum
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             #region Content paths
+            TextureRefs.tank = this.Content.Load<Texture2D>("Placeholder/Images/Tank");
             TextureRefs.koala = this.Content.Load<Texture2D>("Placeholder/Images/Koala");
             TextureRefs.menuBgImage = this.Content.Load<Texture2D>("Placeholder/Images/MainMenuBG");
             TextureRefs.menuButton = this.Content.Load<Texture2D>("Placeholder/Images/Button");
@@ -176,7 +182,7 @@ namespace Solum
             GameServices.GetService<Logger>().gameTime = gameTime;
             GameServices.GetService<KeyboardDevice>().Update();
             GameServices.GetService<MouseDevice>().Update();
-            //GameServices.GetService<GamepadDevice>().Update();
+            GameServices.GetService<GamepadDevice>().Update();
 
             if (GameServices.GetService<KeyboardDevice>().WasKeyPressed(Keys.F10) || menuManager.MenuState == MenuManager.MenuStates.Exit)
                 Exit();
@@ -190,6 +196,7 @@ namespace Solum
                     menuManager.Update();
                     break;
                 case GameState.playerSelection:
+                    G.gameState = GameState.playing;
                     break;
                 case GameState.paused:
                     if(pauseMenuManager.ActiveMenu == null)
@@ -202,6 +209,7 @@ namespace Solum
                     if (this.IsActive)
                     {
                         GameServices.GetService<Camera2d>().updateCamera();
+                        tank.Update();
                     }/*else
                         G.gameState = GameState.paused;*/
                     GameServices.GetService<Logger>().logFPS();
@@ -226,10 +234,11 @@ namespace Solum
                     menuManager.Draw(spriteBatch);
                     break;
                 case GameState.playerSelection:
+                    spriteBatch.Begin();
                     break;
                 case GameState.paused:
                     //All of playing draws here too;
-                    spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, GameServices.GetService<Camera2d>().get_transformation());
+                    spriteBatch.Begin();
                     spriteBatch.Draw(TextureRefs.koala, new Vector2(0.0f, 0.0f), Color.White);
                     spriteBatch.End();
                     //Drawing the pause menu on top
@@ -237,8 +246,8 @@ namespace Solum
                     pauseMenuManager.Draw(spriteBatch);                 
                     break;
                 case GameState.playing:
-                    spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, GameServices.GetService<Camera2d>().get_transformation());
-                    spriteBatch.Draw(TextureRefs.koala, new Vector2(0.0f, 0.0f), Color.White);
+                    spriteBatch.Begin();
+                    tank.Draw(spriteBatch);
                     break;
             }
             
