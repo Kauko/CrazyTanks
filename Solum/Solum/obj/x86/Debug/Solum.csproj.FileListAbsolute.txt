@@ -38,3 +38,6 @@ C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\
 C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Images\Ready.xnb
 C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Images\WaitingReady.xnb
 C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Images\ActiveButton.xnb
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Levels\level1.xnb
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\LevelLibrary.dll
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\LevelLibrary.pdb

@@ -112,7 +112,18 @@ namespace Solum
             SoundRefs.menuClose = Content.Load<SoundEffect>("Placeholder/Audio/MenuClose");
 
             SoundRefs.bgm = Content.Load<Song>("Placeholder/Audio/MainMenuBGM");
+
+            LevelLibrary.Level level = Content.Load<LevelLibrary.Level>("Levels/level1");
             #endregion
+
+            for (int row = 0; row < level.Rows; row++)
+            {
+                for (int column = 0; column < level.Columns; column++)
+                {
+                    GameServices.GetService<Logger>().logMsg(""+level.GetValue(row, column));
+                }
+                Console.WriteLine();
+            }
 
             #region screen Center location..
             int screenHeight = graphics.GraphicsDevice.Viewport.Height;

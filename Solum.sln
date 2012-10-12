@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solum", "Solum\Solum\Solum.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolumContent", "Solum\SolumContent\SolumContent.contentproj", "{C7A20BD6-EB72-4CC9-AC23-4EECEFECC5CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevelLibrary", "LevelLibrary\LevelLibrary.csproj", "{65C5F0B4-EA11-485C-ADC2-4CCE544E410A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevelContentPipelineExtension", "LevelContentPipelineExtension\LevelContentPipelineExtension.csproj", "{EE0AAFA7-BCBC-4BA2-92AE-6073A3C911CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -17,6 +21,14 @@ Global
 		{97730032-1848-4F60-A697-BF9BD2FB0B9D}.Release|x86.Build.0 = Release|x86
 		{C7A20BD6-EB72-4CC9-AC23-4EECEFECC5CE}.Debug|x86.ActiveCfg = Debug|x86
 		{C7A20BD6-EB72-4CC9-AC23-4EECEFECC5CE}.Release|x86.ActiveCfg = Release|x86
+		{65C5F0B4-EA11-485C-ADC2-4CCE544E410A}.Debug|x86.ActiveCfg = Debug|x86
+		{65C5F0B4-EA11-485C-ADC2-4CCE544E410A}.Debug|x86.Build.0 = Debug|x86
+		{65C5F0B4-EA11-485C-ADC2-4CCE544E410A}.Release|x86.ActiveCfg = Release|x86
+		{65C5F0B4-EA11-485C-ADC2-4CCE544E410A}.Release|x86.Build.0 = Release|x86
+		{EE0AAFA7-BCBC-4BA2-92AE-6073A3C911CB}.Debug|x86.ActiveCfg = Debug|x86
+		{EE0AAFA7-BCBC-4BA2-92AE-6073A3C911CB}.Debug|x86.Build.0 = Debug|x86
+		{EE0AAFA7-BCBC-4BA2-92AE-6073A3C911CB}.Release|x86.ActiveCfg = Debug|x86
+		{EE0AAFA7-BCBC-4BA2-92AE-6073A3C911CB}.Release|x86.Build.0 = Debug|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
