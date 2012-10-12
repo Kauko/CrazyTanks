@@ -25,7 +25,7 @@ using Solum.Menus;
 namespace Solum
 {
 
-    public enum GameState { playing, paused, menu, playerSelection };
+    public enum GameState { playing, paused, menu, playerSelection, controllerDisconnected };
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -35,6 +35,7 @@ namespace Solum
         SpriteBatch spriteBatch;
         MenuManager menuManager;
         MenuManager pauseMenuManager;
+        PlayerSelectionMenu playerSelectionMenu;
 
         public Game1()
         {
@@ -57,20 +58,21 @@ namespace Solum
             GameServices.AddService<MouseDevice>(new MouseDevice());
             GameServices.AddService<Game>(this);
             //GameServices.AddService<GamepadDevice>(new GamepadDevice(PlayerIndex.One));
-            if(GamePad.GetState(PlayerIndex.One).IsConnected)
-                G.gamePadOne = new GamepadDevice(PlayerIndex.One);
-            if (GamePad.GetState(PlayerIndex.Two).IsConnected)
-                G.gamePadTwo = new GamepadDevice(PlayerIndex.Two);
-            if (GamePad.GetState(PlayerIndex.Three).IsConnected)
-                G.gamePadThree = new GamepadDevice(PlayerIndex.Three);
-            if (GamePad.GetState(PlayerIndex.Four).IsConnected)
-                G.gamePadFour = new GamepadDevice(PlayerIndex.Four);
+            //if(GamePad.GetState(PlayerIndex.One).IsConnected)
+            G.gamePadOne = new GamepadDevice(PlayerIndex.One);
+            //if (GamePad.GetState(PlayerIndex.Two).IsConnected)
+            G.gamePadTwo = new GamepadDevice(PlayerIndex.Two);
+            //if (GamePad.GetState(PlayerIndex.Three).IsConnected)
+            G.gamePadThree = new GamepadDevice(PlayerIndex.Three);
+            //if (GamePad.GetState(PlayerIndex.Four).IsConnected)
+            G.gamePadFour = new GamepadDevice(PlayerIndex.Four);
 
             GameServices.AddService<Camera2d>(new Camera2d());
-            GameServices.AddService<Logger>(new Logger(true));
+            GameServices.AddService<Logger>(new Logger(false));
 
             menuManager = new MenuManager();
             pauseMenuManager = new MenuManager();
+            playerSelectionMenu = new PlayerSelectionMenu();
 
             G.gameState = GameState.menu;
 
@@ -177,6 +179,7 @@ namespace Solum
             GameServices.GetService<KeyboardDevice>().Update();
             GameServices.GetService<MouseDevice>().Update();
             //GameServices.GetService<GamepadDevice>().Update();
+            updateGamepads();
 
             if (GameServices.GetService<KeyboardDevice>().WasKeyPressed(Keys.F10) || menuManager.MenuState == MenuManager.MenuStates.Exit)
                 Exit();
@@ -187,9 +190,11 @@ namespace Solum
                     pauseMenuManager.MenuState = MenuManager.MenuStates.None;
                     if (menuManager.ActiveMenu == null)
                         menuManager.Show("Main Menu");
+                    //if(G.gamePadOne.IsConnected)
                     menuManager.Update();
                     break;
                 case GameState.playerSelection:
+                    playerSelectionMenu.Update();
                     break;
                 case GameState.paused:
                     if(pauseMenuManager.ActiveMenu == null)
@@ -197,6 +202,15 @@ namespace Solum
                     pauseMenuManager.Update();
                     if (pauseMenuManager.MenuState == MenuManager.MenuStates.Exit)
                         G.gameState = GameState.menu;
+                    break;
+                case GameState.controllerDisconnected:
+                    bool allConnected = true;
+                    foreach(GamepadDevice d in G.activeGamepads){
+                        if (!d.IsConnected)
+                            allConnected = false;
+                    }
+                    if (allConnected)
+                        G.gameState = GameState.playing;
                     break;
                 case GameState.playing:
                     if (this.IsActive)
@@ -226,6 +240,8 @@ namespace Solum
                     menuManager.Draw(spriteBatch);
                     break;
                 case GameState.playerSelection:
+                    spriteBatch.Begin();
+                    playerSelectionMenu.Draw(spriteBatch);
                     break;
                 case GameState.paused:
                     //All of playing draws here too;
@@ -236,6 +252,13 @@ namespace Solum
                     spriteBatch.Begin();
                     pauseMenuManager.Draw(spriteBatch);                 
                     break;
+                case GameState.controllerDisconnected:
+                    var rect = new Texture2D(GameServices.GetService<GraphicsDevice>(), 1, 1);
+                    rect.SetData(new[] { Color.Black });
+                    spriteBatch.Draw(rect, new Rectangle(0, 0, GameServices.GetService<GraphicsDevice>().Viewport.Width, GameServices.GetService<GraphicsDevice>().Viewport.Height), Color.White*0.5f);
+                    Vector2 titlePosition = new Vector2(GameServices.GetService<GraphicsDevice>().Viewport.Width / 2 - (SpriteFontRefs.titleFont.MeasureString("Controller disconnected").X / 2), 50);
+                    spriteBatch.DrawString(SpriteFontRefs.titleFont, "Controller disconnected", titlePosition, Color.Black);
+                    break;
                 case GameState.playing:
                     spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, GameServices.GetService<Camera2d>().get_transformation());
                     spriteBatch.Draw(TextureRefs.koala, new Vector2(0.0f, 0.0f), Color.White);
@@ -245,6 +268,23 @@ namespace Solum
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        private void updateGamepads()
+        {
+            switch (G.gameState)
+            {
+                case GameState.menu:
+                case GameState.playerSelection:
+                    G.gamePadOne.Update();
+                    break;
+                case GameState.playing:
+                case GameState.paused:
+                case GameState.controllerDisconnected:
+                    foreach (GamepadDevice d in G.activeGamepads)
+                        d.Update();
+                    break;
+            }
         }
     }
 }

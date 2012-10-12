@@ -34,3 +34,6 @@ C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\obj\
 C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\obj\x86\Debug\Solum.exe
 C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\obj\x86\Debug\Solum.pdb
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Images\PressStart.xnb
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Images\Ready.xnb
+C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Images\WaitingReady.xnb

@@ -74,6 +74,33 @@
       <Output>C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Audio\MenuOpen.xnb</Output>
       <Time>2012-10-12T20:46:50.0414622+03:00</Time>
     </Item>
+    <Item>
+      <Source>Placeholder\Images\PressStart.png</Source>
+      <Name>Placeholder\Images\PressStart</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Images\PressStart.xnb</Output>
+      <Time>2012-10-12T21:42:39.5325913+03:00</Time>
+    </Item>
+    <Item>
+      <Source>Placeholder\Images\Ready.png</Source>
+      <Name>Placeholder\Images\Ready</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Images\Ready.xnb</Output>
+      <Time>2012-10-12T21:43:11.3414107+03:00</Time>
+    </Item>
+    <Item>
+      <Source>Placeholder\Images\WaitingReady.png</Source>
+      <Name>Placeholder\Images\WaitingReady</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\teemuk\Documents\Visual Studio 2010\Projects\ShareTank\Solum\Solum\bin\x86\Debug\Content\Placeholder\Images\WaitingReady.xnb</Output>
+      <Time>2012-10-12T21:40:29.4081486+03:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

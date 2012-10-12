@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Solum.Utility
 {
@@ -35,8 +36,11 @@ namespace Solum.Utility
         public const int menuButtonWidth = 150; //width of a menu button
         public const int menuButtonHeight = 50; // height of a menu button
         public const int menuButtonVerticalOffset = 170; //if this is 0, the first button will be in the middle of the screen. Higher value means the first button is towards the top of the screen
-        public const int menuButtonVerticalAddition = menuButtonHeight + 30; //the space between the menu buttons
-
+        public const int menuButtonVerticalAddition = menuButtonHeight + 30; //the space between the menu 
+        public const int playerSelectionWidgetPositionX = 50;
+        public const int playerSelectionWidgetPositionY = 50;
+        public const int playerSelectionWidgetVerticalOffsetY = 400;
+        public const int playerSelectionWidgetHorizontalOffsetX = 300;
         /* End of menu variables */
     }
 }
