@@ -49,6 +49,7 @@ namespace Solum.SharedTanks
                 {
                     if (b.shooter != t)
                     {
+                        if(t.state == TankState.Alive){
                         if (t.takeDamage(b))
                         {
                             #region kill and death counter increases
@@ -88,8 +89,10 @@ namespace Solum.SharedTanks
                             }
                             #endregion
                         }
-                        if(t.Team != b.shooter.Team)
-                            b.shooter.increaseShieldMeter(C.shieldMeterIncreaseOnDamage);
+                        }
+                            if(t.Team != b.shooter.Team)
+                                b.shooter.increaseShieldMeter(C.shieldMeterIncreaseOnDamage);
+                        }
                         b.removable = true;
                     }
                 }
