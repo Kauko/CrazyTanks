@@ -254,7 +254,8 @@ namespace Solum.SharedTanks
             //Draw healthbar
             var rect = new Texture2D(GameServices.GetService<GraphicsDevice>(), 1, 1);
             rect.SetData(new[] { Color.DeepPink });
-            spriteBatch.Draw(rect, new Rectangle((int)pos.X, (int)pos.Y + C.healthbarHorizontalOffset, C.healthbarWidth, C.healthbarHeight), Color.White * 0.5f);
+            float width = C.healthbarWidth * this.health;
+            spriteBatch.Draw(rect, new Rectangle((int)pos.X, (int)pos.Y + C.healthbarHorizontalOffset, (int) width, C.healthbarHeight), Color.White * 0.5f);
 
         }
 
