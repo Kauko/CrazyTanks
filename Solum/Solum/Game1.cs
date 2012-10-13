@@ -212,7 +212,6 @@ namespace Solum
                     playerSelectionMenu.Update();
                     break;
                 case GameState.paused:
-                    GameServices.GetService<Logger>().logMsg("Now is paused");
                     if(pauseMenuManager.ActiveMenu == null)
                         pauseMenuManager.Show("Pause Menu");
                     pauseMenuManager.Update();
@@ -247,10 +246,8 @@ namespace Solum
                     GameServices.GetService<GridManager>().Update();
                     foreach (GamepadDevice d in G.activeGamepads)
                     {
-                        GameServices.GetService<Logger>().logMsg(""+d.PlayerIndex);
                         if (d.WasButtonPressed(Buttons.Start))
                         {
-                            GameServices.GetService<Logger>().logMsg("Pause menu");
                             G.gameState = GameState.paused;
                         }
                     }
