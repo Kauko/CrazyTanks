@@ -48,13 +48,16 @@ namespace Solum.SharedTanks
         public bool usedShield = false;
 
         public Bullet bullet;
+        public Teams Team { get; private set; }
 
 
-        public Tank()
+
+        public Tank(Teams team, Vector2 position)
         {
-            pos = Vector2.Zero;
+            pos = position;
             dir = Vector2.Zero;
             center = new Vector2(TextureRefs.tank.Width / 2, TextureRefs.tank.Height / 2);
+            this.Team = team;
             bullet = new Bullet();
 
             controls = new TankControls(ControlSide.Left);
@@ -243,6 +246,11 @@ namespace Solum.SharedTanks
                 spriteBatch.Draw(TextureRefs.shield, pos + center - new Vector2(TextureRefs.shield.Width / 2, TextureRefs.shield.Height / 2), null, Color.White, rotation, new Vector2(TextureRefs.shield.Width / 2, TextureRefs.shield.Height / 2), 1.0f, SpriteEffects.None, 0f);
             }
             spriteBatch.Draw(TextureRefs.bullet, bullet.pos, Color.White);
+        }
+
+        public RotatedRectangle getRectangle()
+        {
+            return new RotatedRectangle(new Rectangle((int)pos.X, (int)pos.Y, TextureRefs.tank.Width, TextureRefs.tank.Height), this.rotation);
         }
     }
 }
