@@ -49,8 +49,10 @@ namespace Solum.SharedTanks
                 {
                     if (b.shooter != t)
                     {
-                        t.takeDamage(b);
-
+                        if (t.state == TankState.Alive)
+                        {
+                            t.TakeDamage(b);
+                        }
                         b.removable = true;
                     }
                 }

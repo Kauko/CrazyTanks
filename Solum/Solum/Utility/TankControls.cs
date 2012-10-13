@@ -23,7 +23,7 @@ namespace Solum.Utility
 
     class TankControls
     {
-        public ControlSide darkside;
+        public ControlSide controlside;
         public Buttons shoot;
         public Buttons changeWeapon;
         public Buttons turretRotateCW;
@@ -32,9 +32,9 @@ namespace Solum.Utility
 
         public TankControls(ControlSide side)
         {
-            darkside = side;
+            controlside = side;
 
-            if (darkside == ControlSide.Left)
+            if (controlside == ControlSide.Left)
             {
                 turretRotateCW = Buttons.DPadLeft;
                 turretRotateCCW = Buttons.DPadRight;

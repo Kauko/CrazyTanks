@@ -28,6 +28,13 @@ namespace Solum.SharedTanks
         SmartBomb
     }
 
+    public enum TankState
+    {
+        Spawning,
+        Alive,
+        Dead
+    }
+
     class Tank : MovingObject
     {
         public Vector2 pos;
@@ -52,12 +59,16 @@ namespace Solum.SharedTanks
         public float speed;
         public float lastRotation;
 
+        public float shieldDurRemaining;
+        public float respawnMeter;
+
         public ShieldState shieldstate;
         public Weapon currentWeapon;
         public List<Weapon> weapons;
+        public TankState state;
 
-        public bool throttling = true;
-        public bool usedShield = false;
+        public bool throttling;
+        public bool usedShield;
 
         public Teams Team { get; private set; }
 
@@ -65,22 +76,36 @@ namespace Solum.SharedTanks
 
         public Tank(Teams team, Vector2 position, ControlSide side)
         {
-            pos = position;
-            GameServices.GetService<Logger>().logMsg("" + pos);
-            dir = Vector2.Zero;
+            /* No need to reset these -> not to initialize() */
+            controls = new TankControls(side);
+            weapons = Enum.GetValues(typeof(Weapon)).Cast<Weapon>().ToList<Weapon>();
             center = new Vector2(TextureRefs.tank.Width / 2, TextureRefs.tank.Height / 2);
             this.Team = team;
+            pad = GameServices.GetService<GamepadDevice>();
+            /* see descr */
 
-            controls = new TankControls(side);
+            Initialize(position);
+        }
 
-            weapons = Enum.GetValues(typeof(Weapon)).Cast<Weapon>().ToList<Weapon>();
+        public void Initialize(Vector2 position)
+        {
+            pos = position;
+            dir = Vector2.Zero;
 
             currentWeapon = Weapon.Shield;
-            shieldstate = ShieldState.Off;
-            pad = GameServices.GetService<GamepadDevice>();
+            state = TankState.Alive;
+
+            shieldDurRemaining = 5;
+            SetShieldState(ShieldState.On);
+
+            respawnMeter = C.respawnTime;
+
             rotation = 0.0f;
             turretRotation = 0.0f;
             speed = C.tankThrottleSpeed;
+
+            throttling = true;
+            usedShield = false;
         }
 
         public void Move(Vector2 stickOffset, Vector2 delta)
@@ -161,11 +186,47 @@ namespace Solum.SharedTanks
         public void SetShieldState(ShieldState state)
         {
             shieldstate = state;
+            if (shieldstate == ShieldState.On)
+            {
+                shieldDurRemaining = C.shieldDuration;
+            }
+            else
+            {
+                shieldDurRemaining = 0f;
+            }
         }
 
 
         public override void Update()
         {
+            switch(state){
+                case TankState.Spawning:
+                    break;
+                case TankState.Alive:
+                    UpdateAlive();
+                    break;
+                case TankState.Dead:
+                    respawnMeter--;
+                    if (respawnMeter < 0)
+                    {
+                        state = TankState.Spawning;
+                    }
+                    break;
+        }
+        }
+
+        public void UpdateAlive()
+        {
+            if (shieldDurRemaining > 0f && shieldstate == ShieldState.On)
+            {
+                shieldDurRemaining = shieldDurRemaining - 1f;
+
+                if (shieldDurRemaining <= 0f)
+                {
+                    SetShieldState(ShieldState.Off);
+                }
+            }
+
             if (pad.WasButtonPressed(controls.reverse))
             {
                 if (throttling)
@@ -182,11 +243,11 @@ namespace Solum.SharedTanks
                 }
             }
 
-            if (controls.darkside == ControlSide.Left)
+            if (controls.controlside == ControlSide.Left)
             {
                 Move(pad.LeftStickPosition, pad.LeftStickDelta);
             }
-            if (controls.darkside == ControlSide.Right)
+            if (controls.controlside == ControlSide.Right)
             {
                 Move(pad.RightStickPosition, pad.RightStickDelta);
             }
@@ -292,7 +353,7 @@ namespace Solum.SharedTanks
             //throw new NotImplementedException();
         }
 
-        internal void takeDamage(Bullet b)
+        internal void TakeDamage(Bullet b)
         {
             if (this.shieldstate == ShieldState.On)
             {
@@ -311,7 +372,9 @@ namespace Solum.SharedTanks
         private void Die()
         {
             GameServices.GetService<Logger>().logMsg("DIE");
-            this.health = 1.0f;
+            this.state = TankState.Dead;
+            this.respawnMeter = C.respawnTime;
+            this.health = 0.0f;
         }
     }
 }
