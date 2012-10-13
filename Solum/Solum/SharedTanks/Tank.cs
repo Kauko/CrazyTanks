@@ -74,14 +74,9 @@ namespace Solum.SharedTanks
         {
             float stickrotation = (float)Math.Atan2(stickOffset.X, stickOffset.Y);
 
-            //stickrotation += MathHelper.PiOver2;
-
             stickrotation = MathHelper.WrapAngle(stickrotation);
 
             rotation = MathHelper.WrapAngle(rotation);
-            
-            //GameServices.GetService<Logger>().logMsg(stickrotation.ToString());
-            //GameServices.GetService<Logger>().logMsg(rotation.ToString());
             
             float d = 0f;
             int cw = 0;
@@ -97,65 +92,44 @@ namespace Solum.SharedTanks
                 cw = -1;
             }
 
-            //GameServices.GetService<Logger>().logMsg(d.ToString());
-
             if (stickOffset != Vector2.Zero)
             {
-                //if (d < MathHelper.PiOver2)
                 if (d < MathHelper.Pi)
                 {
-                    rotation += cw * C.tankRotationSpeed;
-                    turretRotation += cw * C.tankRotationSpeed;
+                    if (throttling)
+                    {
+                        rotation += cw * C.tankRotationSpeed;
+                        turretRotation += cw * C.tankRotationSpeed;
+                    }
+                    else
+                    {
+                        rotation -= cw * C.tankRotationSpeed;
+                        turretRotation -= cw * C.tankRotationSpeed;
+                    }
                 }
                 if( d > MathHelper.Pi)
-                //else if( d >= MathHelper.PiOver2 && d < MathHelper.Pi)
-                {
-                    rotation -= cw * C.tankRotationSpeed;
-                    turretRotation -= cw * C.tankRotationSpeed;
-                }
-                /*else if (d >= MathHelper.Pi && d < MathHelper.Pi + MathHelper.PiOver2)
-                {
-                    if (throttling)
-                    {
-                        rotation += cw * C.tankRotationSpeed;
-                        turretRotation += cw * C.tankRotationSpeed;
-                        throttling = false;
-                    }
-                    else
-                    {
-                        rotation -= cw * C.tankRotationSpeed;
-                        turretRotation -= cw * C.tankRotationSpeed;
-                        throttling = true;
-                    }
-                }
-                else if (d >= MathHelper.Pi + MathHelper.PiOver2 && d <= MathHelper.Pi)
                 {
                     if (throttling)
                     {
                         rotation -= cw * C.tankRotationSpeed;
                         turretRotation -= cw * C.tankRotationSpeed;
-                        throttling = false;
                     }
                     else
                     {
                         rotation += cw * C.tankRotationSpeed;
                         turretRotation += cw * C.tankRotationSpeed;
-                        throttling = true;
                     }
-                }*/
+                }
 
                 Vector2 up = new Vector2(0, -1);
                 Matrix rotMatrix = Matrix.CreateRotationZ(rotation);
+
+                up = new Vector2(0, -1);
+                rotMatrix = Matrix.CreateRotationZ(rotation);
                 dir = Vector2.Transform(up, rotMatrix);
 
-                if (throttling)
-                {
-                    pos += dir * C.tankThrottleSpeed;
-                }
-                else
-                {
-                    pos -= dir * C.tankReverseSpeed;
-                }
+                pos.X += dir.X * C.tankThrottleSpeed;
+                pos.Y += dir.Y * C.tankThrottleSpeed;
             }
         }
 
@@ -180,6 +154,18 @@ namespace Solum.SharedTanks
         {
             if (controls.darkside == ControlSide.Left)
             {
+                if(pad.WasButtonPressed(controls.reverse)){
+                    if (throttling)
+                    {
+                        throttling = false;
+                        rotation -= MathHelper.Pi;
+                    }
+                    else
+                    {
+                        throttling = true;
+                        rotation += MathHelper.Pi;
+                    }
+                }
                 Move(pad.LeftStickPosition, pad.LeftStickDelta);
             }
             if (controls.darkside == ControlSide.Right)
@@ -242,7 +228,14 @@ namespace Solum.SharedTanks
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureRefs.tank, pos, null, Color.White, rotation,center, 1.0f, SpriteEffects.None, 0f);
+
+            float drawrotation = rotation;
+            if (!throttling)
+            {
+                drawrotation = rotation + MathHelper.Pi;
+            }
+
+            spriteBatch.Draw(TextureRefs.tank, pos, null, Color.White, drawrotation, center, 1.0f, SpriteEffects.None, 0f);
             spriteBatch.Draw(TextureRefs.turret, pos, null, Color.White, turretRotation, center, 1.0f, SpriteEffects.None, 0f);
             if (shieldstate == ShieldState.On)
             {
