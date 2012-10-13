@@ -39,15 +39,7 @@ namespace Solum.SharedTanks
         protected GamepadDevice pad;
 
         public TankControls controls;
-        public float ShieldMeter {
-            get { return ShieldMeter; } 
-            set { 
-                if (ShieldMeter < 1.0f) 
-                    ShieldMeter += value;
-                if (ShieldMeter > 1.0f)
-                    ShieldMeter = 1.0f;
-                } 
-        }
+        public float ShieldMeter = 0.0f;
         public float health = 1.0f;
         public float speed;
         public float lastRotation;
@@ -166,6 +158,7 @@ namespace Solum.SharedTanks
 
         public override void Update()
         {
+            increaseShieldMeter(C.shieldMeterIncreaseOnUpdate);
             if (pad.WasButtonPressed(controls.reverse))
             {
                 if (throttling)
@@ -312,6 +305,14 @@ namespace Solum.SharedTanks
         {
             GameServices.GetService<Logger>().logMsg("DIE");
             this.health = 1.0f;
+        }
+
+        internal void increaseShieldMeter(float p)
+        {
+            if (ShieldMeter < 1.0f)
+                ShieldMeter += p;
+            if (ShieldMeter > 1.0f)
+                ShieldMeter = 1.0f;
         }
     }
 }

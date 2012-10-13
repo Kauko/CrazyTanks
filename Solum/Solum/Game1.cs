@@ -303,12 +303,107 @@ namespace Solum
                     GameServices.GetService<GridManager>().Draw(spriteBatch);
                     GameServices.GetService<BulletManager>().Draw(spriteBatch);
                     spriteBatch.Draw(TextureRefs.Frame, new Vector2(0, 0), Color.White);
+                    DrawFrame(spriteBatch);
                     break;
             }
             
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public void DrawFrame(SpriteBatch spriteBatch)
+        {
+            float height, alpha = C.indicatorTransparency;
+            foreach (GamepadDevice d in G.activeGamepads)
+            {
+                if (d.PlayerIndex == PlayerIndex.One)
+                {
+                    //Red
+                    height = TextureRefs.ShieldIndicator.Height * G.redOneShield;
+                    alpha = C.indicatorTransparency;
+                    if (G.redOneShield == 1.0)
+                        alpha = 1.0f;
+                    spriteBatch.Draw(TextureRefs.ShieldIndicator, new Vector2(0, 0), new Rectangle(0, 0, TextureRefs.ShieldIndicator.Width, (int)height), Color.White * alpha);
+
+                    height = TextureRefs.ShieldIndicator.Height * G.redTwoShield;
+                    alpha = C.indicatorTransparency;
+                    if (G.redTwoShield == 1.0)
+                        alpha = 1.0f;
+                    spriteBatch.Draw(TextureRefs.ShieldIndicator, new Vector2(TextureRefs.ShieldIndicator.Width + TextureRefs.BombIndicator.Width, 0), new Rectangle(0, 0, TextureRefs.ShieldIndicator.Width, (int)height), Color.White * alpha);
+            
+                    continue;
+                }
+
+                if (d.PlayerIndex == PlayerIndex.Two)
+                {
+                    //Blue
+                    height = TextureRefs.ShieldIndicator.Height * G.blueOneShield;
+                    alpha = C.indicatorTransparency;
+                    if (G.blueOneShield == 1.0)
+                        alpha = 1.0f;
+                    spriteBatch.Draw(TextureRefs.ShieldIndicator,
+                        new Vector2(GameServices.GetService<GraphicsDevice>().Viewport.Width - TextureRefs.ShieldIndicator.Width, 0),
+                        new Rectangle(0, 0, TextureRefs.ShieldIndicator.Width, (int)height), Color.White * alpha);
+
+                    height = TextureRefs.ShieldIndicator.Height * G.blueTwoShield;
+                    alpha = C.indicatorTransparency;
+                    if (G.blueTwoShield == 1.0)
+                        alpha = 1.0f;
+                    spriteBatch.Draw(TextureRefs.ShieldIndicator,
+                        new Vector2(GameServices.GetService<GraphicsDevice>().Viewport.Width - TextureRefs.ShieldIndicator.Width
+                            - TextureRefs.ShieldIndicator.Width - TextureRefs.BombIndicator.Width, 0),
+                        new Rectangle(0, 0, TextureRefs.ShieldIndicator.Width, (int)height), Color.White * alpha);
+            
+                    continue;
+                }
+
+                if (d.PlayerIndex == PlayerIndex.Three)
+                {
+                    //green
+                    height = TextureRefs.ShieldIndicator.Height * G.greenOneShield;
+                    alpha = C.indicatorTransparency;
+                    if (G.greenOneShield == 1.0)
+                        alpha = 1.0f;
+                    spriteBatch.Draw(TextureRefs.ShieldIndicator,
+                        new Vector2(0, GameServices.GetService<GraphicsDevice>().Viewport.Height - TextureRefs.ShieldIndicator.Height),
+                        new Rectangle(0, 0, TextureRefs.ShieldIndicator.Width, (int)height), Color.White * alpha);
+
+                    height = TextureRefs.ShieldIndicator.Height * G.greenTwoShield;
+                    alpha = C.indicatorTransparency;
+                    if (G.greenTwoShield == 1.0)
+                        alpha = 1.0f;
+                    spriteBatch.Draw(TextureRefs.ShieldIndicator,
+                        new Vector2(TextureRefs.ShieldIndicator.Width + TextureRefs.BombIndicator.Width, GameServices.GetService<GraphicsDevice>().Viewport.Height - TextureRefs.ShieldIndicator.Height),
+                        new Rectangle(0, 0, TextureRefs.ShieldIndicator.Width, (int)height), Color.White * alpha);
+            
+                    continue;
+                }
+
+                if (d.PlayerIndex == PlayerIndex.Four)
+                {
+                    //yellow
+                    height = TextureRefs.ShieldIndicator.Height * G.yellowOneShield;
+                    alpha = C.indicatorTransparency;
+                    if (G.yellowOneShield == 1.0)
+                        alpha = 1.0f;
+                    spriteBatch.Draw(TextureRefs.ShieldIndicator,
+                        new Vector2(GameServices.GetService<GraphicsDevice>().Viewport.Width - TextureRefs.ShieldIndicator.Width,
+                            GameServices.GetService<GraphicsDevice>().Viewport.Height - TextureRefs.ShieldIndicator.Height),
+                        new Rectangle(0, 0, TextureRefs.ShieldIndicator.Width, (int)height), Color.White * alpha);
+
+                    height = TextureRefs.ShieldIndicator.Height * G.yellowTwoShield;
+                    alpha = C.indicatorTransparency;
+                    if (G.yellowTwoShield == 1.0)
+                        alpha = 1.0f;
+                    spriteBatch.Draw(TextureRefs.ShieldIndicator,
+                        new Vector2(GameServices.GetService<GraphicsDevice>().Viewport.Width - TextureRefs.ShieldIndicator.Width - TextureRefs.ShieldIndicator.Width - TextureRefs.BombIndicator.Width,
+                            GameServices.GetService<GraphicsDevice>().Viewport.Height - TextureRefs.ShieldIndicator.Height - TextureRefs.ShieldIndicator.Height - TextureRefs.BombIndicator.Height),
+                        new Rectangle(0, 0, TextureRefs.ShieldIndicator.Width, (int)height), Color.White * alpha);
+                    continue;
+                }
+            }
+           
         }
 
         private void updateGamepads()

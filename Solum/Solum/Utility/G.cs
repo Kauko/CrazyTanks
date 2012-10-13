@@ -34,6 +34,14 @@ namespace Solum.Utility
         /* Global variables */
         public static GameState gameState;
         public static List<GamepadDevice> activeGamepads = new List<GamepadDevice>();
+        public static float redOneShield;
+        public static float redTwoShield;
+        public static float blueOneShield;
+        public static float blueTwoShield;
+        public static float greenOneShield;
+        public static float greenTwoShield;
+        public static float yellowOneShield;
+        public static float yellowTwoShield;
         /* End of global variables */
 
         

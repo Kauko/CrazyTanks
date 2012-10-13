@@ -54,6 +54,8 @@ namespace Solum.Utility
         public const int tankPartnerOffsetX = 100; //How far away from your teammate
         public const int tankPartnerOffsetY = 100;
         public const float bulletDamage = 0.3f;
+        public const float shieldMeterIncreaseOnDamage = 0.3f;
+        public const float shieldMeterIncreaseOnUpdate = 0.001f;
         /* End of tank variables */
 
         /* Grid variables */
@@ -72,9 +74,15 @@ namespace Solum.Utility
         public static int healthbarHorizontalOffset = TextureRefs.tank.Height + 40;
         public static int healthbarWidth = 60;
         public static int healthbarHeight = 10;
+        /* end of play area variables*/
+
+        /* frame variablea */
         public const int frameWidth = 20;
         public const int frameHeight = 70;
-        /* end of play area variables*/
+        public const int indicatorBorderOffset = 30;
+        public const int indicatorOffset = 5;
+        public const float indicatorTransparency = 0.3f;
+        /* end of frame variables */
         
     }
 }

@@ -182,8 +182,28 @@ namespace Solum.SharedTanks
             {
                 t.Item1.Draw(spriteBatch);
                 t.Item2.Draw(spriteBatch);
-            }
 
+                if (t.Item1.Team == Teams.red)
+                {
+                    G.redOneShield = t.Item1.ShieldMeter;
+                    G.redTwoShield = t.Item2.ShieldMeter;
+                }
+                else if (t.Item1.Team == Teams.blue)
+                {
+                    G.blueOneShield = t.Item1.ShieldMeter;
+                    G.blueTwoShield = t.Item2.ShieldMeter;
+                }
+                else if (t.Item1.Team == Teams.green)
+                {
+                    G.greenOneShield = t.Item1.ShieldMeter;
+                    G.greenTwoShield = t.Item2.ShieldMeter;
+                }
+                else if (t.Item1.Team == Teams.yellow)
+                {
+                    G.yellowOneShield = t.Item1.ShieldMeter;
+                    G.yellowTwoShield = t.Item2.ShieldMeter;
+                }
+            }
         }
     }
 }
