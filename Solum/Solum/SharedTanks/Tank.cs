@@ -39,6 +39,16 @@ namespace Solum.SharedTanks
         protected GamepadDevice pad;
 
         public TankControls controls;
+        public float ShieldMeter {
+            get { return ShieldMeter; } 
+            set { 
+                if (ShieldMeter < 1.0f) 
+                    ShieldMeter += value;
+                if (ShieldMeter > 1.0f)
+                    ShieldMeter = 1.0f;
+                } 
+        }
+        public float health = 1.0f;
 
         public ShieldState shieldstate;
         public Weapon currentWeapon;
@@ -248,9 +258,11 @@ namespace Solum.SharedTanks
             {
                 spriteBatch.Draw(TextureRefs.shield, pos, null, Color.White, rotation, center, 1.0f, SpriteEffects.None, 0f);
             }
+            //Draw healthbar
+            var rect = new Texture2D(GameServices.GetService<GraphicsDevice>(), 1, 1);
+            rect.SetData(new[] { Color.DeepPink });
+            spriteBatch.Draw(rect, new Rectangle((int)pos.X, (int)pos.Y + C.healthbarHorizontalOffset, C.healthbarWidth, C.healthbarHeight), Color.White * 0.5f);
 
-            //getRotatedRectangle().Draw(spriteBatch);
-            //spriteBatch.Draw(TextureRefs.RotatedRectangle, getRectangle(), Color.White);
         }
 
         public RotatedRectangle getRotatedRectangle()
@@ -277,8 +289,24 @@ namespace Solum.SharedTanks
 
         internal void takeDamage(Bullet b)
         {
-            GameServices.GetService<Logger>().logMsg("Tank.takeDamage()");
-            //throw new NotImplementedException();
+            if (this.shieldstate == ShieldState.On)
+            {
+
+            }
+            else
+            {
+                GameServices.GetService<Logger>().logMsg("Tank.takeDamage()");
+                this.health -= C.bulletDamage;
+            }
+            if (this.health <= 0.0f)
+                Die();
+            
+        }
+
+        private void Die()
+        {
+            GameServices.GetService<Logger>().logMsg("DIE");
+            this.health = 1.0f;
         }
     }
 }

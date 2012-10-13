@@ -115,6 +115,9 @@ namespace Solum
             TextureRefs.SmartBombPickup = this.Content.Load<Texture2D>("Placeholder/Images/SmartBomb");
             TextureRefs.Wall = this.Content.Load<Texture2D>("Placeholder/Images/Wall");
             TextureRefs.RotatedRectangle = this.Content.Load<Texture2D>("Placeholder/Images/RotatedRectangle");
+            TextureRefs.Frame = this.Content.Load<Texture2D>("Placeholder/Images/BombIndicator");
+            TextureRefs.ShieldIndicator = this.Content.Load<Texture2D>("Placeholder/Images/ShieldIndicator");
+            TextureRefs.BombIndicator = this.Content.Load<Texture2D>("Placeholder/Images/Frame");
 
             SpriteFontRefs.textFont = Content.Load<SpriteFont>("Placeholder/Fonts/textFont");
             SpriteFontRefs.titleFont = Content.Load<SpriteFont>("Placeholder/Fonts/titleFont");

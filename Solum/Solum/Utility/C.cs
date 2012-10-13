@@ -53,6 +53,7 @@ namespace Solum.Utility
         public const int tankSpawnOffsetY = 100;
         public const int tankPartnerOffsetX = 100; //How far away from your teammate
         public const int tankPartnerOffsetY = 100;
+        public const float bulletDamage = 0.2f;
         /* End of tank variables */
 
         /* Grid variables */
@@ -62,6 +63,16 @@ namespace Solum.Utility
         public static int pickupInterval = 900; //60 = approx 1s. 900 ~= 15s;
         public static int pickupSpawnChance = 3; //if(random.next(that) == 1) spawnpickup(). 3 here is 33% chance of spawning, since next() returns either 0,1 or 2.
         /* end of grid variables */
+
+        /* play area variables */
+        public const int playAreaX = 20;
+        public const int playAreaY = 70;
+        public const int playAreaHeight = 1140;
+        public const int playAreaWidth = 680;
+        public static int healthbarHorizontalOffset = TextureRefs.tank.Height + 40;
+        public static int healthbarWidth = 60;
+        public static int healthbarHeight = 10;
+        /* end of play area variables*/
         
     }
 }

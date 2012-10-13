@@ -50,6 +50,7 @@ namespace Solum.SharedTanks
                     if (b.shooter != t)
                     {
                         t.takeDamage(b);
+
                         b.removable = true;
                     }
                 }

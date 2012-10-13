@@ -92,6 +92,12 @@ namespace Solum.SharedTanks
                 if (checkTankCollisions(t.Item2))
                     t.Item2.Collide();
 
+                //Check collision with play area border
+                //if(checkScreenCollisions(t.Item1))
+                    //t.Item1.Collide();
+                //if (checkScreenCollisions(t.Item2))
+                    //t.Item2.Collide();
+
                 //check collisions with staticworldobjects (walls, powerups)
                 foreach (StaticWorldObject o in GameServices.GetService<GridManager>().checkTankCollision(t.Item1.getRotatedRectangle()))
                 {
@@ -111,6 +117,23 @@ namespace Solum.SharedTanks
                 GameServices.GetService<BulletManager>().checkTankCollisions(t.Item1);
                 GameServices.GetService<BulletManager>().checkTankCollisions(t.Item2);
             }
+        }
+
+        private bool checkScreenCollisions(Tank self)
+        {
+            Rectangle screenLeft = new Rectangle(0, 0, C.playAreaWidth, GameServices.GetService<GraphicsDevice>().Viewport.Height);
+            Rectangle screenRight = new Rectangle(C.playAreaWidth+C.playAreaX, 0, C.playAreaWidth, GameServices.GetService<GraphicsDevice>().Viewport.Height);
+            Rectangle screenTop = new Rectangle(0, 0, C.playAreaHeight, GameServices.GetService<GraphicsDevice>().Viewport.Width);
+            Rectangle screenBottom = new Rectangle(0, C.playAreaY+C.playAreaHeight, C.playAreaHeight, GameServices.GetService<GraphicsDevice>().Viewport.Width);
+            if(self.getRotatedRectangle().Intersects(screenLeft))
+                return true;
+            if (self.getRotatedRectangle().Intersects(screenRight))
+                return true;
+            if (self.getRotatedRectangle().Intersects(screenTop))
+                return true;
+            if (self.getRotatedRectangle().Intersects(screenBottom))
+                return true;
+            return false;
         }
 
         private bool checkTankCollisions(Tank self)
@@ -141,6 +164,7 @@ namespace Solum.SharedTanks
 
         public void Draw(SpriteBatch spriteBatch)
         {
+
             foreach (Tuple<Tank, Tank> t in tanks)
             {
                 t.Item1.Draw(spriteBatch);
