@@ -28,6 +28,7 @@ namespace Solum.Utility
         public static GamepadDevice gamePadTwo;
         public static GamepadDevice gamePadThree;
         public static GamepadDevice gamePadFour;
+        public static List<LevelLibrary.Level> levels = new List<LevelLibrary.Level>();
         /* End of one time init variables */
 
         /* Global variables */
