@@ -15,13 +15,6 @@ using Solum.Logging;
 
 namespace Solum.SharedTanks
 {
-
-    public enum ControlSide
-    {
-        Right,
-        Left
-    }
-
     public enum ShieldState
     {
         On,
@@ -38,24 +31,27 @@ namespace Solum.SharedTanks
     class Tank : MovingObject
     {
         public Vector2 pos;
-        protected Vector2 center;
-        
+        protected Vector2 center;       
         protected float rotation;
         protected float turretRotation;
         protected GamepadDevice pad;
-        
-        public ControlSide side;
+
+        public TankControls controls;
+
         public ShieldState shieldstate;
         public Weapon currentWeapon;
 
         public bool throttling = true;
         public bool usedShield = false;
 
+
         public Tank()
         {
             pos = Vector2.Zero;
             center = Vector2.Zero;
-            side = ControlSide.Left;
+
+            controls = new TankControls(ControlSide.Left);
+
             currentWeapon = Weapon.Shield;
             shieldstate = ShieldState.Off;
             pad = GameServices.GetService<GamepadDevice>();
@@ -155,34 +151,33 @@ namespace Solum.SharedTanks
             center.X = TextureRefs.tank.Width / 2;
             center.Y = TextureRefs.tank.Height / 2;
 
-            if (side == ControlSide.Left)
-            {
-                Move(pad.LeftStickPosition, pad.LeftStickDelta);
-                if (pad.IsButtonDown(Buttons.DPadLeft))
-                {
-                    RotateTurret(-C.turretRotationSpeed);
-                }
-                else if (pad.IsButtonDown(Buttons.DPadRight))
-                {
-                    RotateTurret(C.turretRotationSpeed);
-                }
+            Move(pad.LeftStickPosition, pad.LeftStickDelta);
 
-                if (pad.WasButtonPressed(Buttons.LeftShoulder) && currentWeapon == Weapon.Shield)
+            if (pad.IsButtonDown(controls.turretRotateCW))
+            {
+                RotateTurret(-C.turretRotationSpeed);
+            }
+            else if (pad.IsButtonDown(controls.turretRotateCCW))
+            {
+                RotateTurret(C.turretRotationSpeed);
+            }
+
+            if (pad.WasButtonPressed(controls.shoot))
+            {
+                switch (currentWeapon)
                 {
-                    usedShield = true;
+                    case Weapon.Cannon:
+                        break;
+                    case Weapon.Shield:
+                        usedShield = true;
+                        break;
+                    case Weapon.SmartBomb:
+                        break;
                 }
             }
-            else
+            if (pad.WasButtonPressed(controls.changeWeapon))
             {
-                Move(pad.RightStickPosition, pad.RightStickDelta);
-                if (pad.IsButtonDown(Buttons.DPadRight))
-                {
-                    RotateTurret(-C.turretRotationSpeed);
-                }
-                else if (pad.IsButtonDown(Buttons.DPadLeft))
-                {
-                    RotateTurret(C.turretRotationSpeed);
-                }
+                
             }
         }
 
