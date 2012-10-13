@@ -28,6 +28,7 @@ namespace Solum.Utility
         public Buttons changeWeapon;
         public Buttons turretRotateCW;
         public Buttons turretRotateCCW;
+        public Buttons reverse;
 
         public TankControls(ControlSide side)
         {
@@ -39,6 +40,7 @@ namespace Solum.Utility
                 turretRotateCCW = Buttons.DPadRight;
                 shoot = Buttons.LeftShoulder;
                 changeWeapon = Buttons.LeftTrigger;
+                reverse = Buttons.LeftStick;
             }
             else
             {
@@ -46,6 +48,7 @@ namespace Solum.Utility
                 turretRotateCCW = Buttons.X;
                 shoot = Buttons.RightShoulder;
                 changeWeapon = Buttons.RightTrigger;
+                reverse = Buttons.RightStick;
             }
         }
     }
