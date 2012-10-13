@@ -45,7 +45,7 @@ namespace Solum.SharedTanks
         {
             foreach (Bullet b in bullets)
             {
-                if (t.getRotatedRectangle().Intersects(new Rectangle((int)b.pos.X, (int)b.pos.Y, TextureRefs.bullet.Width, TextureRefs.bullet.Height)))
+                if (t.getRotatedRectangle().Intersects(new RotatedRectangle(new Rectangle((int)b.pos.X, (int)b.pos.Y, TextureRefs.bullet.Width, TextureRefs.bullet.Height),0.0f)))
                 {
                     if (b.shooter != t)
                     {

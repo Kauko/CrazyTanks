@@ -63,7 +63,7 @@ namespace Solum.SharedTanks
             {
                 for (int r = 0; r < this.level.Rows; r++)
                 {
-                    Rectangle rect = new Rectangle((int)this.gridPosition.X + c * C.tileWidth, (int)this.gridPosition.Y + r * C.tileHeight, C.tileWidth, C.tileHeight);
+                    RotatedRectangle rect = new RotatedRectangle(new Rectangle((int)this.gridPosition.X + c * C.tileWidth, (int)this.gridPosition.Y + r * C.tileHeight, C.tileWidth, C.tileHeight), 0.0f);
                     if (this.tiles[c,r].Type != StaticType.Empty && tankPosition.Intersects(rect))
                     {
                         ret.Add(this.tiles[c,r]);

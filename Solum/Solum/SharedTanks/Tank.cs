@@ -242,15 +242,15 @@ namespace Solum.SharedTanks
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureRefs.tank, pos, null, Color.White, rotation, center, 1.0f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(TextureRefs.tank, pos, null, Color.White, rotation,center, 1.0f, SpriteEffects.None, 0f);
             spriteBatch.Draw(TextureRefs.turret, pos + center - new Vector2(TextureRefs.turret.Width / 2, TextureRefs.turret.Height / 2), null, Color.White, turretRotation, center, 1.0f, SpriteEffects.None, 0f);
             if (shieldstate == ShieldState.On)
             {
                 spriteBatch.Draw(TextureRefs.shield, pos +center - new Vector2(TextureRefs.shield.Width / 2, TextureRefs.shield.Height / 2), null, Color.White, rotation, center, 1.0f, SpriteEffects.None, 0f);
             }
 
-            getRotatedRectangle().Draw(spriteBatch);
-            spriteBatch.Draw(TextureRefs.RotatedRectangle, getRectangle(), Color.White);
+            //getRotatedRectangle().Draw(spriteBatch);
+            //spriteBatch.Draw(TextureRefs.RotatedRectangle, getRectangle(), Color.White);
         }
 
         public RotatedRectangle getRotatedRectangle()
@@ -260,7 +260,7 @@ namespace Solum.SharedTanks
 
         public Rectangle getRectangle()
         {
-            return new Rectangle((int)pos.X, (int)pos.Y, TextureRefs.tank.Width, TextureRefs.tank.Height);
+            return new Rectangle((int)pos.X - TextureRefs.tank.Width / 2, (int)pos.Y - TextureRefs.tank.Height / 2, TextureRefs.tank.Width, TextureRefs.tank.Height);
         }
 
         internal void Collide()
