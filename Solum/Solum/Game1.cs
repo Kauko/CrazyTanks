@@ -331,7 +331,7 @@ namespace Solum
                     if (G.redTwoShield == 1.0)
                         alpha = 1.0f;
                     spriteBatch.Draw(TextureRefs.ShieldIndicator, new Vector2(TextureRefs.ShieldIndicator.Width + TextureRefs.BombIndicator.Width, 0), new Rectangle(0, 0, TextureRefs.ShieldIndicator.Width, (int)height), Color.White * alpha);
-            
+                    
                     continue;
                 }
 

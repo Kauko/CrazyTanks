@@ -285,7 +285,7 @@ namespace Solum.SharedTanks
             //throw new NotImplementedException();
         }
 
-        internal void takeDamage(Bullet b)
+        internal bool takeDamage(Bullet b)
         {
             if (this.shieldstate == ShieldState.On)
             {
@@ -297,7 +297,11 @@ namespace Solum.SharedTanks
                 this.health -= C.bulletDamage;
             }
             if (this.health <= 0.0f)
+            {
                 Die();
+                return true;
+            }
+            return false;
             
         }
 
