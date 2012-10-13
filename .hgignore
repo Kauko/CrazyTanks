@@ -12,3 +12,4 @@ syntax: glob
 *.orig
 *.pdb
 *.build-res
+*.xnb

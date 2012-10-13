@@ -172,12 +172,6 @@ namespace Solum
             pauseMenuManager.AddMenu("Pause Menu", mainPauseMenu);
             #endregion
 
-
-            tank = new Tank();
-            tank.pos = new Vector2(100.0f, 100.0f);
-            tank2 = new Tank();
-            tank.pos = new Vector2(200.0f, 200.0f);
-
         }
 
         /// <summary>

@@ -80,9 +80,9 @@ namespace Solum.SharedTanks
                 t.Item2.Update();
 
                 if (t.Item1.usedShield)
-                    t.Item2.ShieldOn(ShieldState.On);
+                    t.Item2.SetShieldState(ShieldState.On);
                 if (t.Item2.usedShield)
-                    t.Item1.ShieldOn(ShieldState.Off);
+                    t.Item1.SetShieldState(ShieldState.Off);
             }
         }
 
