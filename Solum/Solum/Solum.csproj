@@ -134,17 +134,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="SharedTanks\MovingObject.cs" />
-    <Compile Include="SharedTanks\Tank.cs" />
     <Compile Include="SharedTanks\WorldObject.cs" />
     <Compile Include="SharedTanks\EmptyStaticWorldObject.cs" />
     <Compile Include="SharedTanks\GridManager.cs" />
-    <Compile Include="SharedTanks\MovingObject.cs" />
     <Compile Include="SharedTanks\SmartBombPickup.cs" />
     <Compile Include="SharedTanks\SpawnObject.cs" />
     <Compile Include="SharedTanks\StaticWorldObject.cs" />
     <Compile Include="SharedTanks\Tank.cs" />
     <Compile Include="SharedTanks\Wall.cs" />
-    <Compile Include="SharedTanks\WorldObject.cs" />
     <Compile Include="Utility\C.cs" />
     <Compile Include="Utility\G.cs" />
     <Compile Include="Utility\GameServices.cs" />
