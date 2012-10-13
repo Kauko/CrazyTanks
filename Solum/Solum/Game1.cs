@@ -212,11 +212,15 @@ namespace Solum
                     playerSelectionMenu.Update();
                     break;
                 case GameState.paused:
+                    GameServices.GetService<Logger>().logMsg("Now is paused");
                     if(pauseMenuManager.ActiveMenu == null)
                         pauseMenuManager.Show("Pause Menu");
                     pauseMenuManager.Update();
                     if (pauseMenuManager.MenuState == MenuManager.MenuStates.Exit)
+                    {
                         G.gameState = GameState.menu;
+                        G.activeGamepads = new List<GamepadDevice>();
+                    }
                     break;
                 case GameState.controllerDisconnected:
                     bool allConnected = true;
@@ -228,6 +232,7 @@ namespace Solum
                         G.gameState = GameState.playing;
                     break;
                 case GameState.playing:
+                    pauseMenuManager.MenuState = MenuManager.MenuStates.None;
                     if (GameServices.GetService<TankManager>().tanks.Count == 0)
                         GameServices.GetService<TankManager>().initTanks();
                    //GameServices.GetService<Logger>().logMsg("Playing");
@@ -242,8 +247,10 @@ namespace Solum
                     GameServices.GetService<GridManager>().Update();
                     foreach (GamepadDevice d in G.activeGamepads)
                     {
+                        GameServices.GetService<Logger>().logMsg(""+d.PlayerIndex);
                         if (d.WasButtonPressed(Buttons.Start))
                         {
+                            GameServices.GetService<Logger>().logMsg("Pause menu");
                             G.gameState = GameState.paused;
                         }
                     }
