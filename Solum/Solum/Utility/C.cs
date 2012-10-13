@@ -44,7 +44,7 @@ namespace Solum.Utility
         /* End of menu variables */
 
         /* Variables used in tanks */
-        public const float tankThrottleSpeed = 2f;
+        public const float tankThrottleSpeed = 3f;
         public const float tankReverseSpeed = 2f;
         public const float tankRotationSpeed = 0.05f;
         public const float turretRotationSpeed = 0.05f;
