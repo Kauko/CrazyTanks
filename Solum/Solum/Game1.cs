@@ -102,9 +102,9 @@ namespace Solum
 
             #region Content paths
             TextureRefs.bullet = this.Content.Load<Texture2D>("Placeholder/Images/Bullet");
-            TextureRefs.tank = this.Content.Load<Texture2D>("Placeholder/Images/Tank");
-            TextureRefs.turret = this.Content.Load<Texture2D>("Placeholder/Images/Turret");
-            TextureRefs.shield = this.Content.Load<Texture2D>("Placeholder/Images/Shield");
+            TextureRefs.tank = this.Content.Load<Texture2D>("Placeholder/Images/Tank2");
+            TextureRefs.turret = this.Content.Load<Texture2D>("Placeholder/Images/Turret2");
+            TextureRefs.shield = this.Content.Load<Texture2D>("Placeholder/Images/Shield2");
             TextureRefs.koala = this.Content.Load<Texture2D>("Placeholder/Images/Koala");
             TextureRefs.menuBgImage = this.Content.Load<Texture2D>("Placeholder/Images/MainMenuBG");
             TextureRefs.menuButton = this.Content.Load<Texture2D>("Placeholder/Images/Button");

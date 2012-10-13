@@ -243,10 +243,10 @@ namespace Solum.SharedTanks
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(TextureRefs.tank, pos, null, Color.White, rotation,center, 1.0f, SpriteEffects.None, 0f);
-            spriteBatch.Draw(TextureRefs.turret, pos + center - new Vector2(TextureRefs.turret.Width / 2, TextureRefs.turret.Height / 2), null, Color.White, turretRotation, center, 1.0f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(TextureRefs.turret, pos, null, Color.White, turretRotation, center, 1.0f, SpriteEffects.None, 0f);
             if (shieldstate == ShieldState.On)
             {
-                spriteBatch.Draw(TextureRefs.shield, pos +center - new Vector2(TextureRefs.shield.Width / 2, TextureRefs.shield.Height / 2), null, Color.White, rotation, center, 1.0f, SpriteEffects.None, 0f);
+                spriteBatch.Draw(TextureRefs.shield, pos, null, Color.White, rotation, center, 1.0f, SpriteEffects.None, 0f);
             }
 
             //getRotatedRectangle().Draw(spriteBatch);
