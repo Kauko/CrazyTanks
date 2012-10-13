@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Solum.Utility;
 using Solum.Input;
 using Microsoft.Xna.Framework;
+using Solum.Logging;
 
 namespace Solum.SharedTanks
 {
@@ -120,6 +121,7 @@ namespace Solum.SharedTanks
                 {
                     if (self.getRotatedRectangle().Intersects(t.Item1.getRotatedRectangle()))
                     {
+                        GameServices.GetService<Logger>().logMsg("Tanks collide!");
                         return true;
                     }
                 }
@@ -128,6 +130,7 @@ namespace Solum.SharedTanks
                 {
                     if (self.getRotatedRectangle().Intersects(t.Item2.getRotatedRectangle()))
                     {
+                        GameServices.GetService<Logger>().logMsg("Tanks collide!");
                         return true;
                     }
                 }

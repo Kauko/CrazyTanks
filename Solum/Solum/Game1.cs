@@ -240,10 +240,11 @@ namespace Solum
                     if (this.IsActive)
                     {
                         //GameServices.GetService<Camera2d>().updateCamera();
-                        GameServices.GetService<TankManager>().Update();
+                        
 
                     }/*else
                         G.gameState = GameState.paused;*/
+                    GameServices.GetService<TankManager>().Update();
                     GameServices.GetService<Logger>().logFPS();
                     GameServices.GetService<GridManager>().Update();
                     GameServices.GetService<BulletManager>().Update();
@@ -293,8 +294,8 @@ namespace Solum
                     break;
                 case GameState.playing:
                     spriteBatch.Begin();
-                    GameServices.GetService<GridManager>().Draw(spriteBatch);
                     GameServices.GetService<TankManager>().Draw(spriteBatch);
+                    GameServices.GetService<GridManager>().Draw(spriteBatch);
                     GameServices.GetService<BulletManager>().Draw(spriteBatch);
                     break;
             }

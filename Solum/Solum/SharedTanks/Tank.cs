@@ -54,6 +54,7 @@ namespace Solum.SharedTanks
         public Tank(Teams team, Vector2 position)
         {
             pos = position;
+            GameServices.GetService<Logger>().logMsg("" + pos);
             dir = Vector2.Zero;
             center = new Vector2(TextureRefs.tank.Width / 2, TextureRefs.tank.Height / 2);
             this.Team = team;
@@ -280,10 +281,11 @@ namespace Solum.SharedTanks
             spriteBatch.Draw(TextureRefs.turret, pos + center - new Vector2(TextureRefs.turret.Width / 2, TextureRefs.turret.Height / 2), null, Color.White, turretRotation, center, 1.0f, SpriteEffects.None, 0f);
             if (shieldstate == ShieldState.On)
             {
-                spriteBatch.Draw(TextureRefs.shield, pos + center - new Vector2(TextureRefs.shield.Width / 2, TextureRefs.shield.Height / 2), null, Color.White, rotation, new Vector2(TextureRefs.shield.Width / 2, TextureRefs.shield.Height / 2), 1.0f, SpriteEffects.None, 0f);
+                spriteBatch.Draw(TextureRefs.shield, pos +center - new Vector2(TextureRefs.shield.Width / 2, TextureRefs.shield.Height / 2), null, Color.White, rotation, center, 1.0f, SpriteEffects.None, 0f);
             }
 
             getRotatedRectangle().Draw(spriteBatch);
+            spriteBatch.Draw(TextureRefs.RotatedRectangle, getRectangle(), Color.White);
         }
 
         public RotatedRectangle getRotatedRectangle()
