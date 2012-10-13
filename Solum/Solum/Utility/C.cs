@@ -48,6 +48,7 @@ namespace Solum.Utility
         public const float tankReverseSpeed = 2f;
         public const float tankRotationSpeed = 0.05f;
         public const float turretRotationSpeed = 0.05f;
+        public const float bulletSpeed = 3f;
         /* End of tank variables */
 
         /* Grid variables */

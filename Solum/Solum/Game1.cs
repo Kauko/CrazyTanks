@@ -78,12 +78,6 @@ namespace Solum
             pauseMenuManager = new MenuManager();
             playerSelectionMenu = new PlayerSelectionMenu();
 
-            tank = new Tank();
-            tank.pos = new Vector2(100.0f, 100.0f);
-            tank2 = new Tank();
-            tank.pos = new Vector2(200.0f, 200.0f);
-
-
             G.gameState = GameState.menu;
 
             graphics.PreferredBackBufferWidth = 1280;
@@ -107,6 +101,7 @@ namespace Solum
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             #region Content paths
+            TextureRefs.bullet = this.Content.Load<Texture2D>("Placeholder/Images/Bullet");
             TextureRefs.tank = this.Content.Load<Texture2D>("Placeholder/Images/Tank");
             TextureRefs.turret = this.Content.Load<Texture2D>("Placeholder/Images/Turret");
             TextureRefs.shield = this.Content.Load<Texture2D>("Placeholder/Images/Shield");
@@ -178,6 +173,12 @@ namespace Solum
             pauseMenuManager.AddMenu("Pause Menu", mainPauseMenu);
             #endregion
 
+
+            tank = new Tank();
+            tank.pos = new Vector2(100.0f, 100.0f);
+            tank2 = new Tank();
+            tank.pos = new Vector2(200.0f, 200.0f);
+
         }
 
         /// <summary>
@@ -243,7 +244,7 @@ namespace Solum
 
                         if (tank.usedShield)
                         {
-                            tank2.ShieldOn(ShieldState.On);
+                            tank2.SetShieldState(ShieldState.On);
                         }
 
                     }/*else

@@ -31,7 +31,9 @@ namespace Solum.SharedTanks
     class Tank : MovingObject
     {
         public Vector2 pos;
-        protected Vector2 center;       
+        protected Vector2 center;
+        protected Vector2 dir;
+
         protected float rotation;
         protected float turretRotation;
         protected GamepadDevice pad;
@@ -45,15 +47,24 @@ namespace Solum.SharedTanks
         public bool throttling = true;
         public bool usedShield = false;
 
+        public Bullet bullet;
+
 
         public Tank()
         {
             pos = Vector2.Zero;
-            center = Vector2.Zero;
+            dir = Vector2.Zero;
+            center = new Vector2(TextureRefs.tank.Width / 2, TextureRefs.tank.Height / 2);
+            bullet = new Bullet();
 
             controls = new TankControls(ControlSide.Left);
 
             weapons = Enum.GetValues(typeof(Weapon)).Cast<Weapon>().ToList<Weapon>();
+
+            foreach (Weapon w in weapons)
+            {
+                GameServices.GetService<Logger>().logMsg(w.ToString());
+            }
 
             currentWeapon = Weapon.Shield;
             shieldstate = ShieldState.Off;
@@ -66,7 +77,7 @@ namespace Solum.SharedTanks
         {
             float stickrotation = (float)Math.Atan2(stickOffset.X, stickOffset.Y);
 
-            stickrotation += MathHelper.PiOver2;
+            //stickrotation += MathHelper.PiOver2;
 
             stickrotation = MathHelper.WrapAngle(stickrotation);
 
@@ -75,9 +86,9 @@ namespace Solum.SharedTanks
             //GameServices.GetService<Logger>().logMsg(stickrotation.ToString());
             //GameServices.GetService<Logger>().logMsg(rotation.ToString());
 
-            float d = 0f;
+            //float d = 0f;
 
-            d = stickrotation - rotation;
+           /* d = stickrotation - rotation;
 
             if(stickrotation > rotation)
             {
@@ -86,12 +97,25 @@ namespace Solum.SharedTanks
             else
             {
                 d = rotation - stickrotation;  
-            }
+            }*/
 
             //GameServices.GetService<Logger>().logMsg(d.ToString());
 
+            if (stickOffset != Vector2.Zero)
+            {
+                rotation = stickrotation;
 
-            if (d < MathHelper.Pi)
+                Vector2 up = new Vector2(0, -1);
+                Matrix rotMatrix = Matrix.CreateRotationZ(rotation);
+                dir = Vector2.Transform(up, rotMatrix);
+
+                pos += dir * C.tankThrottleSpeed;
+            }
+
+            //bullet.SetDirection(Vector2.Transform(up, rotMatrix));
+
+
+            /*if (d < MathHelper.Pi)
             {
                 if (d >= MathHelper.PiOver2 && d < MathHelper.Pi)
                 {
@@ -143,7 +167,7 @@ namespace Solum.SharedTanks
             turretRotation = MathHelper.WrapAngle(turretRotation);
         }
 
-        public void ShieldOn(ShieldState state)
+        public void SetShieldState(ShieldState state)
         {
             shieldstate = state;
         }
@@ -151,8 +175,7 @@ namespace Solum.SharedTanks
 
         public override void Update()
         {
-            center.X = TextureRefs.tank.Width / 2;
-            center.Y = TextureRefs.tank.Height / 2;
+            bullet.Update();
 
             Move(pad.LeftStickPosition, pad.LeftStickDelta);
 
@@ -170,6 +193,7 @@ namespace Solum.SharedTanks
                 switch (currentWeapon)
                 {
                     case Weapon.Cannon:
+                        Shoot();
                         break;
                     case Weapon.Shield:
                         usedShield = true;
@@ -180,30 +204,45 @@ namespace Solum.SharedTanks
             }
             if (pad.WasButtonPressed(controls.changeWeapon))
             {
-                for(int i = 0; i < weapons.Count; i++)
-                {
-                    if(weapons[i] == currentWeapon)
-                    {
-                        if (i + 1 == weapons.Count)
-                        {
-                            i = 0;
-                        }
-                        currentWeapon = weapons[i++];
-                        break;
-                    }
-                }
-                GameServices.GetService<Logger>().logMsg(currentWeapon.ToString());
+                NextWeapon();
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Shoot()
+        {
+            bullet.SetPosition(pos - center);
+
+            Vector2 up = new Vector2(0, -1);
+            Matrix rotMatrix = Matrix.CreateRotationZ(turretRotation);
+
+            bullet.SetDirection(Vector2.Transform(up, rotMatrix));
+        }
+
+        public void NextWeapon()
+        {
+            for (int i = 0; i < weapons.Count; i++)
+            {
+                if (weapons[i] == currentWeapon)
+                {
+                    if (i + 1 == weapons.Count)
+                    {
+                        i = -1;
+                    }
+                    currentWeapon = weapons[i + 1];
+                    break;
+                }
+            }
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(TextureRefs.tank, pos, null, Color.White, rotation, center, 1.0f, SpriteEffects.None, 0f);
             spriteBatch.Draw(TextureRefs.turret, pos + center - new Vector2(TextureRefs.turret.Width / 2, TextureRefs.turret.Height / 2), null, Color.White, turretRotation, center, 1.0f, SpriteEffects.None, 0f);
             if (shieldstate == ShieldState.On)
             {
-                spriteBatch.Draw(TextureRefs.shield, pos - new Vector2(5, 5), null, Color.White, rotation, center, 1.0f, SpriteEffects.None, 0f);
+                spriteBatch.Draw(TextureRefs.shield, pos + center - new Vector2(TextureRefs.shield.Width / 2, TextureRefs.shield.Height / 2), null, Color.White, rotation, new Vector2(TextureRefs.shield.Width / 2, TextureRefs.shield.Height / 2), 1.0f, SpriteEffects.None, 0f);
             }
+            spriteBatch.Draw(TextureRefs.bullet, bullet.pos, Color.White);
         }
     }
 }

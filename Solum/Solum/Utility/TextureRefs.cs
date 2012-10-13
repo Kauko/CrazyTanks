@@ -15,6 +15,7 @@ namespace Solum.Utility
 {
     class TextureRefs
     {
+        public static Texture2D bullet;
         public static Texture2D shield;
         public static Texture2D tank;
         public static Texture2D turret;
