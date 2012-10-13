@@ -123,6 +123,14 @@ namespace Solum.SharedTanks
                         return true;
                     }
                 }
+
+                if (self.pos != t.Item2.pos)
+                {
+                    if (self.getRotatedRectangle().Intersects(t.Item2.getRotatedRectangle()))
+                    {
+                        return true;
+                    }
+                }
             }
 
             return false;

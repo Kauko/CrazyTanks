@@ -246,7 +246,7 @@ namespace Solum.SharedTanks
 
         public RotatedRectangle getRotatedRectangle()
         {
-            return new RotatedRectangle(new Rectangle((int)pos.X, (int)pos.Y, TextureRefs.tank.Width, TextureRefs.tank.Height), this.rotation);
+            return new RotatedRectangle(getRectangle(), this.rotation);
         }
 
         public Rectangle getRectangle()
