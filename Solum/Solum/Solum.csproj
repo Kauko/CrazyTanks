@@ -133,6 +133,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="SharedTanks\MovingObject.cs" />
+    <Compile Include="SharedTanks\Tank.cs" />
+    <Compile Include="SharedTanks\WorldObject.cs" />
     <Compile Include="Utility\C.cs" />
     <Compile Include="Utility\G.cs" />
     <Compile Include="Utility\GameServices.cs" />

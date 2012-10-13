@@ -16,36 +16,69 @@ using Solum.Logging;
 namespace Solum.SharedTanks
 {
 
-    enum ControlSide
+    public enum ControlSide
     {
         Right,
         Left
+    }
+
+    public enum ShieldState
+    {
+        On,
+        Off
+    }
+
+    public enum Weapon
+    {
+        Shield,
+        Cannon,
+        SmartBomb
     }
 
     class Tank : MovingObject
     {
         public Vector2 pos;
         protected Vector2 center;
+        
         protected float rotation;
+        protected float turretRotation;
         protected GamepadDevice pad;
+        
         public ControlSide side;
+        public ShieldState shieldstate;
+        public Weapon currentWeapon;
+
+        public bool throttling = true;
+        public bool usedShield = false;
 
         public Tank()
         {
             pos = Vector2.Zero;
             center = Vector2.Zero;
             side = ControlSide.Left;
+            currentWeapon = Weapon.Shield;
+            shieldstate = ShieldState.Off;
             pad = GameServices.GetService<GamepadDevice>();
             rotation = 0.0f;
+            turretRotation = 0.0f;
         }
 
         public void Move(Vector2 stickOffset, Vector2 delta)
         {
-            //pos += stickOffset * C.tankThrottleSpeed;
             float stickrotation = (float)Math.Atan2(stickOffset.X, stickOffset.Y);
-            stickrotation += MathHelper.Pi;
+
+            stickrotation += MathHelper.PiOver2;
+
+            stickrotation = MathHelper.WrapAngle(stickrotation);
+
+            rotation = MathHelper.WrapAngle(rotation);
+            
+            //GameServices.GetService<Logger>().logMsg(stickrotation.ToString());
+            //GameServices.GetService<Logger>().logMsg(rotation.ToString());
 
             float d = 0f;
+
+            d = stickrotation - rotation;
 
             if(stickrotation > rotation)
             {
@@ -56,22 +89,47 @@ namespace Solum.SharedTanks
                 d = rotation - stickrotation;  
             }
 
-            if (d > MathHelper.Pi && d < (2 * MathHelper.Pi) - 0.2f)
+            //GameServices.GetService<Logger>().logMsg(d.ToString());
+
+
+            if (d < MathHelper.Pi)
             {
-                rotation += C.tankRotationSpeed;
+                if (d >= MathHelper.PiOver2 && d < MathHelper.Pi)
+                {
+                    rotation += C.tankRotationSpeed;
+                    pos.X += stickOffset.X * C.tankThrottleSpeed;
+                    pos.Y -= stickOffset.Y * C.tankThrottleSpeed;
+
+                }
+                else if (d < MathHelper.PiOver2 && d >= 0)
+                {
+                    rotation -= C.tankRotationSpeed;
+                    pos.X += stickOffset.X * C.tankThrottleSpeed;
+                    pos.Y -= stickOffset.Y * C.tankThrottleSpeed;
+
+                }
             }
-            else if (d < MathHelper.Pi && d > 0.2f) 
-            {
-                rotation -= C.tankRotationSpeed;
+            /*else{
+                if(throttling == true)
+                    throttling = false;
+                else
+                    throttling = true;
+
+                if (d >= MathHelper.Pi && d <= MathHelper.Pi + MathHelper.PiOver2)
+                {
+                    rotation -= C.tankRotationSpeed;
+                    pos.X -= stickOffset.X * C.tankThrottleSpeed;
+                    pos.Y += stickOffset.Y * C.tankThrottleSpeed;
+
+                }
+                else if (d > MathHelper.Pi + MathHelper.PiOver2 && d <= MathHelper.TwoPi)
+                {
+                    rotation += C.tankRotationSpeed;
+                    pos.X -= stickOffset.X * C.tankThrottleSpeed;
+                    pos.Y += stickOffset.Y * C.tankThrottleSpeed;
+                }
             }
-
-            //Vector2 direction = Vector2.Zero - stickOffset;
-            //direction.Normalize();
-            //float angle = (float)(Math.Atan2(direction.X, direction.Y)) - MathHelper.Pi;
-
-            //if(angle 
-
-            //rotation = angle;
+             * */
 
         }
 
@@ -79,6 +137,18 @@ namespace Solum.SharedTanks
         {
             //rotation += stickOffset.X * 
         }
+
+        public void RotateTurret(float trot)
+        {
+            turretRotation += trot;
+            turretRotation = MathHelper.WrapAngle(turretRotation);
+        }
+
+        public void ShieldOn(ShieldState state)
+        {
+            shieldstate = state;
+        }
+
 
         public override void Update()
         {
@@ -88,16 +158,42 @@ namespace Solum.SharedTanks
             if (side == ControlSide.Left)
             {
                 Move(pad.LeftStickPosition, pad.LeftStickDelta);
+                if (pad.IsButtonDown(Buttons.DPadLeft))
+                {
+                    RotateTurret(-C.turretRotationSpeed);
+                }
+                else if (pad.IsButtonDown(Buttons.DPadRight))
+                {
+                    RotateTurret(C.turretRotationSpeed);
+                }
+
+                if (pad.WasButtonPressed(Buttons.LeftShoulder) && currentWeapon == Weapon.Shield)
+                {
+                    usedShield = true;
+                }
             }
             else
             {
                 Move(pad.RightStickPosition, pad.RightStickDelta);
+                if (pad.IsButtonDown(Buttons.DPadRight))
+                {
+                    RotateTurret(-C.turretRotationSpeed);
+                }
+                else if (pad.IsButtonDown(Buttons.DPadLeft))
+                {
+                    RotateTurret(C.turretRotationSpeed);
+                }
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(TextureRefs.tank, pos, null, Color.White, rotation, center, 1.0f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(TextureRefs.turret, pos + center - new Vector2(TextureRefs.turret.Width / 2, TextureRefs.turret.Height / 2), null, Color.White, turretRotation, center, 1.0f, SpriteEffects.None, 0f);
+            if (shieldstate == ShieldState.On)
+            {
+                spriteBatch.Draw(TextureRefs.shield, pos - new Vector2(5, 5), null, Color.White, rotation, center, 1.0f, SpriteEffects.None, 0f);
+            }
         }
     }
 }

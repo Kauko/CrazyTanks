@@ -37,6 +37,7 @@ namespace Solum
         MenuManager menuManager;
         MenuManager pauseMenuManager;
         Tank tank;
+        Tank tank2;
         PlayerSelectionMenu playerSelectionMenu;
 
         public Game1()
@@ -78,6 +79,9 @@ namespace Solum
 
             tank = new Tank();
             tank.pos = new Vector2(100.0f, 100.0f);
+            tank2 = new Tank();
+            tank.pos = new Vector2(200.0f, 200.0f);
+
 
             G.gameState = GameState.menu;
 
@@ -103,6 +107,8 @@ namespace Solum
 
             #region Content paths
             TextureRefs.tank = this.Content.Load<Texture2D>("Placeholder/Images/Tank");
+            TextureRefs.turret = this.Content.Load<Texture2D>("Placeholder/Images/Turret");
+            TextureRefs.shield = this.Content.Load<Texture2D>("Placeholder/Images/Shield");
             TextureRefs.koala = this.Content.Load<Texture2D>("Placeholder/Images/Koala");
             TextureRefs.menuBgImage = this.Content.Load<Texture2D>("Placeholder/Images/MainMenuBG");
             TextureRefs.menuButton = this.Content.Load<Texture2D>("Placeholder/Images/Button");
@@ -236,6 +242,13 @@ namespace Solum
                     {
                         //GameServices.GetService<Camera2d>().updateCamera();
                         tank.Update();
+                        tank2.Update();
+
+                        if (tank.usedShield)
+                        {
+                            tank2.ShieldOn(ShieldState.On);
+                        }
+
                     }/*else
                         G.gameState = GameState.paused;*/
                     GameServices.GetService<Logger>().logFPS();
@@ -285,6 +298,7 @@ namespace Solum
                 case GameState.playing:
                     spriteBatch.Begin();
                     tank.Draw(spriteBatch);
+                    tank2.Draw(spriteBatch);
                     break;
             }
             

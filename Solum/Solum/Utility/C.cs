@@ -42,9 +42,10 @@ namespace Solum.Utility
         public const int playerSelectionWidgetVerticalOffsetY = 400;
         public const int playerSelectionWidgetHorizontalOffsetX = 300;
         /* Variables used in tanks */
-        public const float tankThrottleSpeed = 5f;
+        public const float tankThrottleSpeed = 2f;
         public const float tankReverseSpeed = 2f;
         public const float tankRotationSpeed = 0.05f;
+        public const float turretRotationSpeed = 0.05f;
 
         /* End of menu variables */
     }
