@@ -48,6 +48,10 @@ namespace Solum.Utility
         public const float tankReverseSpeed = 2f;
         public const float tankRotationSpeed = 0.05f;
         public const float turretRotationSpeed = 0.05f;
+        public const int tankSpawnOffsetX = 100; //How far away from the edge of the screen
+        public const int tankSpawnOffsetY = 100;
+        public const int tankPartnerOffsetX = 100; //How far away from your teammate
+        public const int tankPartnerOffsetY = 100;
         /* End of tank variables */
 
         /* Grid variables */

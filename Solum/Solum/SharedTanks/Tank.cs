@@ -45,11 +45,14 @@ namespace Solum.SharedTanks
         public bool throttling = true;
         public bool usedShield = false;
 
+        public Teams Team { get; private set; }
 
-        public Tank()
+
+        public Tank(Teams team, Vector2 position)
         {
-            pos = Vector2.Zero;
+            pos = position;
             center = Vector2.Zero;
+            this.Team = team;
 
             controls = new TankControls(ControlSide.Left);
 
@@ -196,7 +199,7 @@ namespace Solum.SharedTanks
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(TextureRefs.tank, pos, null, Color.White, rotation, center, 1.0f, SpriteEffects.None, 0f);
             spriteBatch.Draw(TextureRefs.turret, pos + center - new Vector2(TextureRefs.turret.Width / 2, TextureRefs.turret.Height / 2), null, Color.White, turretRotation, center, 1.0f, SpriteEffects.None, 0f);
@@ -204,6 +207,11 @@ namespace Solum.SharedTanks
             {
                 spriteBatch.Draw(TextureRefs.shield, pos - new Vector2(5, 5), null, Color.White, rotation, center, 1.0f, SpriteEffects.None, 0f);
             }
+        }
+
+        public RotatedRectangle getRectangle()
+        {
+            return new RotatedRectangle(new Rectangle((int)pos.X, (int)pos.Y, TextureRefs.tank.Width, TextureRefs.tank.Height), this.rotation);
         }
     }
 }

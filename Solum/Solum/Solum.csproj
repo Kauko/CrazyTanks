@@ -134,6 +134,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="SharedTanks\MovingObject.cs" />
+    <Compile Include="SharedTanks\TankManager.cs" />
     <Compile Include="SharedTanks\WorldObject.cs" />
     <Compile Include="SharedTanks\EmptyStaticWorldObject.cs" />
     <Compile Include="SharedTanks\GridManager.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Utility\GameServices.cs" />
     <Compile Include="Utility\LevelRefs.cs" />
     <Compile Include="Utility\Logger.cs" />
+    <Compile Include="Utility\RotatedRectangle.cs" />
     <Compile Include="Utility\SoundRefs.cs" />
     <Compile Include="Utility\SpriteFontRefs.cs" />
     <Compile Include="Utility\TankControls.cs" />

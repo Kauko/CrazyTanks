@@ -36,8 +36,6 @@ namespace Solum
         SpriteBatch spriteBatch;
         MenuManager menuManager;
         MenuManager pauseMenuManager;
-        Tank tank;
-        Tank tank2;
         PlayerSelectionMenu playerSelectionMenu;
 
         public Game1()
@@ -73,16 +71,11 @@ namespace Solum
             GameServices.AddService<Camera2d>(new Camera2d());
             GameServices.AddService<Logger>(new Logger(false));
             GameServices.AddService<GridManager>(new GridManager());
+            GameServices.AddService<TankManager>(new TankManager());
 
             menuManager = new MenuManager();
             pauseMenuManager = new MenuManager();
             playerSelectionMenu = new PlayerSelectionMenu();
-
-            tank = new Tank();
-            tank.pos = new Vector2(100.0f, 100.0f);
-            tank2 = new Tank();
-            tank.pos = new Vector2(200.0f, 200.0f);
-
 
             G.gameState = GameState.menu;
 
@@ -234,17 +227,13 @@ namespace Solum
                         G.gameState = GameState.playing;
                     break;
                 case GameState.playing:
+                    if (GameServices.GetService<TankManager>().tanks.Count == 0)
+                        GameServices.GetService<TankManager>().initTanks();
                    //GameServices.GetService<Logger>().logMsg("Playing");
                     if (this.IsActive)
                     {
                         //GameServices.GetService<Camera2d>().updateCamera();
-                        tank.Update();
-                        tank2.Update();
-
-                        if (tank.usedShield)
-                        {
-                            tank2.ShieldOn(ShieldState.On);
-                        }
+                        GameServices.GetService<TankManager>().Update();
 
                     }/*else
                         G.gameState = GameState.paused;*/
@@ -283,7 +272,7 @@ namespace Solum
                     //All of playing draws here too;
                     spriteBatch.Begin();
                     GameServices.GetService<GridManager>().Draw(spriteBatch);
-                    tank.Draw(spriteBatch);
+                    GameServices.GetService<TankManager>().Draw(spriteBatch);
                     //Drawing the pause menu on top
                     pauseMenuManager.Draw(spriteBatch);                 
                     break;
@@ -297,8 +286,7 @@ namespace Solum
                 case GameState.playing:
                     spriteBatch.Begin();
                     GameServices.GetService<GridManager>().Draw(spriteBatch);
-                    tank.Draw(spriteBatch);
-                    tank2.Draw(spriteBatch);
+                    GameServices.GetService<TankManager>().Draw(spriteBatch);
                     break;
             }
             
