@@ -87,6 +87,8 @@ namespace Solum.SharedTanks
 
         private void spawnPickup(bool spawnRandomly)
         {
+            this.pickupTimer = 0;
+            List<Tuple<int, int>> possibleTiles = new List<Tuple<int, int>>();
             if (spawnRandomly)
             {
                 for (int c = 0; c < this.level.Columns; c++)
@@ -95,7 +97,7 @@ namespace Solum.SharedTanks
                     {
                         if (this.tiles[c, r].Type == StaticType.Empty)
                         {
-                            this.tiles[c, r] = new SmartBombPickup();
+                            possibleTiles.Add(Tuple.Create(c, r));
                         }
                     }
                 }
@@ -108,11 +110,17 @@ namespace Solum.SharedTanks
                     {
                         if (this.tiles[c, r].Type == StaticType.Empty && this.level.GetValue(c,r) == 2)
                         {
-                            this.tiles[c, r] = new SmartBombPickup();
+                            possibleTiles.Add(Tuple.Create(c, r));
                         }
                     }
                 }
             }
+
+            Random rand = new Random();
+            Tuple<int,int> t = possibleTiles.ElementAt(rand.Next(possibleTiles.Count));
+            SmartBombPickup foo = new SmartBombPickup();
+            this.tiles[t.Item1, t.Item2] = foo;
+            this.pickups.Add(foo);
         }
 
         public void Draw(SpriteBatch spriteBatch)

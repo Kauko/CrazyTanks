@@ -73,7 +73,6 @@ namespace Solum.Menus
                 //GameServices.GetService<Logger>().logMsg("Updating widget");
                 if (device.WasButtonPressed(Buttons.DPadRight))
                 {
-                    GameServices.GetService<Logger>().logMsg("Right pressed");
                     if (!oneReady)
                         oneReady = true;
                     else
@@ -81,15 +80,13 @@ namespace Solum.Menus
                 }
                 if (device.WasButtonPressed(Buttons.X))
                 {
-                    GameServices.GetService<Logger>().logMsg("X pressed");
                     if (!twoReady)
                         twoReady = true;
                     else
                         twoReady = false;
                 }
-                if (device.WasButtonPressed(Buttons.Start))
+                if (device.WasButtonPressed(Buttons.Start) && device.PlayerIndex != PlayerIndex.One)
                 {
-                    GameServices.GetService<Logger>().logMsg("Start pressed");
                     this.started = false;
                     this.oneReady = false;
                     this.twoReady = false;

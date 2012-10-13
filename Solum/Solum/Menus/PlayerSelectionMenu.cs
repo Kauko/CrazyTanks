@@ -51,7 +51,7 @@ namespace Solum.Menus
             }
             if (!widgets[0].bothReady())
                 startGame = false;
-            if (startGame)
+            if (startGame && widgets[0].getController().WasButtonPressed(Buttons.Start))
             {
                 foreach (PlayerSelectionWidget p in widgets)
                 {
