@@ -28,5 +28,6 @@ namespace Solum.Utility
         public static Texture2D activeMenuButton;
         public static Texture2D Wall;
         public static Texture2D SmartBombPickup;
+        public static Texture2D RotatedRectangle;
     }
 }

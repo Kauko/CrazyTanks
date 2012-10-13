@@ -19,14 +19,17 @@ namespace Solum.SharedTanks
     {
         public Vector2 pos;
         public Vector2 dir;
+        public Tank shooter;
+        public bool removable = false;
 
-        public Bullet()
+        public Bullet(Tank t, Vector2 dir, Vector2 pos)
         {
-            pos = Vector2.Zero;
-            dir = Vector2.Zero;
+            this.pos = pos;
+            this.dir = dir;
+            this.shooter = t;
         }
 
-        public void SetDirection(Vector2 direction)
+        /*public void SetDirection(Vector2 direction)
         {
             dir = direction;
         }
@@ -34,7 +37,7 @@ namespace Solum.SharedTanks
         public void SetPosition(Vector2 position)
         {
             pos = position;
-        }
+        }*/
 
         public override void Update()
         {

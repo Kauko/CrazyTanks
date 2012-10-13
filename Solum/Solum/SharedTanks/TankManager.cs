@@ -83,16 +83,42 @@ namespace Solum.SharedTanks
                     t.Item2.SetShieldState(ShieldState.On);
                 if (t.Item2.usedShield)
                     t.Item1.SetShieldState(ShieldState.Off);
+
+                //Check collisions with other tanks
+                if (checkTankCollisions(t.Item1))
+                    t.Item1.Collide();
+
+                if (checkTankCollisions(t.Item2))
+                    t.Item2.Collide();
+
+                //check collisions with staticworldobjects (walls, powerups)
+                foreach (StaticWorldObject o in GameServices.GetService<GridManager>().checkTankCollision(t.Item1.getRotatedRectangle()))
+                {
+                    if (o.Type == StaticType.Wall)
+                        t.Item1.Collide();
+                    else if (o.Type == StaticType.SmartBomb)
+                        t.Item1.CollectSmartBomb();
+                }
+                foreach (StaticWorldObject o in GameServices.GetService<GridManager>().checkTankCollision(t.Item2.getRotatedRectangle()))
+                {
+                    if (o.Type == StaticType.Wall)
+                        t.Item2.Collide();
+                    else if (o.Type == StaticType.SmartBomb)
+                        t.Item2.CollectSmartBomb();
+                }
+                //check collisions with bullets
+                GameServices.GetService<BulletManager>().checkTankCollisions(t.Item1);
+                GameServices.GetService<BulletManager>().checkTankCollisions(t.Item2);
             }
         }
 
-        public bool checkCollisions(Tank self)
+        private bool checkTankCollisions(Tank self)
         {
             foreach (Tuple<Tank, Tank> t in tanks)
             {
                 if (self.pos != t.Item1.pos)
                 {
-                    if (self.getRectangle().Intersects(t.Item1.getRectangle()))
+                    if (self.getRotatedRectangle().Intersects(t.Item1.getRotatedRectangle()))
                     {
                         return true;
                     }

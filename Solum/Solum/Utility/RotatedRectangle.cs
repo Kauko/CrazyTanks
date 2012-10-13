@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Solum.Utility
 {
@@ -207,6 +208,11 @@ namespace Solum.Utility
         public int Height
         {
             get { return CollisionRectangle.Height; }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(TextureRefs.RotatedRectangle, new Vector2(this.CollisionRectangle.X, this.CollisionRectangle.Y), null , Color.White, this.Rotation, this.Origin, 1.0f, SpriteEffects.None, 0f);
         }
 
     }

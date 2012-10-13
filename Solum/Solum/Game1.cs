@@ -72,6 +72,7 @@ namespace Solum
             GameServices.AddService<Logger>(new Logger(false));
             GameServices.AddService<GridManager>(new GridManager());
             GameServices.AddService<TankManager>(new TankManager());
+            GameServices.AddService<BulletManager>(new BulletManager());
 
             menuManager = new MenuManager();
             pauseMenuManager = new MenuManager();
@@ -113,6 +114,7 @@ namespace Solum
             TextureRefs.waitingReady = this.Content.Load<Texture2D>("Placeholder/Images/WaitingReady");
             TextureRefs.SmartBombPickup = this.Content.Load<Texture2D>("Placeholder/Images/SmartBomb");
             TextureRefs.Wall = this.Content.Load<Texture2D>("Placeholder/Images/Wall");
+            TextureRefs.RotatedRectangle = this.Content.Load<Texture2D>("Placeholder/Images/RotatedRectangle");
 
             SpriteFontRefs.textFont = Content.Load<SpriteFont>("Placeholder/Fonts/textFont");
             SpriteFontRefs.titleFont = Content.Load<SpriteFont>("Placeholder/Fonts/titleFont");
@@ -244,6 +246,7 @@ namespace Solum
                         G.gameState = GameState.paused;*/
                     GameServices.GetService<Logger>().logFPS();
                     GameServices.GetService<GridManager>().Update();
+                    GameServices.GetService<BulletManager>().Update();
                     foreach (GamepadDevice d in G.activeGamepads)
                     {
                         if (d.WasButtonPressed(Buttons.Start))
@@ -292,6 +295,7 @@ namespace Solum
                     spriteBatch.Begin();
                     GameServices.GetService<GridManager>().Draw(spriteBatch);
                     GameServices.GetService<TankManager>().Draw(spriteBatch);
+                    GameServices.GetService<BulletManager>().Draw(spriteBatch);
                     break;
             }
             

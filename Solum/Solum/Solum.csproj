@@ -134,6 +134,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="SharedTanks\Bullet.cs" />
+    <Compile Include="SharedTanks\BulletManager.cs" />
     <Compile Include="SharedTanks\MovingObject.cs" />
     <Compile Include="SharedTanks\TankManager.cs" />
     <Compile Include="SharedTanks\WorldObject.cs" />

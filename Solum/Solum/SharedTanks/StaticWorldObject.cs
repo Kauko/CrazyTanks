@@ -9,7 +9,7 @@ namespace Solum.SharedTanks
 {
     public enum StaticType
     {
-        Smartbomb,
+        SmartBomb,
         Wall,
         Empty,
     }

@@ -12,7 +12,7 @@ namespace Solum.SharedTanks
     {
         public SmartBombPickup()
         {
-            this.Type = StaticType.Smartbomb;
+            this.Type = StaticType.SmartBomb;
         }
 
         public override void Draw(SpriteBatch spriteBatch, Vector2 position)

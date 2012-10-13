@@ -47,7 +47,6 @@ namespace Solum.SharedTanks
         public bool throttling = true;
         public bool usedShield = false;
 
-        public Bullet bullet;
         public Teams Team { get; private set; }
 
 
@@ -58,7 +57,6 @@ namespace Solum.SharedTanks
             dir = Vector2.Zero;
             center = new Vector2(TextureRefs.tank.Width / 2, TextureRefs.tank.Height / 2);
             this.Team = team;
-            bullet = new Bullet();
 
             controls = new TankControls(ControlSide.Left);
 
@@ -178,7 +176,6 @@ namespace Solum.SharedTanks
 
         public override void Update()
         {
-            bullet.Update();
 
             Move(pad.LeftStickPosition, pad.LeftStickDelta);
 
@@ -213,12 +210,10 @@ namespace Solum.SharedTanks
 
         public void Shoot()
         {
-            bullet.SetPosition(pos - center);
-
             Vector2 up = new Vector2(0, -1);
             Matrix rotMatrix = Matrix.CreateRotationZ(turretRotation);
-
-            bullet.SetDirection(Vector2.Transform(up, rotMatrix));
+            
+            GameServices.GetService<BulletManager>().addBullet(new Bullet(this, Vector2.Transform(up, rotMatrix), pos - center));
         }
 
         public void NextWeapon()
@@ -245,12 +240,36 @@ namespace Solum.SharedTanks
             {
                 spriteBatch.Draw(TextureRefs.shield, pos + center - new Vector2(TextureRefs.shield.Width / 2, TextureRefs.shield.Height / 2), null, Color.White, rotation, new Vector2(TextureRefs.shield.Width / 2, TextureRefs.shield.Height / 2), 1.0f, SpriteEffects.None, 0f);
             }
-            spriteBatch.Draw(TextureRefs.bullet, bullet.pos, Color.White);
+
+            getRotatedRectangle().Draw(spriteBatch);
         }
 
-        public RotatedRectangle getRectangle()
+        public RotatedRectangle getRotatedRectangle()
         {
             return new RotatedRectangle(new Rectangle((int)pos.X, (int)pos.Y, TextureRefs.tank.Width, TextureRefs.tank.Height), this.rotation);
+        }
+
+        public Rectangle getRectangle()
+        {
+            return new Rectangle((int)pos.X, (int)pos.Y, TextureRefs.tank.Width, TextureRefs.tank.Height);
+        }
+
+        internal void Collide()
+        {
+            GameServices.GetService<Logger>().logMsg("collide()");
+            //throw new NotImplementedException();
+        }
+
+        internal void CollectSmartBomb()
+        {
+            GameServices.GetService<Logger>().logMsg("Tank.collectSmartbomb()");
+            //throw new NotImplementedException();
+        }
+
+        internal void takeDamage(Bullet b)
+        {
+            GameServices.GetService<Logger>().logMsg("Tank.takeDamage()");
+            //throw new NotImplementedException();
         }
     }
 }
