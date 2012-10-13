@@ -64,11 +64,6 @@ namespace Solum.SharedTanks
 
             weapons = Enum.GetValues(typeof(Weapon)).Cast<Weapon>().ToList<Weapon>();
 
-            foreach (Weapon w in weapons)
-            {
-                GameServices.GetService<Logger>().logMsg(w.ToString());
-            }
-
             currentWeapon = Weapon.Shield;
             shieldstate = ShieldState.Off;
             pad = GameServices.GetService<GamepadDevice>();
@@ -88,31 +83,78 @@ namespace Solum.SharedTanks
             
             //GameServices.GetService<Logger>().logMsg(stickrotation.ToString());
             //GameServices.GetService<Logger>().logMsg(rotation.ToString());
-
-            //float d = 0f;
-
-           /* d = stickrotation - rotation;
+            
+            float d = 0f;
+            int cw = 0;
 
             if(stickrotation > rotation)
             {
                 d = stickrotation - rotation;
+                cw = 1;
             }
             else
             {
-                d = rotation - stickrotation;  
-            }*/
+                d = rotation - stickrotation;
+                cw = -1;
+            }
 
             //GameServices.GetService<Logger>().logMsg(d.ToString());
 
             if (stickOffset != Vector2.Zero)
             {
-                rotation = stickrotation;
+                if (d < MathHelper.PiOver2)
+                {
+                    rotation += cw * C.tankRotationSpeed;
+                    turretRotation += cw * C.tankRotationSpeed;
+                }
+                else if( d >= MathHelper.PiOver2 && d < MathHelper.Pi)
+                {
+                    rotation -= cw * C.tankRotationSpeed;
+                    turretRotation -= cw * C.tankRotationSpeed;
+                }
+                else if (d >= MathHelper.Pi && d < MathHelper.Pi + MathHelper.PiOver2)
+                {
+                    if (throttling)
+                    {
+                        rotation += cw * C.tankRotationSpeed;
+                        turretRotation += cw * C.tankRotationSpeed;
+                        throttling = false;
+                    }
+                    else
+                    {
+                        rotation -= cw * C.tankRotationSpeed;
+                        turretRotation -= cw * C.tankRotationSpeed;
+                        throttling = true;
+                    }
+                }
+                else if (d >= MathHelper.Pi + MathHelper.PiOver2 && d <= MathHelper.Pi)
+                {
+                    if (throttling)
+                    {
+                        rotation -= cw * C.tankRotationSpeed;
+                        turretRotation -= cw * C.tankRotationSpeed;
+                        throttling = false;
+                    }
+                    else
+                    {
+                        rotation += cw * C.tankRotationSpeed;
+                        turretRotation += cw * C.tankRotationSpeed;
+                        throttling = true;
+                    }
+                }
 
                 Vector2 up = new Vector2(0, -1);
                 Matrix rotMatrix = Matrix.CreateRotationZ(rotation);
                 dir = Vector2.Transform(up, rotMatrix);
 
-                pos += dir * C.tankThrottleSpeed;
+                if (throttling)
+                {
+                    pos += dir * C.tankThrottleSpeed;
+                }
+                else
+                {
+                    pos -= dir * C.tankReverseSpeed;
+                }
             }
 
             //bullet.SetDirection(Vector2.Transform(up, rotMatrix));
