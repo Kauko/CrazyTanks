@@ -1,3 +1,14 @@
+syntax: regexp
 bin
 debug
 obj
+
+syntax: glob
+*.suo
+*.user
+*.cache
+*.txt
+*.cachefile
+*.orig
+*.pdb
+*.build-res
