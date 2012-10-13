@@ -49,6 +49,8 @@ namespace Solum.SharedTanks
                 } 
         }
         public float health = 1.0f;
+        public float speed;
+        public float lastRotation;
 
         public ShieldState shieldstate;
         public Weapon currentWeapon;
@@ -78,6 +80,7 @@ namespace Solum.SharedTanks
             pad = GameServices.GetService<GamepadDevice>();
             rotation = 0.0f;
             turretRotation = 0.0f;
+            speed = C.tankThrottleSpeed;
         }
 
         public void Move(Vector2 stickOffset, Vector2 delta)
@@ -87,6 +90,7 @@ namespace Solum.SharedTanks
             stickrotation = MathHelper.WrapAngle(stickrotation);
 
             rotation = MathHelper.WrapAngle(rotation);
+            lastRotation = rotation;
             
             float d = 0f;
             int cw = 0;
@@ -138,8 +142,8 @@ namespace Solum.SharedTanks
                 rotMatrix = Matrix.CreateRotationZ(rotation);
                 dir = Vector2.Transform(up, rotMatrix);
 
-                pos.X += dir.X * C.tankThrottleSpeed;
-                pos.Y += dir.Y * C.tankThrottleSpeed;
+                pos.X += dir.X * speed;
+                pos.Y += dir.Y * speed;
             }
         }
 
@@ -162,20 +166,24 @@ namespace Solum.SharedTanks
 
         public override void Update()
         {
+            if (pad.WasButtonPressed(controls.reverse))
+            {
+                if (throttling)
+                {
+                    throttling = false;
+                    rotation -= MathHelper.Pi;
+                    speed = C.tankReverseSpeed;
+                }
+                else
+                {
+                    throttling = true;
+                    rotation += MathHelper.Pi;
+                    speed = C.tankThrottleSpeed;
+                }
+            }
+
             if (controls.darkside == ControlSide.Left)
             {
-                if(pad.WasButtonPressed(controls.reverse)){
-                    if (throttling)
-                    {
-                        throttling = false;
-                        rotation -= MathHelper.Pi;
-                    }
-                    else
-                    {
-                        throttling = true;
-                        rotation += MathHelper.Pi;
-                    }
-                }
                 Move(pad.LeftStickPosition, pad.LeftStickDelta);
             }
             if (controls.darkside == ControlSide.Right)
@@ -271,6 +279,9 @@ namespace Solum.SharedTanks
         internal void Collide()
         {
             GameServices.GetService<Logger>().logMsg("collide()");
+            pos -= dir * speed;
+            rotation = lastRotation;
+            turretRotation = lastRotation;
             //throw new NotImplementedException();
         }
 
