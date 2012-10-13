@@ -40,6 +40,7 @@ namespace Solum.SharedTanks
 
         public ShieldState shieldstate;
         public Weapon currentWeapon;
+        public List<Weapon> weapons;
 
         public bool throttling = true;
         public bool usedShield = false;
@@ -51,6 +52,8 @@ namespace Solum.SharedTanks
             center = Vector2.Zero;
 
             controls = new TankControls(ControlSide.Left);
+
+            weapons = Enum.GetValues(typeof(Weapon)).Cast<Weapon>().ToList<Weapon>();
 
             currentWeapon = Weapon.Shield;
             shieldstate = ShieldState.Off;
@@ -177,7 +180,19 @@ namespace Solum.SharedTanks
             }
             if (pad.WasButtonPressed(controls.changeWeapon))
             {
-                
+                for(int i = 0; i < weapons.Count; i++)
+                {
+                    if(weapons[i] == currentWeapon)
+                    {
+                        if (i + 1 == weapons.Count)
+                        {
+                            i = 0;
+                        }
+                        currentWeapon = weapons[i++];
+                        break;
+                    }
+                }
+                GameServices.GetService<Logger>().logMsg(currentWeapon.ToString());
             }
         }
 
