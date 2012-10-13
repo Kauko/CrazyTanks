@@ -49,11 +49,11 @@ namespace Solum.Utility
         public const float tankRotationSpeed = 0.05f;
         public const float turretRotationSpeed = 0.05f;
         public const float bulletSpeed = 3f;
-        public const int tankSpawnOffsetX = 100; //How far away from the edge of the screen
-        public const int tankSpawnOffsetY = 100;
+        public const int tankSpawnOffsetX = playAreaX + 100; //How far away from the edge of the screen
+        public const int tankSpawnOffsetY = playAreaY + 100;
         public const int tankPartnerOffsetX = 100; //How far away from your teammate
         public const int tankPartnerOffsetY = 100;
-        public const float bulletDamage = 0.2f;
+        public const float bulletDamage = 0.3f;
         /* End of tank variables */
 
         /* Grid variables */
@@ -72,6 +72,8 @@ namespace Solum.Utility
         public static int healthbarHorizontalOffset = TextureRefs.tank.Height + 40;
         public static int healthbarWidth = 60;
         public static int healthbarHeight = 10;
+        public const int frameWidth = 20;
+        public const int frameHeight = 70;
         /* end of play area variables*/
         
     }

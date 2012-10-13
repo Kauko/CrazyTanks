@@ -93,10 +93,10 @@ namespace Solum.SharedTanks
                     t.Item2.Collide();
 
                 //Check collision with play area border
-                //if(checkScreenCollisions(t.Item1))
-                    //t.Item1.Collide();
-                //if (checkScreenCollisions(t.Item2))
-                    //t.Item2.Collide();
+                if(checkScreenCollisions(t.Item1))
+                    t.Item1.Collide();
+                if (checkScreenCollisions(t.Item2))
+                    t.Item2.Collide();
 
                 //check collisions with staticworldobjects (walls, powerups)
                 foreach (StaticWorldObject o in GameServices.GetService<GridManager>().checkTankCollision(t.Item1.getRotatedRectangle()))
@@ -121,18 +121,31 @@ namespace Solum.SharedTanks
 
         private bool checkScreenCollisions(Tank self)
         {
-            Rectangle screenLeft = new Rectangle(0, 0, C.playAreaWidth, GameServices.GetService<GraphicsDevice>().Viewport.Height);
-            Rectangle screenRight = new Rectangle(C.playAreaWidth+C.playAreaX, 0, C.playAreaWidth, GameServices.GetService<GraphicsDevice>().Viewport.Height);
-            Rectangle screenTop = new Rectangle(0, 0, C.playAreaHeight, GameServices.GetService<GraphicsDevice>().Viewport.Width);
-            Rectangle screenBottom = new Rectangle(0, C.playAreaY+C.playAreaHeight, C.playAreaHeight, GameServices.GetService<GraphicsDevice>().Viewport.Width);
-            if(self.getRotatedRectangle().Intersects(screenLeft))
+            Rectangle screenLeft = new Rectangle(0, 0, C.frameWidth, GameServices.GetService<GraphicsDevice>().Viewport.Height);
+            Rectangle screenRight = new Rectangle(GameServices.GetService<GraphicsDevice>().Viewport.Width-C.frameWidth, 0, C.frameWidth, GameServices.GetService<GraphicsDevice>().Viewport.Height);
+            Rectangle screenTop = new Rectangle(0, 0,GameServices.GetService<GraphicsDevice>().Viewport.Width, C.frameHeight);
+            Rectangle screenBottom = new Rectangle(0, GameServices.GetService<GraphicsDevice>().Viewport.Height- C.frameHeight, GameServices.GetService<GraphicsDevice>().Viewport.Width, C.frameHeight);
+            if (self.getRotatedRectangle().Intersects(screenLeft))
+            {
+                GameServices.GetService<Logger>().logMsg("screenLeft");
                 return true;
+            }
+                
             if (self.getRotatedRectangle().Intersects(screenRight))
+            {
+                GameServices.GetService<Logger>().logMsg("screenRight");
                 return true;
+            }
             if (self.getRotatedRectangle().Intersects(screenTop))
+            {
+                GameServices.GetService<Logger>().logMsg("screenTop");
                 return true;
+            }
             if (self.getRotatedRectangle().Intersects(screenBottom))
+            {
+                GameServices.GetService<Logger>().logMsg("screenBottom");
                 return true;
+            }
             return false;
         }
 
