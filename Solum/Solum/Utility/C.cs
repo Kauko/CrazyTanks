@@ -54,6 +54,8 @@ namespace Solum.Utility
         public const int tankPartnerOffsetX = 100; //How far away from your teammate
         public const int tankPartnerOffsetY = 100;
         public const float bulletDamage = 0.3f;
+        public const float shieldDuration = 5f * 60f;
+        public const float respawnTime = 5f * 60f;
         public const float shieldMeterIncreaseOnDamage = 0.3f;
         public const float shieldMeterIncreaseOnUpdate = 0.001f;
         /* End of tank variables */

@@ -49,9 +49,12 @@ namespace Solum.SharedTanks
                 {
                     if (b.shooter != t)
                     {
-                        t.takeDamage(b);
-                        if(t.Team != b.shooter.Team)
-                            b.shooter.increaseShieldMeter(C.shieldMeterIncreaseOnDamage);
+                        if (t.state == TankState.Alive)
+                        {
+                            t.TakeDamage(b);
+                            if(t.Team != b.shooter.Team)
+                                b.shooter.increaseShieldMeter(C.shieldMeterIncreaseOnDamage);
+                        }
                         b.removable = true;
                     }
                 }

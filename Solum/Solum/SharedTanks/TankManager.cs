@@ -73,6 +73,38 @@ namespace Solum.SharedTanks
             }
         }
 
+        public void ReSpawn(Tank tank){
+            int screenWidth = GameServices.GetService<GraphicsDevice>().Viewport.Width;
+            int screenHeight = GameServices.GetService<GraphicsDevice>().Viewport.Height;
+
+            switch(tank.Team){
+                case Teams.blue:
+                    if (tank.controls.controlside == ControlSide.Left)
+                        tank.Initialize(new Vector2(screenWidth, 0) - new Vector2(C.tankSpawnOffsetX, 0) + new Vector2(0, C.tankSpawnOffsetY));
+                    else
+                        tank.Initialize(new Vector2(screenWidth, 0) - new Vector2(C.tankSpawnOffsetX, 0) + new Vector2(0, C.tankSpawnOffsetY) - new Vector2(C.tankPartnerOffsetX, 0) + new Vector2(0, C.tankPartnerOffsetY));
+                    break;
+                case Teams.green:
+                    if (tank.controls.controlside == ControlSide.Left)
+                        tank.Initialize(new Vector2(0, screenHeight) - new Vector2(0, C.tankSpawnOffsetY) + new Vector2(C.tankSpawnOffsetX, 0));
+                    else
+                        tank.Initialize(new Vector2(0, screenHeight) - new Vector2(C.tankSpawnOffsetX, 0) + new Vector2(0, C.tankSpawnOffsetY) - new Vector2(C.tankPartnerOffsetX, 0) + new Vector2(0, C.tankPartnerOffsetY));
+                    break;
+                case Teams.red:
+                    if (tank.controls.controlside == ControlSide.Left)
+                        tank.Initialize(new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY));
+                    else
+                        tank.Initialize(new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY) + new Vector2(C.tankPartnerOffsetX, C.tankPartnerOffsetY));
+                    break;
+                case Teams.yellow:
+                    if (tank.controls.controlside == ControlSide.Left)
+                        tank.Initialize(new Vector2(screenWidth, screenHeight) - new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY));
+                    else
+                        tank.Initialize(new Vector2(screenWidth, screenHeight) - new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY) - new Vector2(C.tankPartnerOffsetX, C.tankPartnerOffsetY));
+                    break;
+            }
+        }
+
         public void Update()
         {
             foreach (Tuple<Tank,Tank> t in tanks)
@@ -80,10 +112,25 @@ namespace Solum.SharedTanks
                 t.Item1.Update();
                 t.Item2.Update();
 
+                if (t.Item1.state == TankState.Spawning)
+                {
+                    ReSpawn(t.Item1);
+                }
+                if (t.Item2.state == TankState.Spawning)
+                {
+                    ReSpawn(t.Item2);
+                }
+
                 if (t.Item1.usedShield)
+                {
                     t.Item2.SetShieldState(ShieldState.On);
+                    t.Item1.usedShield = false;
+                }
                 if (t.Item2.usedShield)
-                    t.Item1.SetShieldState(ShieldState.Off);
+                {
+                    t.Item1.SetShieldState(ShieldState.On);
+                    t.Item2.usedShield = false;
+                }
 
                 //Check collisions with other tanks
                 if (checkTankCollisions(t.Item1))
