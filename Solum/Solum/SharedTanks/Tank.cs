@@ -51,7 +51,7 @@ namespace Solum.SharedTanks
 
 
 
-        public Tank(Teams team, Vector2 position)
+        public Tank(Teams team, Vector2 position, ControlSide side)
         {
             pos = position;
             GameServices.GetService<Logger>().logMsg("" + pos);
@@ -59,7 +59,7 @@ namespace Solum.SharedTanks
             center = new Vector2(TextureRefs.tank.Width / 2, TextureRefs.tank.Height / 2);
             this.Team = team;
 
-            controls = new TankControls(ControlSide.Left);
+            controls = new TankControls(side);
 
             weapons = Enum.GetValues(typeof(Weapon)).Cast<Weapon>().ToList<Weapon>();
 
@@ -101,17 +101,19 @@ namespace Solum.SharedTanks
 
             if (stickOffset != Vector2.Zero)
             {
-                if (d < MathHelper.PiOver2)
+                //if (d < MathHelper.PiOver2)
+                if (d < MathHelper.Pi)
                 {
                     rotation += cw * C.tankRotationSpeed;
                     turretRotation += cw * C.tankRotationSpeed;
                 }
-                else if( d >= MathHelper.PiOver2 && d < MathHelper.Pi)
+                if( d > MathHelper.Pi)
+                //else if( d >= MathHelper.PiOver2 && d < MathHelper.Pi)
                 {
                     rotation -= cw * C.tankRotationSpeed;
                     turretRotation -= cw * C.tankRotationSpeed;
                 }
-                else if (d >= MathHelper.Pi && d < MathHelper.Pi + MathHelper.PiOver2)
+                /*else if (d >= MathHelper.Pi && d < MathHelper.Pi + MathHelper.PiOver2)
                 {
                     if (throttling)
                     {
@@ -140,7 +142,7 @@ namespace Solum.SharedTanks
                         turretRotation += cw * C.tankRotationSpeed;
                         throttling = true;
                     }
-                }
+                }*/
 
                 Vector2 up = new Vector2(0, -1);
                 Matrix rotMatrix = Matrix.CreateRotationZ(rotation);
@@ -155,49 +157,6 @@ namespace Solum.SharedTanks
                     pos -= dir * C.tankReverseSpeed;
                 }
             }
-
-            //bullet.SetDirection(Vector2.Transform(up, rotMatrix));
-
-
-            /*if (d < MathHelper.Pi)
-            {
-                if (d >= MathHelper.PiOver2 && d < MathHelper.Pi)
-                {
-                    rotation += C.tankRotationSpeed;
-                    pos.X += stickOffset.X * C.tankThrottleSpeed;
-                    pos.Y -= stickOffset.Y * C.tankThrottleSpeed;
-
-                }
-                else if (d < MathHelper.PiOver2 && d >= 0)
-                {
-                    rotation -= C.tankRotationSpeed;
-                    pos.X += stickOffset.X * C.tankThrottleSpeed;
-                    pos.Y -= stickOffset.Y * C.tankThrottleSpeed;
-
-                }
-            }
-            /*else{
-                if(throttling == true)
-                    throttling = false;
-                else
-                    throttling = true;
-
-                if (d >= MathHelper.Pi && d <= MathHelper.Pi + MathHelper.PiOver2)
-                {
-                    rotation -= C.tankRotationSpeed;
-                    pos.X -= stickOffset.X * C.tankThrottleSpeed;
-                    pos.Y += stickOffset.Y * C.tankThrottleSpeed;
-
-                }
-                else if (d > MathHelper.Pi + MathHelper.PiOver2 && d <= MathHelper.TwoPi)
-                {
-                    rotation += C.tankRotationSpeed;
-                    pos.X -= stickOffset.X * C.tankThrottleSpeed;
-                    pos.Y += stickOffset.Y * C.tankThrottleSpeed;
-                }
-            }
-             * */
-
         }
 
         public void Rotate(Vector2 stickOffset)
@@ -219,8 +178,14 @@ namespace Solum.SharedTanks
 
         public override void Update()
         {
-
-            Move(pad.LeftStickPosition, pad.LeftStickDelta);
+            if (controls.darkside == ControlSide.Left)
+            {
+                Move(pad.LeftStickPosition, pad.LeftStickDelta);
+            }
+            if (controls.darkside == ControlSide.Right)
+            {
+                Move(pad.RightStickPosition, pad.RightStickDelta);
+            }
 
             if (pad.IsButtonDown(controls.turretRotateCW))
             {
