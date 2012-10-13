@@ -21,7 +21,7 @@ namespace Solum.SharedTanks
         {
         }
 
-        public virtual void Draw()
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
         }
     }

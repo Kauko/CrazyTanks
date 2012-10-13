@@ -41,12 +41,22 @@ namespace Solum.Utility
         public const int playerSelectionWidgetPositionY = 50;
         public const int playerSelectionWidgetVerticalOffsetY = 400;
         public const int playerSelectionWidgetHorizontalOffsetX = 300;
+        /* End of menu variables */
+
         /* Variables used in tanks */
         public const float tankThrottleSpeed = 2f;
         public const float tankReverseSpeed = 2f;
         public const float tankRotationSpeed = 0.05f;
         public const float turretRotationSpeed = 0.05f;
+        /* End of tank variables */
 
-        /* End of menu variables */
+        /* Grid variables */
+        public const int tileWidth = 30;
+        public const int tileHeight = 30;
+        public static int maxPickups = 3;
+        public static int pickupInterval = 900; //60 = approx 1s. 900 ~= 15s;
+        public static int pickupSpawnChance = 3; //if(random.next(that) == 1) spawnpickup(). 3 here is 33% chance of spawning, since next() returns either 0,1 or 2.
+        /* end of grid variables */
+        
     }
 }

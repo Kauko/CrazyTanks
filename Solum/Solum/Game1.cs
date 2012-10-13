@@ -72,6 +72,7 @@ namespace Solum
 
             GameServices.AddService<Camera2d>(new Camera2d());
             GameServices.AddService<Logger>(new Logger(false));
+            GameServices.AddService<GridManager>(new GridManager());
 
             menuManager = new MenuManager();
             pauseMenuManager = new MenuManager();
@@ -116,6 +117,8 @@ namespace Solum
             TextureRefs.ready = this.Content.Load<Texture2D>("Placeholder/Images/Ready");
             TextureRefs.pressStart = this.Content.Load<Texture2D>("Placeholder/Images/PressStart");
             TextureRefs.waitingReady = this.Content.Load<Texture2D>("Placeholder/Images/WaitingReady");
+            TextureRefs.SmartBombPickup = this.Content.Load<Texture2D>("Placeholder/Images/SmartBomb");
+            TextureRefs.Wall = this.Content.Load<Texture2D>("Placeholder/Images/Wall");
 
             SpriteFontRefs.textFont = Content.Load<SpriteFont>("Placeholder/Fonts/textFont");
             SpriteFontRefs.titleFont = Content.Load<SpriteFont>("Placeholder/Fonts/titleFont");
@@ -125,17 +128,11 @@ namespace Solum
 
             SoundRefs.bgm = Content.Load<Song>("Placeholder/Audio/MainMenuBGM");
 
-            LevelLibrary.Level level = Content.Load<LevelLibrary.Level>("Levels/level1");
+            LevelRefs.levelOne = Content.Load<LevelLibrary.Level>("Levels/level1");
+            G.levels.Add(LevelRefs.levelOne);
             #endregion
 
-            for (int row = 0; row < level.Rows; row++)
-            {
-                for (int column = 0; column < level.Columns; column++)
-                {
-                    GameServices.GetService<Logger>().logMsg(""+level.GetValue(row, column));
-                }
-                Console.WriteLine();
-            }
+            GameServices.GetService<GridManager>().loadMap();
 
             #region screen Center location..
             int screenHeight = graphics.GraphicsDevice.Viewport.Height;
@@ -252,6 +249,7 @@ namespace Solum
                     }/*else
                         G.gameState = GameState.paused;*/
                     GameServices.GetService<Logger>().logFPS();
+                    GameServices.GetService<GridManager>().Update();
                     foreach (GamepadDevice d in G.activeGamepads)
                     {
                         if (d.WasButtonPressed(Buttons.Start))
@@ -284,7 +282,8 @@ namespace Solum
                 case GameState.paused:
                     //All of playing draws here too;
                     spriteBatch.Begin();
-                    spriteBatch.Draw(TextureRefs.koala, new Vector2(0, 0), Color.White);
+                    GameServices.GetService<GridManager>().Draw(spriteBatch);
+                    tank.Draw(spriteBatch);
                     //Drawing the pause menu on top
                     pauseMenuManager.Draw(spriteBatch);                 
                     break;
@@ -297,6 +296,7 @@ namespace Solum
                     break;
                 case GameState.playing:
                     spriteBatch.Begin();
+                    GameServices.GetService<GridManager>().Draw(spriteBatch);
                     tank.Draw(spriteBatch);
                     tank2.Draw(spriteBatch);
                     break;
