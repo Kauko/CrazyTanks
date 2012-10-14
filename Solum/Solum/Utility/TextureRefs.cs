@@ -32,5 +32,7 @@ namespace Solum.Utility
         public static Texture2D Frame;
         public static Texture2D ShieldIndicator;
         public static Texture2D BombIndicator;
+        public static Texture2D TankDead;
+        public static Texture2D TurretShield;
     }
 }

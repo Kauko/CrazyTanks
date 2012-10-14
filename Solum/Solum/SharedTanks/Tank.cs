@@ -24,8 +24,8 @@ namespace Solum.SharedTanks
     public enum Weapon
     {
         Shield,
-        Cannon,
-        SmartBomb
+        Cannon
+        //SmartBomb
     }
 
     public enum TankState
@@ -64,6 +64,7 @@ namespace Solum.SharedTanks
         public bool usedShield;
 
         public Teams Team { get; private set; }
+        SoundEffectInstance shieldSound;
 
 
 
@@ -75,6 +76,8 @@ namespace Solum.SharedTanks
             center = new Vector2(TextureRefs.tank.Width / 2, TextureRefs.tank.Height / 2);
             this.Team = team;
             pad = gpad;
+            shieldSound = SoundRefs.shieldOn.CreateInstance();
+            shieldSound.IsLooped = true;
             /* see descr */
 
             Initialize(position);
@@ -85,7 +88,7 @@ namespace Solum.SharedTanks
             pos = position;
             dir = Vector2.Zero;
 
-            currentWeapon = Weapon.Shield;
+            currentWeapon = Weapon.Cannon;
             state = TankState.Alive;
 
             shieldDurRemaining = 5;
@@ -184,10 +187,12 @@ namespace Solum.SharedTanks
             if (shieldstate == ShieldState.On)
             {
                 shieldDurRemaining = C.shieldDuration;
+                shieldSound.Play();
             }
             else
             {
                 shieldDurRemaining = 0f;
+                shieldSound.Stop();
             }
         }
 
@@ -288,13 +293,14 @@ namespace Solum.SharedTanks
                             ShieldMeter = 0.0f;
                         }
                         break;
-                    case Weapon.SmartBomb:
-                        break;
+                    //case Weapon.SmartBomb:
+                      //  break;
                 }
             }
             if (pad.WasButtonPressed(controls.changeWeapon))
             {
-                NextWeapon();
+                if(currentWeapon != Weapon.Cannon || currentWeapon == Weapon.Cannon && ShieldMeter == 1.0f) 
+                    NextWeapon();
             }
         }
 
@@ -306,6 +312,11 @@ namespace Solum.SharedTanks
             GameServices.GetService<Logger>().logMsg("ja anukseni valmiina");
 
             GameServices.GetService<BulletManager>().addBullet(new Bullet(this, Vector2.Transform(up, rotMatrix), pos - new Vector2(TextureRefs.bullet.Width / 2, TextureRefs.bullet.Height / 2)));
+            Random rand = new Random();
+            if (rand.Next(10) != 1)
+                SoundRefs.cannon.Play();
+            else
+                SoundRefs.cannonAlt.Play();
             reloadCounter = C.reloadTime;
         }
 
@@ -334,12 +345,19 @@ namespace Solum.SharedTanks
                 drawrotation = rotation + MathHelper.Pi;
             }
 
-            spriteBatch.Draw(TextureRefs.tank, pos, null, Color.White, drawrotation, center, 1.0f, SpriteEffects.None, 0f);
-            spriteBatch.Draw(TextureRefs.turret, pos, null, Color.White, turretRotation, center, 1.0f, SpriteEffects.None, 0f);
-            if (shieldstate == ShieldState.On)
+            if (state == TankState.Alive)
             {
-                spriteBatch.Draw(TextureRefs.shield, pos, null, Color.White, rotation, center, 1.0f, SpriteEffects.None, 0f);
-            }
+                spriteBatch.Draw(TextureRefs.tank, pos, null, Color.White, drawrotation, center, 1.0f, SpriteEffects.None, 0f);
+                if(currentWeapon == Weapon.Cannon)
+                    spriteBatch.Draw(TextureRefs.turret, pos, null, Color.White, turretRotation, center, 1.0f, SpriteEffects.None, 0f);
+                if(currentWeapon == Weapon.Shield)
+                    spriteBatch.Draw(TextureRefs.TurretShield, pos, null, Color.White, turretRotation, center, 1.0f, SpriteEffects.None, 0f);
+                if (shieldstate == ShieldState.On)
+                {
+                    spriteBatch.Draw(TextureRefs.shield, pos, null, Color.White, rotation, center, 1.0f, SpriteEffects.None, 0f);
+                }
+            }else if(state == TankState.Dead)
+                spriteBatch.Draw(TextureRefs.TankDead, pos, null, Color.White, drawrotation, center, 1.0f, SpriteEffects.None, 0f);
             //Draw healthbar
             var rect = new Texture2D(GameServices.GetService<GraphicsDevice>(), 1, 1);
             rect.SetData(new[] { Color.DeepPink });
@@ -375,20 +393,25 @@ namespace Solum.SharedTanks
 
         internal bool takeDamage(Bullet b)
         {
+            bool wasHit = false;
             if (this.shieldstate == ShieldState.On)
             {
-
+                SoundRefs.shieldHit.Play();
             }
             else
             {
                 GameServices.GetService<Logger>().logMsg("Tank.takeDamage()");
                 this.health -= C.bulletDamage;
+                wasHit = true;
             }
             if (this.health <= 0.0f)
             {
                 Die();
+                SoundRefs.tankDead.Play();
                 return true;
             }
+            if (wasHit)
+                SoundRefs.tankHit.Play();
             return false;
             
         }

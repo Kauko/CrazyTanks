@@ -19,6 +19,13 @@ namespace Solum.Utility
     {
         public static SoundEffect menuOpen;
         public static SoundEffect menuClose;
+        public static SoundEffect cannon;
+        public static SoundEffect cannonAlt;
+        public static SoundEffect tankDead;
+        public static SoundEffect tankHit;
+        public static SoundEffect shieldHit;
+        public static SoundEffect shieldOn;
+        public static SoundEffect gamebgm;
 
         public static Song bgm;
     }
