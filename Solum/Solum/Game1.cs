@@ -427,6 +427,9 @@ namespace Solum
                 case GameState.menu:
                 case GameState.playerSelection:
                     G.gamePadOne.Update();
+                    G.gamePadTwo.Update();
+                    G.gamePadThree.Update();
+                    G.gamePadFour.Update();
                     break;
                 case GameState.playing:
                 case GameState.paused:

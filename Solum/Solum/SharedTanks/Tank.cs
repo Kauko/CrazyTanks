@@ -66,14 +66,14 @@ namespace Solum.SharedTanks
 
 
 
-        public Tank(Teams team, Vector2 position, ControlSide side)
+        public Tank(Teams team, Vector2 position, GamepadDevice gpad, ControlSide side)
         {
             /* No need to reset these -> not to initialize() */
             controls = new TankControls(side);
             weapons = Enum.GetValues(typeof(Weapon)).Cast<Weapon>().ToList<Weapon>();
             center = new Vector2(TextureRefs.tank.Width / 2, TextureRefs.tank.Height / 2);
             this.Team = team;
-            pad = GameServices.GetService<GamepadDevice>();
+            pad = gpad;
             /* see descr */
 
             Initialize(position);
@@ -95,6 +95,7 @@ namespace Solum.SharedTanks
             rotation = 0.0f;
             turretRotation = 0.0f;
             speed = C.tankThrottleSpeed;
+            health = 1.0f;
 
             throttling = true;
             usedShield = false;
@@ -263,13 +264,19 @@ namespace Solum.SharedTanks
 
             if (pad.WasButtonPressed(controls.shoot))
             {
+                GameServices.GetService<Logger>().logMsg("AMMUTAAN SAATANA");
                 switch (currentWeapon)
                 {
                     case Weapon.Cannon:
+                        GameServices.GetService<Logger>().logMsg("aseeni on kanuuna");
                         Shoot();
                         break;
                     case Weapon.Shield:
-                        usedShield = true;
+                        if (ShieldMeter == 1.0f)
+                        {
+                            usedShield = true;
+                            ShieldMeter = 0.0f;
+                        }
                         break;
                     case Weapon.SmartBomb:
                         break;
@@ -285,7 +292,9 @@ namespace Solum.SharedTanks
         {
             Vector2 up = new Vector2(0, -1);
             Matrix rotMatrix = Matrix.CreateRotationZ(turretRotation);
-            
+
+            GameServices.GetService<Logger>().logMsg("ja anukseni valmiina");
+
             GameServices.GetService<BulletManager>().addBullet(new Bullet(this, Vector2.Transform(up, rotMatrix), pos - center));
         }
 

@@ -90,10 +90,10 @@ namespace Solum.SharedTanks
                                 }
                                 #endregion
                             }
-                            if (t.Team != b.shooter.Team)
-                                b.shooter.increaseShieldMeter(C.shieldMeterIncreaseOnDamage);
-                        }
+                        if (t.Team != b.shooter.Team)
+                            b.shooter.increaseShieldMeter(C.shieldMeterIncreaseOnDamage);
                         b.removable = true;
+                    }
                     }
                 }
 
