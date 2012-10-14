@@ -37,6 +37,7 @@ namespace Solum
         MenuManager menuManager;
         MenuManager pauseMenuManager;
         PlayerSelectionMenu playerSelectionMenu;
+        SoundEffectInstance bgm;
 
         int winCounter = 0;
 
@@ -120,12 +121,21 @@ namespace Solum
             TextureRefs.BombIndicator = this.Content.Load<Texture2D>("Placeholder/Images/BombIndicator");
             TextureRefs.ShieldIndicator = this.Content.Load<Texture2D>("Placeholder/Images/ShieldIndicator");
             TextureRefs.Frame= this.Content.Load<Texture2D>("Placeholder/Images/Frame");
+            TextureRefs.TankDead = this.Content.Load<Texture2D>("Placeholder/Images/TankDead");
+            TextureRefs.TurretShield = this.Content.Load<Texture2D>("Placeholder/Images/Turret2Shield");
 
             SpriteFontRefs.textFont = Content.Load<SpriteFont>("Placeholder/Fonts/textFont");
             SpriteFontRefs.titleFont = Content.Load<SpriteFont>("Placeholder/Fonts/titleFont");
 
             SoundRefs.menuOpen = Content.Load<SoundEffect>("Placeholder/Audio/MenuOpen");
             SoundRefs.menuClose = Content.Load<SoundEffect>("Placeholder/Audio/MenuClose");
+            SoundRefs.cannon = Content.Load<SoundEffect>("Audio/laukaus2");
+            SoundRefs.cannonAlt = Content.Load<SoundEffect>("Audio/laukaus1");
+            SoundRefs.tankDead = Content.Load<SoundEffect>("Audio/osuma_rikki");
+            SoundRefs.tankHit = Content.Load<SoundEffect>("Audio/osuma_tankki");
+            SoundRefs.shieldHit = Content.Load<SoundEffect>("Audio/shield_osuma");
+            SoundRefs.shieldOn = Content.Load<SoundEffect>("Audio/shield_p‰‰ll‰");
+            SoundRefs.gamebgm = Content.Load<SoundEffect>("Audio/tankki_music_16sec");
 
             SoundRefs.bgm = Content.Load<Song>("Placeholder/Audio/MainMenuBGM");
 
@@ -178,6 +188,11 @@ namespace Solum
                 new List<string>() { "Continue", "Main Menu" });
             pauseMenuManager.AddMenu("Pause Menu", mainPauseMenu);
             #endregion
+
+            bgm = SoundRefs.gamebgm.CreateInstance();
+            bgm.IsLooped = true;
+            bgm.Volume=C.bgmVolume;
+            bgm.Play();
 
         }
 

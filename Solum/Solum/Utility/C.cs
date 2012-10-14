@@ -65,6 +65,7 @@ namespace Solum.Utility
         /* misc */
         public const int allowedDeaths = 10;
         public const int winWaitTime = 120;
+        public const float bgmVolume = 0.1f;
         /* */
 
         /* Grid variables */
