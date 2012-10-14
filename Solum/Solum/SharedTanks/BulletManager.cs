@@ -45,31 +45,15 @@ namespace Solum.SharedTanks
         {
             foreach (Bullet b in bullets)
             {
-                if (t.getRotatedRectangle().Intersects(new RotatedRectangle(new Rectangle((int)b.pos.X, (int)b.pos.Y, TextureRefs.bullet.Width, TextureRefs.bullet.Height),0.0f)))
+                if (t.getRotatedRectangle().Intersects(new RotatedRectangle(new Rectangle((int)b.pos.X, (int)b.pos.Y, TextureRefs.bullet.Width, TextureRefs.bullet.Height), 0.0f)))
                 {
                     if (b.shooter != t)
                     {
-                        if(t.state == TankState.Alive){
+                        if (t.state == TankState.Alive)
+                        {
                             if (t.takeDamage(b))
                             {
                                 #region kill and death counter increases
-                                //increase kill counter for team
-                                if (b.shooter.Team == Teams.red)
-                                {
-                                    G.redKills++;
-                                }
-                                else if (b.shooter.Team == Teams.blue)
-                                {
-                                    G.blueKills++;
-                                }
-                                else if (b.shooter.Team == Teams.green)
-                                {
-                                    G.greenKills++;
-                                }
-                                else if (b.shooter.Team == Teams.yellow)
-                                {
-                                    G.yellowKills++;
-                                }
                                 //increase deaths counter for team
                                 if (t.Team == Teams.red)
                                 {
@@ -87,17 +71,33 @@ namespace Solum.SharedTanks
                                 {
                                     G.yellowDeaths++;
                                 }
+                                //increase kill counter for team
+                                if (b.shooter.Team == Teams.red && b.shooter.Team != t.Team)
+                                {
+                                    G.redKills++;
+                                }
+                                else if (b.shooter.Team == Teams.blue && b.shooter.Team != t.Team)
+                                {
+                                    G.blueKills++;
+                                }
+                                else if (b.shooter.Team == Teams.green && b.shooter.Team != t.Team)
+                                {
+                                    G.greenKills++;
+                                }
+                                else if (b.shooter.Team == Teams.yellow && b.shooter.Team != t.Team)
+                                {
+                                    G.yellowKills++;
+                                }
                                 #endregion
                             }
-                        }
-                            if(t.Team != b.shooter.Team)
+                            if (t.Team != b.shooter.Team)
                                 b.shooter.increaseShieldMeter(C.shieldMeterIncreaseOnDamage);
                         }
                         b.removable = true;
                     }
                 }
-            
 
+            }
             removeBullet();
         }
 

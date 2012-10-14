@@ -60,6 +60,11 @@ namespace Solum.Utility
         public const float shieldMeterIncreaseOnUpdate = 0.001f;
         /* End of tank variables */
 
+        /* misc */
+        public const int allowedDeaths = 10;
+        public const int winWaitTime = 120;
+        /* */
+
         /* Grid variables */
         public const int tileWidth = 30;
         public const int tileHeight = 30;
@@ -84,6 +89,8 @@ namespace Solum.Utility
         public const int indicatorBorderOffset = 30;
         public const int indicatorOffset = 5;
         public const float indicatorTransparency = 0.3f;
+        public const int KDCounterOffsetLeft = 190;
+        public const int KDCounterOffsetRight = 20;
         /* end of frame variables */
         
     }

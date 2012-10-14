@@ -202,7 +202,14 @@ namespace Solum.SharedTanks
                     respawnMeter--;
                     if (respawnMeter < 0)
                     {
-                        state = TankState.Spawning;
+                        if(this.Team == Teams.red && G.redDeaths < C.allowedDeaths)
+                            state = TankState.Spawning;
+                        if (this.Team == Teams.blue && G.blueDeaths < C.allowedDeaths)
+                            state = TankState.Spawning;
+                        if (this.Team == Teams.green && G.greenDeaths < C.allowedDeaths)
+                            state = TankState.Spawning;
+                        if (this.Team == Teams.yellow && G.yellowDeaths < C.allowedDeaths)
+                            state = TankState.Spawning;
                     }
                     break;
         }

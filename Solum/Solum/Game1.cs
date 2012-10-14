@@ -38,6 +38,8 @@ namespace Solum
         MenuManager pauseMenuManager;
         PlayerSelectionMenu playerSelectionMenu;
 
+        int winCounter = 0;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -258,6 +260,12 @@ namespace Solum
                             G.gameState = GameState.paused;
                         }
                     }
+                    if (someoneWins())
+                    {
+                        winCounter++;
+                    }
+                    if (winCounter >= C.winWaitTime)
+                        G.gameState = GameState.menu;
                     break;
             }
             
@@ -287,6 +295,7 @@ namespace Solum
                     GameServices.GetService<GridManager>().Draw(spriteBatch);
                     GameServices.GetService<BulletManager>().Draw(spriteBatch);
                     spriteBatch.Draw(TextureRefs.Frame, new Vector2(0, 0), Color.White);
+                    DrawFrame(spriteBatch);
                     //Drawing the pause menu on top
                     pauseMenuManager.Draw(spriteBatch);                 
                     break;
@@ -331,7 +340,8 @@ namespace Solum
                     if (G.redTwoShield == 1.0)
                         alpha = 1.0f;
                     spriteBatch.Draw(TextureRefs.ShieldIndicator, new Vector2(TextureRefs.ShieldIndicator.Width + TextureRefs.BombIndicator.Width, 0), new Rectangle(0, 0, TextureRefs.ShieldIndicator.Width, (int)height), Color.White * alpha);
-                    
+
+                    spriteBatch.DrawString(SpriteFontRefs.titleFont, "K" + G.redKills + "D" + G.redDeaths, new Vector2(GameServices.GetService<GraphicsDevice>().Viewport.Width / 2 - C.KDCounterOffsetLeft, 0), Color.Black);
                     continue;
                 }
 
@@ -354,7 +364,8 @@ namespace Solum
                         new Vector2(GameServices.GetService<GraphicsDevice>().Viewport.Width - TextureRefs.ShieldIndicator.Width
                             - TextureRefs.ShieldIndicator.Width - TextureRefs.BombIndicator.Width, 0),
                         new Rectangle(0, 0, TextureRefs.ShieldIndicator.Width, (int)height), Color.White * alpha);
-            
+
+                    spriteBatch.DrawString(SpriteFontRefs.titleFont, "K" + G.blueKills + "D" + G.blueDeaths, new Vector2(GameServices.GetService<GraphicsDevice>().Viewport.Width / 2 + C.KDCounterOffsetRight, 0), Color.Black);
                     continue;
                 }
 
@@ -376,7 +387,8 @@ namespace Solum
                     spriteBatch.Draw(TextureRefs.ShieldIndicator,
                         new Vector2(TextureRefs.ShieldIndicator.Width + TextureRefs.BombIndicator.Width, GameServices.GetService<GraphicsDevice>().Viewport.Height - TextureRefs.ShieldIndicator.Height),
                         new Rectangle(0, 0, TextureRefs.ShieldIndicator.Width, (int)height), Color.White * alpha);
-            
+
+                    spriteBatch.DrawString(SpriteFontRefs.titleFont, "K" + G.greenKills + "D" + G.greenDeaths, new Vector2(GameServices.GetService<GraphicsDevice>().Viewport.Width / 2 - C.KDCounterOffsetLeft, GameServices.GetService<GraphicsDevice>().Viewport.Height-C.frameHeight), Color.Black);
                     continue;
                 }
 
@@ -400,6 +412,8 @@ namespace Solum
                         new Vector2(GameServices.GetService<GraphicsDevice>().Viewport.Width - TextureRefs.ShieldIndicator.Width - TextureRefs.ShieldIndicator.Width - TextureRefs.BombIndicator.Width,
                             GameServices.GetService<GraphicsDevice>().Viewport.Height - TextureRefs.ShieldIndicator.Height - TextureRefs.ShieldIndicator.Height - TextureRefs.BombIndicator.Height),
                         new Rectangle(0, 0, TextureRefs.ShieldIndicator.Width, (int)height), Color.White * alpha);
+
+                    spriteBatch.DrawString(SpriteFontRefs.titleFont, "K" + G.yellowKills + "D" + G.yellowDeaths, new Vector2(GameServices.GetService<GraphicsDevice>().Viewport.Width / 2 + C.KDCounterOffsetRight, GameServices.GetService<GraphicsDevice>().Viewport.Height - C.frameHeight), Color.Black);
                     continue;
                 }
             }
@@ -421,6 +435,20 @@ namespace Solum
                         d.Update();
                     break;
             }
+        }
+
+        private bool someoneWins()
+        {
+            if(G.redDeaths >= C.allowedDeaths+1 && G.blueDeaths >= C.allowedDeaths+1 && G.greenDeaths >= C.allowedDeaths+1 ||
+                G.redDeaths >= C.allowedDeaths+1 && G.blueDeaths >= C.allowedDeaths+1 && G.yellowDeaths >= C.allowedDeaths + 1 ||
+                G.redDeaths >= C.allowedDeaths+1 && G.yellowDeaths >= C.allowedDeaths+1 && G.greenDeaths >= C.allowedDeaths + 1 ||
+                G.yellowDeaths >= C.allowedDeaths+1 && G.blueDeaths >= C.allowedDeaths+1 && G.greenDeaths >= C.allowedDeaths + 1 ||
+                G.redDeaths >= C.allowedDeaths+1 && G.blueDeaths >= C.allowedDeaths+1 && G.yellowDeaths >= C.allowedDeaths + 1 ||
+                G.redDeaths >= C.allowedDeaths+1 && G.yellowDeaths >= C.allowedDeaths+1 && G.greenDeaths >= C.allowedDeaths + 1 ||
+                G.yellowDeaths >= C.allowedDeaths+1 && G.blueDeaths >= C.allowedDeaths+1 && G.greenDeaths >= C.allowedDeaths + 1)
+                return true;
+            else
+                return false;
         }
     }
 }
