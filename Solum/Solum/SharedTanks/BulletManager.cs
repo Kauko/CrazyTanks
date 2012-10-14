@@ -32,7 +32,7 @@ namespace Solum.SharedTanks
                 }*/
 
                 //check checkTankCollisions with frame
-                if(checkFrameCollisions(b){
+                if(checkFrameCollisions(b)){
                     b.removable = true;
                     continue;
                 }
