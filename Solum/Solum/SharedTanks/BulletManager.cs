@@ -25,11 +25,18 @@ namespace Solum.SharedTanks
             {
                 b.Update();
                 //Check that bullet is on screen
-                if (!screen.Contains(new Point((int)b.pos.X, (int)b.pos.Y)))
+                /*if (!screen.Contains(new Point((int)b.pos.X, (int)b.pos.Y)))
                 {
                     b.removable = true;
                     continue;
+                }*/
+
+                //check checkTankCollisions with frame
+                if(checkFrameCollisions(b){
+                    b.removable = true;
+                    continue;
                 }
+
                 //check collisions with walls
                 if (GameServices.GetService<GridManager>().checkBulletCollision(b))
                 {
@@ -39,6 +46,36 @@ namespace Solum.SharedTanks
             }
 
             removeBullet();
+        }
+
+        public bool checkFrameCollisions(Bullet b)
+        {
+            Rectangle screenLeft = new Rectangle(0, 0, C.frameWidth, GameServices.GetService<GraphicsDevice>().Viewport.Height);
+            Rectangle screenRight = new Rectangle(GameServices.GetService<GraphicsDevice>().Viewport.Width - C.frameWidth, 0, C.frameWidth, GameServices.GetService<GraphicsDevice>().Viewport.Height);
+            Rectangle screenTop = new Rectangle(0, 0, GameServices.GetService<GraphicsDevice>().Viewport.Width, C.frameHeight);
+            Rectangle screenBottom = new Rectangle(0, GameServices.GetService<GraphicsDevice>().Viewport.Height - C.frameHeight, GameServices.GetService<GraphicsDevice>().Viewport.Width, C.frameHeight);
+            Rectangle self = new Rectangle((int)b.pos.X, (int)b.pos.Y, TextureRefs.bullet.Width, TextureRefs.bullet.Height);
+            if (self.Intersects(screenLeft))
+            {
+                return true;
+            }
+
+            if (self.Intersects(screenRight))
+            {
+                
+                return true;
+            }
+            if (self.Intersects(screenTop))
+            {
+                
+                return true;
+            }
+            if (self.Intersects(screenBottom))
+            {
+                
+                return true;
+            }
+            return false;
         }
 
         public void checkTankCollisions(Tank t)
