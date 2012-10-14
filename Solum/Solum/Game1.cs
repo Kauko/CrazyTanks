@@ -439,16 +439,22 @@ namespace Solum
 
         private bool someoneWins()
         {
-            if(G.redDeaths >= C.allowedDeaths+1 && G.blueDeaths >= C.allowedDeaths+1 && G.greenDeaths >= C.allowedDeaths+1 ||
-                G.redDeaths >= C.allowedDeaths+1 && G.blueDeaths >= C.allowedDeaths+1 && G.yellowDeaths >= C.allowedDeaths + 1 ||
-                G.redDeaths >= C.allowedDeaths+1 && G.yellowDeaths >= C.allowedDeaths+1 && G.greenDeaths >= C.allowedDeaths + 1 ||
-                G.yellowDeaths >= C.allowedDeaths+1 && G.blueDeaths >= C.allowedDeaths+1 && G.greenDeaths >= C.allowedDeaths + 1 ||
-                G.redDeaths >= C.allowedDeaths+1 && G.blueDeaths >= C.allowedDeaths+1 && G.yellowDeaths >= C.allowedDeaths + 1 ||
-                G.redDeaths >= C.allowedDeaths+1 && G.yellowDeaths >= C.allowedDeaths+1 && G.greenDeaths >= C.allowedDeaths + 1 ||
-                G.yellowDeaths >= C.allowedDeaths+1 && G.blueDeaths >= C.allowedDeaths+1 && G.greenDeaths >= C.allowedDeaths + 1)
-                return true;
-            else
+            int foo = 0;
+            if (G.redDeaths >= C.allowedDeaths + 1)
+                foo++;
+            if (G.blueDeaths >= C.allowedDeaths + 1)
+                foo++;
+            if (G.greenDeaths >= C.allowedDeaths + 1)
+                foo++;
+            if (G.yellowDeaths >= C.allowedDeaths + 1)
+                foo++;
+            if (G.activeGamepads.Count == 1)
                 return false;
+            if (foo >= G.activeGamepads.Count - 1)
+                return true;
+
+            return false;
+            
         }
     }
 }
