@@ -109,8 +109,8 @@ namespace Solum.SharedTanks
         {
             foreach (Tuple<Tank,Tank> t in tanks)
             {
-                t.Item1.Update();
-                t.Item2.Update();
+                t.Item1.Update(t.Item2.state, t.Item2.shieldstate);
+                t.Item2.Update(t.Item1.state, t.Item1.shieldstate);
 
                 if (t.Item1.state == TankState.Spawning)
                 {
