@@ -52,7 +52,8 @@ namespace Solum.SharedTanks
         public float lastRotation;
 
         public float shieldDurRemaining;
-        public float respawnMeter;
+        public float respawnCounter;
+        public float reloadCounter;
 
         public ShieldState shieldstate;
         public Weapon currentWeapon;
@@ -90,7 +91,8 @@ namespace Solum.SharedTanks
             shieldDurRemaining = 5;
             SetShieldState(ShieldState.On);
 
-            respawnMeter = C.respawnTime;
+            respawnCounter = C.respawnTime;
+            reloadCounter = C.reloadTime;
 
             rotation = 0.0f;
             turretRotation = 0.0f;
@@ -200,8 +202,8 @@ namespace Solum.SharedTanks
                     UpdateAlive();
                     break;
                 case TankState.Dead:
-                    respawnMeter--;
-                    if (respawnMeter < 0)
+                    respawnCounter--;
+                    if (respawnCounter < 0)
                     {
                         if(this.Team == Teams.red && G.redDeaths < C.allowedDeaths)
                             state = TankState.Spawning;
@@ -226,6 +228,11 @@ namespace Solum.SharedTanks
                 {
                     SetShieldState(ShieldState.Off);
                 }
+            }
+
+            if (reloadCounter > 0f)
+            {
+                reloadCounter--;
             }
 
             if (pad.WasButtonPressed(controls.reverse))
@@ -269,7 +276,10 @@ namespace Solum.SharedTanks
                 {
                     case Weapon.Cannon:
                         GameServices.GetService<Logger>().logMsg("aseeni on kanuuna");
-                        Shoot();
+                        if (reloadCounter <= 0f)
+                        {
+                            Shoot();
+                        }
                         break;
                     case Weapon.Shield:
                         if (ShieldMeter == 1.0f)
@@ -295,7 +305,8 @@ namespace Solum.SharedTanks
 
             GameServices.GetService<Logger>().logMsg("ja anukseni valmiina");
 
-            GameServices.GetService<BulletManager>().addBullet(new Bullet(this, Vector2.Transform(up, rotMatrix), pos - center));
+            GameServices.GetService<BulletManager>().addBullet(new Bullet(this, Vector2.Transform(up, rotMatrix), pos - new Vector2(TextureRefs.bullet.Width / 2, TextureRefs.bullet.Height / 2)));
+            reloadCounter = C.reloadTime;
         }
 
         public void NextWeapon()
@@ -386,7 +397,7 @@ namespace Solum.SharedTanks
         {
             GameServices.GetService<Logger>().logMsg("DIE");
             this.state = TankState.Dead;
-            this.respawnMeter = C.respawnTime;
+            this.respawnCounter = C.respawnTime;
             this.health = 0.0f;
         }
 

@@ -58,6 +58,7 @@ namespace Solum.Utility
         public const float respawnTime = 5f * 60f;
         public const float shieldMeterIncreaseOnDamage = 0.3f;
         public const float shieldMeterIncreaseOnUpdate = 0.001f;
+        public const float reloadTime = 1f * 60f;
         /* End of tank variables */
 
         /* misc */
