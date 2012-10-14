@@ -26,10 +26,10 @@ namespace Solum.SharedTanks
                 {
                     tanks.Add(new Tuple<Tank,Tank>(
                         new Tank(Teams.red, 
-                            new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY), d, ControlSide.Left), 
+                            new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY), MathHelper.PiOver2 + MathHelper.PiOver4, d, ControlSide.Left), 
                         new Tank(Teams.red, 
                             new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY)
-                            +new Vector2(C.tankPartnerOffsetX, C.tankPartnerOffsetY), d, ControlSide.Right)));
+                            +new Vector2(C.tankPartnerOffsetX, C.tankPartnerOffsetY), MathHelper.PiOver2 + MathHelper.PiOver4, d, ControlSide.Right)));
                 }
                 else if (d.PlayerIndex == PlayerIndex.Two)
                 {
@@ -37,13 +37,13 @@ namespace Solum.SharedTanks
                         new Tank(Teams.blue,
                             new Vector2(screenWidth, 0) 
                             - new Vector2(C.tankSpawnOffsetX, 0)
-                            + new Vector2(0,C.tankSpawnOffsetY), d, ControlSide.Left), 
+                            + new Vector2(0,C.tankSpawnOffsetY), MathHelper.Pi + MathHelper.PiOver4, d, ControlSide.Left), 
                         new Tank(Teams.blue, 
                             new Vector2(screenWidth, 0) 
                             - new Vector2(C.tankSpawnOffsetX, 0)
                             + new Vector2(0,C.tankSpawnOffsetY)
                             - new Vector2(C.tankPartnerOffsetX, 0)
-                            + new Vector2(0, C.tankPartnerOffsetY), d, ControlSide.Right)));
+                            + new Vector2(0, C.tankPartnerOffsetY), MathHelper.Pi + MathHelper.PiOver4, d, ControlSide.Right)));
                 }
                 else if (d.PlayerIndex == PlayerIndex.Three)
                 {
@@ -51,24 +51,24 @@ namespace Solum.SharedTanks
                         new Tank(Teams.green, 
                             new Vector2(0, screenHeight) 
                             - new Vector2(0, C.tankSpawnOffsetY)
-                            + new Vector2(C.tankSpawnOffsetX,0), d, ControlSide.Left), 
+                            + new Vector2(C.tankSpawnOffsetX,0), MathHelper.PiOver4, d, ControlSide.Left), 
                         new Tank(Teams.green,
                             new Vector2(0, screenHeight)
                             - new Vector2(0, C.tankSpawnOffsetY)
                             + new Vector2(C.tankSpawnOffsetX, 0) 
                             + new Vector2(C.tankPartnerOffsetX, 0)
-                            - new Vector2(0, C.tankPartnerOffsetY), d, ControlSide.Right)));
+                            - new Vector2(0, C.tankPartnerOffsetY), MathHelper.PiOver4, d, ControlSide.Right)));
                 }
                 else if (d.PlayerIndex == PlayerIndex.Four)
                 {
                     tanks.Add(new Tuple<Tank, Tank>(
                         new Tank(Teams.yellow,
                             new Vector2(screenWidth, screenHeight)
-                            -new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY), d, ControlSide.Left), 
+                            -new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY), MathHelper.TwoPi - MathHelper.PiOver4, d, ControlSide.Left), 
                         new Tank(Teams.yellow,
                             new Vector2(screenWidth, screenHeight)
                             - new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY)
-                            - new Vector2(C.tankPartnerOffsetX, C.tankPartnerOffsetY), d, ControlSide.Right)));
+                            - new Vector2(C.tankPartnerOffsetX, C.tankPartnerOffsetY), MathHelper.TwoPi - MathHelper.PiOver4, d, ControlSide.Right)));
                 }
             }
         }
@@ -78,29 +78,29 @@ namespace Solum.SharedTanks
             int screenHeight = GameServices.GetService<GraphicsDevice>().Viewport.Height;
 
             switch(tank.Team){
+                case Teams.red:
+                    if (tank.controls.controlside == ControlSide.Left)
+                        tank.Initialize(new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY), MathHelper.Pi + MathHelper.PiOver4);
+                    else
+                        tank.Initialize(new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY) + new Vector2(C.tankPartnerOffsetX, C.tankPartnerOffsetY), MathHelper.Pi + MathHelper.PiOver4);
+                    break;
                 case Teams.blue:
                     if (tank.controls.controlside == ControlSide.Left)
-                        tank.Initialize(new Vector2(screenWidth, 0) - new Vector2(C.tankSpawnOffsetX, 0) + new Vector2(0, C.tankSpawnOffsetY));
+                        tank.Initialize(new Vector2(screenWidth, 0) - new Vector2(C.tankSpawnOffsetX, 0) + new Vector2(0, C.tankSpawnOffsetY), MathHelper.Pi + MathHelper.PiOver4);
                     else
-                        tank.Initialize(new Vector2(screenWidth, 0) - new Vector2(C.tankSpawnOffsetX, 0) + new Vector2(0, C.tankSpawnOffsetY) - new Vector2(C.tankPartnerOffsetX, 0) + new Vector2(0, C.tankPartnerOffsetY));
+                        tank.Initialize(new Vector2(screenWidth, 0) - new Vector2(C.tankSpawnOffsetX, 0) + new Vector2(0, C.tankSpawnOffsetY) - new Vector2(C.tankPartnerOffsetX, 0) + new Vector2(0, C.tankPartnerOffsetY), MathHelper.Pi + MathHelper.PiOver4);
                     break;
                 case Teams.green:
                     if (tank.controls.controlside == ControlSide.Left)
-                        tank.Initialize(new Vector2(0, screenHeight) - new Vector2(0, C.tankSpawnOffsetY) + new Vector2(C.tankSpawnOffsetX, 0));
+                        tank.Initialize(new Vector2(0, screenHeight) - new Vector2(0, C.tankSpawnOffsetY) + new Vector2(C.tankSpawnOffsetX, 0), MathHelper.PiOver4);
                     else
-                        tank.Initialize(new Vector2(0, screenHeight) - new Vector2(C.tankSpawnOffsetX, 0) + new Vector2(0, C.tankSpawnOffsetY) - new Vector2(C.tankPartnerOffsetX, 0) + new Vector2(0, C.tankPartnerOffsetY));
-                    break;
-                case Teams.red:
-                    if (tank.controls.controlside == ControlSide.Left)
-                        tank.Initialize(new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY));
-                    else
-                        tank.Initialize(new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY) + new Vector2(C.tankPartnerOffsetX, C.tankPartnerOffsetY));
+                        tank.Initialize(new Vector2(0, screenHeight) - new Vector2(C.tankSpawnOffsetX, 0) + new Vector2(0, C.tankSpawnOffsetY) - new Vector2(C.tankPartnerOffsetX, 0) + new Vector2(0, C.tankPartnerOffsetY), MathHelper.PiOver4);
                     break;
                 case Teams.yellow:
                     if (tank.controls.controlside == ControlSide.Left)
-                        tank.Initialize(new Vector2(screenWidth, screenHeight) - new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY));
+                        tank.Initialize(new Vector2(screenWidth, screenHeight) - new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY), MathHelper.TwoPi - MathHelper.PiOver4);
                     else
-                        tank.Initialize(new Vector2(screenWidth, screenHeight) - new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY) - new Vector2(C.tankPartnerOffsetX, C.tankPartnerOffsetY));
+                        tank.Initialize(new Vector2(screenWidth, screenHeight) - new Vector2(C.tankSpawnOffsetX, C.tankSpawnOffsetY) - new Vector2(C.tankPartnerOffsetX, C.tankPartnerOffsetY), MathHelper.TwoPi - MathHelper.PiOver4);
                     break;
             }
         }

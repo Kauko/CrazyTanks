@@ -308,11 +308,11 @@ namespace Solum
                     break;
                 case GameState.playing:
                     spriteBatch.Begin();
-                    GameServices.GetService<TankManager>().Draw(spriteBatch);
                     GameServices.GetService<GridManager>().Draw(spriteBatch);
-                    GameServices.GetService<BulletManager>().Draw(spriteBatch);
                     spriteBatch.Draw(TextureRefs.Frame, new Vector2(0, 0), Color.White);
                     DrawFrame(spriteBatch);
+                    GameServices.GetService<TankManager>().Draw(spriteBatch);
+                    GameServices.GetService<BulletManager>().Draw(spriteBatch);
                     break;
             }
             

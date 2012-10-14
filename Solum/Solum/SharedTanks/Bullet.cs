@@ -45,6 +45,12 @@ namespace Solum.SharedTanks
             pos.Y = pos.Y + dir.Y * C.bulletSpeed;
         }
 
+        public void MoveToStartPoint(float distance)
+        {
+            pos.X = pos.X + dir.X * distance;
+            pos.Y = pos.Y + dir.Y * distance;
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(TextureRefs.bullet, pos, Color.White);

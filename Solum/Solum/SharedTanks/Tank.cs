@@ -35,6 +35,12 @@ namespace Solum.SharedTanks
         Dead
     }
 
+    public enum TurretState
+    {
+        Shooting,
+        Ready
+    }
+
     class Tank : MovingObject
     {
         public Vector2 pos;
@@ -49,6 +55,7 @@ namespace Solum.SharedTanks
         public float ShieldMeter = 0.0f;
         public float health = 1.0f;
         public float speed;
+        public float rotationSpeed;
         public float lastRotation;
 
         public float shieldDurRemaining;
@@ -59,6 +66,7 @@ namespace Solum.SharedTanks
         public Weapon currentWeapon;
         public List<Weapon> weapons;
         public TankState state;
+        public TurretState turretState;
 
         public bool throttling;
         public bool usedShield;
@@ -67,7 +75,7 @@ namespace Solum.SharedTanks
 
 
 
-        public Tank(Teams team, Vector2 position, GamepadDevice gpad, ControlSide side)
+        public Tank(Teams team, Vector2 position, float rotation, GamepadDevice gpad, ControlSide side)
         {
             /* No need to reset these -> not to initialize() */
             controls = new TankControls(side);
@@ -77,16 +85,17 @@ namespace Solum.SharedTanks
             pad = gpad;
             /* see descr */
 
-            Initialize(position);
+            Initialize(position, rotation);
         }
 
-        public void Initialize(Vector2 position)
+        public void Initialize(Vector2 position, float rot)
         {
             pos = position;
             dir = Vector2.Zero;
 
             currentWeapon = Weapon.Shield;
             state = TankState.Alive;
+            turretState = TurretState.Ready;
 
             shieldDurRemaining = 5;
             SetShieldState(ShieldState.On);
@@ -94,8 +103,8 @@ namespace Solum.SharedTanks
             respawnCounter = C.respawnTime;
             reloadCounter = C.reloadTime;
 
-            rotation = 0.0f;
-            turretRotation = 0.0f;
+            rotation = rot;
+            turretRotation = rot;
             speed = C.tankThrottleSpeed;
             health = 1.0f;
 
@@ -133,12 +142,17 @@ namespace Solum.SharedTanks
                     if (throttling)
                     {
                         rotation += cw * C.tankRotationSpeed;
-                        turretRotation += cw * C.tankRotationSpeed;
+                        if(turretState == TurretState.Ready){
+                            turretRotation += cw * C.tankRotationSpeed;
+                        }
                     }
                     else
                     {
-                        rotation -= cw * C.tankRotationSpeed;
-                        turretRotation -= cw * C.tankRotationSpeed;
+                        rotation -= cw * C.tankReverseRotationSpeed;
+                        if (turretState == TurretState.Ready)
+                        {
+                            turretRotation -= cw * C.tankReverseRotationSpeed;
+                        }
                     }
                 }
                 if( d > MathHelper.Pi)
@@ -146,12 +160,18 @@ namespace Solum.SharedTanks
                     if (throttling)
                     {
                         rotation -= cw * C.tankRotationSpeed;
-                        turretRotation -= cw * C.tankRotationSpeed;
+                        if (turretState == TurretState.Ready)
+                        {
+                            turretRotation -= cw * C.tankRotationSpeed;
+                        }
                     }
                     else
                     {
-                        rotation += cw * C.tankRotationSpeed;
-                        turretRotation += cw * C.tankRotationSpeed;
+                        rotation += cw * C.tankReverseRotationSpeed;
+                        if (turretState == TurretState.Ready)
+                        {
+                            turretRotation += cw * C.tankReverseRotationSpeed;
+                        }
                     }
                 }
 
@@ -232,6 +252,10 @@ namespace Solum.SharedTanks
 
             if (reloadCounter > 0f)
             {
+                if (reloadCounter <= C.reloadTime - 1f)
+                {
+                    turretState = TurretState.Ready;
+                }
                 reloadCounter--;
             }
 
@@ -260,11 +284,11 @@ namespace Solum.SharedTanks
                 Move(pad.RightStickPosition, pad.RightStickDelta);
             }
 
-            if (pad.IsButtonDown(controls.turretRotateCW))
+            if (pad.IsButtonDown(controls.turretRotateCW) && (turretState == TurretState.Ready))
             {
                 RotateTurret(-C.turretRotationSpeed);
             }
-            else if (pad.IsButtonDown(controls.turretRotateCCW))
+            else if (pad.IsButtonDown(controls.turretRotateCCW) && (turretState == TurretState.Ready))
             {
                 RotateTurret(C.turretRotationSpeed);
             }
@@ -279,6 +303,7 @@ namespace Solum.SharedTanks
                         if (reloadCounter <= 0f)
                         {
                             Shoot();
+                            turretState = TurretState.Shooting;
                         }
                         break;
                     case Weapon.Shield:
@@ -305,7 +330,10 @@ namespace Solum.SharedTanks
 
             GameServices.GetService<Logger>().logMsg("ja anukseni valmiina");
 
-            GameServices.GetService<BulletManager>().addBullet(new Bullet(this, Vector2.Transform(up, rotMatrix), pos - new Vector2(TextureRefs.bullet.Width / 2, TextureRefs.bullet.Height / 2)));
+            Bullet bullet = new Bullet(this, Vector2.Transform(up, rotMatrix), pos - new Vector2(TextureRefs.bullet.Width / 2, TextureRefs.bullet.Height / 2));
+            bullet.MoveToStartPoint(TextureRefs.turret.Height / 2  - 10);
+
+            GameServices.GetService<BulletManager>().addBullet(bullet);
             reloadCounter = C.reloadTime;
         }
 

@@ -47,8 +47,9 @@ namespace Solum.Utility
         public const float tankThrottleSpeed = 3f;
         public const float tankReverseSpeed = 1f;
         public const float tankRotationSpeed = 0.05f;
+        public const float tankReverseRotationSpeed = 0.02f;
         public const float turretRotationSpeed = 0.05f;
-        public const float bulletSpeed = 3f;
+        public const float bulletSpeed = 6f;
         public const int tankSpawnOffsetX = playAreaX + 100; //How far away from the edge of the screen
         public const int tankSpawnOffsetY = playAreaY + 100;
         public const int tankPartnerOffsetX = 100; //How far away from your teammate
