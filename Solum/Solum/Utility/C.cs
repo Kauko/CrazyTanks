@@ -49,7 +49,7 @@ namespace Solum.Utility
         public const float tankRotationSpeed = 0.05f;
         public const float tankReverseRotationSpeed = 0.02f;
         public const float turretRotationSpeed = 0.05f;
-        public const float bulletSpeed = 6f;
+        public const float bulletSpeed = 12f;
         public const int tankSpawnOffsetX = playAreaX + 100; //How far away from the edge of the screen
         public const int tankSpawnOffsetY = playAreaY + 100;
         public const int tankPartnerOffsetX = 100; //How far away from your teammate
@@ -60,6 +60,7 @@ namespace Solum.Utility
         public const float shieldMeterIncreaseOnDamage = 0.3f;
         public const float shieldMeterIncreaseOnUpdate = 0.001f;
         public const float reloadTime = 1f * 60f;
+        public const int bulletsInShot = 3;
         /* End of tank variables */
 
         /* misc */
@@ -71,7 +72,7 @@ namespace Solum.Utility
         /* Grid variables */
         public const int tileWidth = 30;
         public const int tileHeight = 30;
-        public static int maxPickups = 3;
+        public static int maxPickups = 0;
         public static int pickupInterval = 900; //60 = approx 1s. 900 ~= 15s;
         public static int pickupSpawnChance = 3; //if(random.next(that) == 1) spawnpickup(). 3 here is 33% chance of spawning, since next() returns either 0,1 or 2.
         /* end of grid variables */

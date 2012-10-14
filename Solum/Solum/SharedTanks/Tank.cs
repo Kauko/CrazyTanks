@@ -55,7 +55,6 @@ namespace Solum.SharedTanks
         public float ShieldMeter = 0.0f;
         public float health = 1.0f;
         public float speed;
-        public float rotationSpeed;
         public float lastRotation;
 
         public float shieldDurRemaining;
@@ -66,6 +65,8 @@ namespace Solum.SharedTanks
         public Weapon currentWeapon;
         public List<Weapon> weapons;
         public TankState state;
+        public TankState partnerState;
+        public ShieldState partnerShieldState;
         public TurretState turretState;
 
         public bool throttling;
@@ -86,6 +87,8 @@ namespace Solum.SharedTanks
             pad = gpad;
             shieldSound = SoundRefs.shieldOn.CreateInstance();
             shieldSound.IsLooped = true;
+            partnerState = TankState.Alive;
+            partnerShieldState = ShieldState.On;
             /* see descr */
 
             Initialize(position, rotation);
@@ -217,8 +220,11 @@ namespace Solum.SharedTanks
         }
 
 
-        public override void Update()
+        public void Update(TankState pstate, ShieldState pshieldstate)
         {
+            partnerState = pstate;
+            partnerShieldState = pshieldstate;
+
             switch(state){
                 case TankState.Spawning:
                     break;
@@ -312,10 +318,11 @@ namespace Solum.SharedTanks
                         }
                         break;
                     case Weapon.Shield:
-                        if (ShieldMeter == 1.0f)
+                        if (ShieldMeter == 1.0f && partnerState == TankState.Alive && partnerShieldState == ShieldState.Off)
                         {
                             usedShield = true;
                             ShieldMeter = 0.0f;
+                            currentWeapon = Weapon.Cannon;
                         }
                         break;
                     //case Weapon.SmartBomb:
@@ -332,14 +339,16 @@ namespace Solum.SharedTanks
         public void Shoot()
         {
             Vector2 up = new Vector2(0, -1);
-            Matrix rotMatrix = Matrix.CreateRotationZ(turretRotation);
 
             GameServices.GetService<Logger>().logMsg("ja anukseni valmiina");
 
-            Bullet bullet = new Bullet(this, Vector2.Transform(up, rotMatrix), pos - new Vector2(TextureRefs.bullet.Width / 2, TextureRefs.bullet.Height / 2));
-            bullet.MoveToStartPoint(TextureRefs.turret.Height / 2  - 10);
-
-            GameServices.GetService<BulletManager>().addBullet(bullet);
+            for (int i = -1; i < C.bulletsInShot - 1; i++)
+            {
+                Matrix rotMatrix = Matrix.CreateRotationZ(turretRotation - i * MathHelper.PiOver4 / 10 );
+                Bullet bullet = new Bullet(this, Vector2.Transform(up, rotMatrix), pos - new Vector2(TextureRefs.bullet.Width / 2, TextureRefs.bullet.Height / 2));
+                bullet.MoveToStartPoint(TextureRefs.turret.Height / 2 - 10);
+                GameServices.GetService<BulletManager>().addBullet(bullet);
+            }
             Random rand = new Random();
             if (rand.Next(10) != 1)
                 SoundRefs.cannon.Play();
