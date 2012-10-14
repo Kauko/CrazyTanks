@@ -50,45 +50,45 @@ namespace Solum.SharedTanks
                     if (b.shooter != t)
                     {
                         if(t.state == TankState.Alive){
-                        if (t.takeDamage(b))
-                        {
-                            #region kill and death counter increases
-                            //increase kill counter for team
-                            if (b.shooter.Team == Teams.red)
+                            if (t.takeDamage(b))
                             {
-                                G.redKills++;
+                                #region kill and death counter increases
+                                //increase kill counter for team
+                                if (b.shooter.Team == Teams.red)
+                                {
+                                    G.redKills++;
+                                }
+                                else if (b.shooter.Team == Teams.blue)
+                                {
+                                    G.blueKills++;
+                                }
+                                else if (b.shooter.Team == Teams.green)
+                                {
+                                    G.greenKills++;
+                                }
+                                else if (b.shooter.Team == Teams.yellow)
+                                {
+                                    G.yellowKills++;
+                                }
+                                //increase deaths counter for team
+                                if (t.Team == Teams.red)
+                                {
+                                    G.redDeaths++;
+                                }
+                                else if (t.Team == Teams.blue)
+                                {
+                                    G.blueDeaths++;
+                                }
+                                else if (t.Team == Teams.green)
+                                {
+                                    G.greenDeaths++;
+                                }
+                                else if (t.Team == Teams.yellow)
+                                {
+                                    G.yellowDeaths++;
+                                }
+                                #endregion
                             }
-                            else if (b.shooter.Team == Teams.blue)
-                            {
-                                G.blueKills++;
-                            }
-                            else if (b.shooter.Team == Teams.green)
-                            {
-                                G.greenKills++;
-                            }
-                            else if (b.shooter.Team == Teams.yellow)
-                            {
-                                G.yellowKills++;
-                            }
-                            //increase deaths counter for team
-                            if (t.Team == Teams.red)
-                            {
-                                G.redDeaths++;
-                            }
-                            else if (t.Team == Teams.blue)
-                            {
-                                G.blueDeaths++;
-                            }
-                            else if (t.Team == Teams.green)
-                            {
-                                G.greenDeaths++;
-                            }
-                            else if (t.Team == Teams.yellow)
-                            {
-                                G.yellowDeaths++;
-                            }
-                            #endregion
-                        }
                         }
                             if(t.Team != b.shooter.Team)
                                 b.shooter.increaseShieldMeter(C.shieldMeterIncreaseOnDamage);
@@ -96,7 +96,7 @@ namespace Solum.SharedTanks
                         b.removable = true;
                     }
                 }
-            }
+            
 
             removeBullet();
         }
