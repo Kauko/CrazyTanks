@@ -46,6 +46,7 @@ namespace Solum.SharedTanks
         public Vector2 pos;
         protected Vector2 center;
         protected Vector2 dir;
+        public Vector2 lastStickOffset;
 
         protected float rotation;
         protected float turretRotation;
@@ -118,9 +119,20 @@ namespace Solum.SharedTanks
             usedShield = false;
         }
 
-        public void Move(Vector2 stickOffset, Vector2 delta)
+        public void Move(Vector2 stickOffset)
         {
+            lastStickOffset = stickOffset;
+
             float stickrotation = (float)Math.Atan2(stickOffset.X, stickOffset.Y);
+
+            if (controls.controlside == ControlSide.Left)
+            {
+                stickrotation = stickrotation - MathHelper.PiOver2;
+            }
+            else
+            {
+                stickrotation = stickrotation + MathHelper.PiOver2;
+            }
 
             stickrotation = MathHelper.WrapAngle(stickrotation);
 
@@ -288,11 +300,11 @@ namespace Solum.SharedTanks
 
             if (controls.controlside == ControlSide.Left)
             {
-                Move(pad.LeftStickPosition, pad.LeftStickDelta);
+                Move(pad.LeftStickPosition);
             }
             if (controls.controlside == ControlSide.Right)
             {
-                Move(pad.RightStickPosition, pad.RightStickDelta);
+                Move(pad.RightStickPosition);
             }
 
             if (pad.IsButtonDown(controls.turretRotateCW) && (turretState == TurretState.Ready))
@@ -416,9 +428,12 @@ namespace Solum.SharedTanks
         internal void Collide()
         {
             GameServices.GetService<Logger>().logMsg("collide()");
-            pos -= dir * speed;
-            rotation = lastRotation;
-            turretRotation = lastRotation;
+            if (lastStickOffset != Vector2.Zero)
+            {
+                pos -= dir * speed;
+                rotation = lastRotation;
+                turretRotation = lastRotation;
+            }
             //throw new NotImplementedException();
         }
 
