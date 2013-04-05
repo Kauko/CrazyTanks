@@ -104,25 +104,34 @@ namespace Solum
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             #region Content paths
-            TextureRefs.bullet = this.Content.Load<Texture2D>("Placeholder/Images/Bullet");
-            TextureRefs.tank = this.Content.Load<Texture2D>("Placeholder/Images/Tank2");
-            TextureRefs.turret = this.Content.Load<Texture2D>("Placeholder/Images/Turret2");
-            TextureRefs.shield = this.Content.Load<Texture2D>("Placeholder/Images/Shield2");
+            TextureRefs.bullet = this.Content.Load<Texture2D>("Images/Kuti");
+            TextureRefs.tank_blue = this.Content.Load<Texture2D>("Images/TankkiSininen2");
+            TextureRefs.tank_red = this.Content.Load<Texture2D>("Images/TankkiPunainen2");
+            TextureRefs.tank_green = this.Content.Load<Texture2D>("Images/TankkiVihreä2");
+            TextureRefs.tank_yellow = this.Content.Load<Texture2D>("Images/TankkiKeltainen2");
+            TextureRefs.turret_blue = this.Content.Load<Texture2D>("Images/TurrettiSininen2");
+            TextureRefs.turret_red = this.Content.Load<Texture2D>("Images/TurrettiPunainen1");
+            TextureRefs.turret_green = this.Content.Load<Texture2D>("Images/TurrettiVihreä2");
+            TextureRefs.turret_yellow = this.Content.Load<Texture2D>("Images/TurrettiKeltainen2");
+            TextureRefs.shield = this.Content.Load<Texture2D>("Images/Shield");
             TextureRefs.koala = this.Content.Load<Texture2D>("Placeholder/Images/Koala");
-            TextureRefs.menuBgImage = this.Content.Load<Texture2D>("Placeholder/Images/MainMenuBG");
-            TextureRefs.menuButton = this.Content.Load<Texture2D>("Placeholder/Images/Button");
-            TextureRefs.activeMenuButton = this.Content.Load<Texture2D>("Placeholder/Images/ActiveButton");
+            TextureRefs.menuBgImage = this.Content.Load<Texture2D>("Images/MenuTausta");
+            TextureRefs.menuButton = this.Content.Load<Texture2D>("Images/MenuNappi");
+            TextureRefs.activeMenuButton = this.Content.Load<Texture2D>("Images/MenuNappiAktiivinen");
             TextureRefs.ready = this.Content.Load<Texture2D>("Placeholder/Images/Ready");
             TextureRefs.pressStart = this.Content.Load<Texture2D>("Placeholder/Images/PressStart");
             TextureRefs.waitingReady = this.Content.Load<Texture2D>("Placeholder/Images/WaitingReady");
             TextureRefs.SmartBombPickup = this.Content.Load<Texture2D>("Placeholder/Images/SmartBomb");
-            TextureRefs.Wall = this.Content.Load<Texture2D>("Placeholder/Images/Wall");
+            TextureRefs.Wall = this.Content.Load<Texture2D>("Images/Brick");
             TextureRefs.RotatedRectangle = this.Content.Load<Texture2D>("Placeholder/Images/RotatedRectangle");
             TextureRefs.BombIndicator = this.Content.Load<Texture2D>("Placeholder/Images/BombIndicator");
-            TextureRefs.ShieldIndicator = this.Content.Load<Texture2D>("Placeholder/Images/ShieldIndicator");
-            TextureRefs.Frame= this.Content.Load<Texture2D>("Placeholder/Images/Frame");
+            TextureRefs.ShieldIndicator = this.Content.Load<Texture2D>("Images/PelitilaShield");
+            TextureRefs.Frame= this.Content.Load<Texture2D>("Images/Pelitila");
             TextureRefs.TankDead = this.Content.Load<Texture2D>("Placeholder/Images/TankDead");
-            TextureRefs.TurretShield = this.Content.Load<Texture2D>("Placeholder/Images/Turret2Shield");
+            TextureRefs.TurretShield_blue = this.Content.Load<Texture2D>("Images/TurrettiSininen1Kilpi");
+            TextureRefs.TurretShield_red = this.Content.Load<Texture2D>("Images/TurrettiPunainen1Kilpi");
+            TextureRefs.TurretShield_green = this.Content.Load<Texture2D>("Images/TurrettiVihreä1Kilpi");
+            TextureRefs.TurretShield_yellow = this.Content.Load<Texture2D>("Images/TurrettiKeltainen1Kilpi");
 
             SpriteFontRefs.textFont = Content.Load<SpriteFont>("Placeholder/Fonts/textFont");
             SpriteFontRefs.titleFont = Content.Load<SpriteFont>("Placeholder/Fonts/titleFont");
@@ -232,6 +241,7 @@ namespace Solum
                     break;
                 case GameState.playerSelection:
                     playerSelectionMenu.Update();
+                    initGame();
                     break;
                 case GameState.paused:
                     if(pauseMenuManager.ActiveMenu == null)
@@ -278,6 +288,7 @@ namespace Solum
                     if (someoneWins())
                     {
                         winCounter++;
+                        G.activeGamepads = new List<GamepadDevice>();
                     }
                     if (winCounter >= C.winWaitTime)
                         G.gameState = GameState.menu;
@@ -285,6 +296,18 @@ namespace Solum
             }
             
             base.Update(gameTime);
+        }
+
+        public void initGame()
+        {
+            GameServices.GetService<TankManager>().tanks = new List<Tuple<Tank,Tank>>();
+            G.redDeaths =0;
+            G.redKills=0; G.blueDeaths=0;
+            G.blueKills=0; G.greenDeaths=0;
+            G.greenKills = 0;
+            G.yellowDeaths = 0;
+            G.yellowKills = 0;
+            winCounter = 0;
         }
 
         /// <summary>

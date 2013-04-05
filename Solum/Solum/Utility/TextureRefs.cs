@@ -17,8 +17,14 @@ namespace Solum.Utility
     {
         public static Texture2D bullet;
         public static Texture2D shield;
-        public static Texture2D tank;
-        public static Texture2D turret;
+        public static Texture2D tank_red;
+        public static Texture2D tank_blue;
+        public static Texture2D tank_green;
+        public static Texture2D tank_yellow;
+        public static Texture2D turret_red;
+        public static Texture2D turret_blue;
+        public static Texture2D turret_green;
+        public static Texture2D turret_yellow;
         public static Texture2D koala;
         public static Texture2D menuBgImage;
         public static Texture2D menuButton;
@@ -33,6 +39,9 @@ namespace Solum.Utility
         public static Texture2D ShieldIndicator;
         public static Texture2D BombIndicator;
         public static Texture2D TankDead;
-        public static Texture2D TurretShield;
+        public static Texture2D TurretShield_blue;
+        public static Texture2D TurretShield_red;
+        public static Texture2D TurretShield_green;
+        public static Texture2D TurretShield_yellow;
     }
 }

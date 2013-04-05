@@ -82,7 +82,7 @@ namespace Solum.Utility
         public const int playAreaY = 70;
         public const int playAreaHeight = 1140;
         public const int playAreaWidth = 680;
-        public static int healthbarHorizontalOffset = TextureRefs.tank.Height + 40;
+        public static int healthbarHorizontalOffset = TextureRefs.tank_blue.Height + 40;
         public static int healthbarWidth = 60;
         public static int healthbarHeight = 10;
         /* end of play area variables*/

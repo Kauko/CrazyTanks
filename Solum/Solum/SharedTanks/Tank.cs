@@ -83,7 +83,7 @@ namespace Solum.SharedTanks
             /* No need to reset these -> not to initialize() */
             controls = new TankControls(side);
             weapons = Enum.GetValues(typeof(Weapon)).Cast<Weapon>().ToList<Weapon>();
-            center = new Vector2(TextureRefs.tank.Width / 2, TextureRefs.tank.Height / 2);
+            center = new Vector2(TextureRefs.tank_blue.Width / 2, TextureRefs.tank_blue.Height / 2);
             this.Team = team;
             pad = gpad;
             shieldSound = SoundRefs.shieldOn.CreateInstance();
@@ -358,7 +358,7 @@ namespace Solum.SharedTanks
             {
                 Matrix rotMatrix = Matrix.CreateRotationZ(turretRotation - i * MathHelper.PiOver4 / 10 );
                 Bullet bullet = new Bullet(this, Vector2.Transform(up, rotMatrix), pos - new Vector2(TextureRefs.bullet.Width / 2, TextureRefs.bullet.Height / 2));
-                bullet.MoveToStartPoint(TextureRefs.turret.Height / 2 - 10);
+                bullet.MoveToStartPoint(TextureRefs.turret_blue.Height / 2 - 10);
                 GameServices.GetService<BulletManager>().addBullet(bullet);
             }
             Random rand = new Random();
@@ -396,11 +396,39 @@ namespace Solum.SharedTanks
 
             if (state == TankState.Alive)
             {
-                spriteBatch.Draw(TextureRefs.tank, pos, null, Color.White, drawrotation, center, 1.0f, SpriteEffects.None, 0f);
+                Texture2D tanktexture = TextureRefs.tank_blue;
+                Texture2D turrettexture = TextureRefs.turret_blue;
+                Texture2D shieldturrettexture = TextureRefs.TurretShield_blue;
+
+                switch (Team)
+                {
+                    case Teams.blue:
+                        tanktexture = TextureRefs.tank_blue;
+                        turrettexture = TextureRefs.turret_blue;
+                        shieldturrettexture = TextureRefs.TurretShield_blue;
+                        break;
+                    case Teams.red:
+                        tanktexture = TextureRefs.tank_red;
+                        turrettexture = TextureRefs.turret_red;
+                        shieldturrettexture = TextureRefs.TurretShield_red;
+                        break;
+                    case Teams.green:
+                        tanktexture = TextureRefs.tank_green;
+                        turrettexture = TextureRefs.turret_green;
+                        shieldturrettexture = TextureRefs.TurretShield_green;
+                        break;
+                    case Teams.yellow:
+                        tanktexture = TextureRefs.tank_yellow;
+                        turrettexture = TextureRefs.turret_yellow;
+                        shieldturrettexture = TextureRefs.TurretShield_yellow;
+                        break;
+                }
+
+                spriteBatch.Draw(tanktexture, pos, null, Color.White, drawrotation, center, 1.0f, SpriteEffects.None, 0f);
                 if(currentWeapon == Weapon.Cannon)
-                    spriteBatch.Draw(TextureRefs.turret, pos, null, Color.White, turretRotation, center, 1.0f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(turrettexture, pos, null, Color.White, turretRotation, new Vector2(6.5f,14f), 1.0f, SpriteEffects.None, 0f);
                 if(currentWeapon == Weapon.Shield)
-                    spriteBatch.Draw(TextureRefs.TurretShield, pos, null, Color.White, turretRotation, center, 1.0f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(shieldturrettexture, pos, null, Color.White, turretRotation, new Vector2(6.5f, 14f), 1.0f, SpriteEffects.None, 0f);
                 if (shieldstate == ShieldState.On)
                 {
                     spriteBatch.Draw(TextureRefs.shield, pos, null, Color.White, rotation, center, 1.0f, SpriteEffects.None, 0f);
@@ -422,7 +450,7 @@ namespace Solum.SharedTanks
 
         public Rectangle getRectangle()
         {
-            return new Rectangle((int)pos.X - TextureRefs.tank.Width / 2, (int)pos.Y - TextureRefs.tank.Height / 2, TextureRefs.tank.Width, TextureRefs.tank.Height);
+            return new Rectangle((int)pos.X - TextureRefs.tank_blue.Width / 2, (int)pos.Y - TextureRefs.tank_blue.Height / 2, TextureRefs.tank_blue.Width, TextureRefs.tank_blue.Height);
         }
 
         internal void Collide()

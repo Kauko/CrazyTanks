@@ -256,6 +256,342 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Images\Brick.png">
+      <Name>Brick</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\Kuti.png">
+      <Name>Kuti</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\MenuNappi.png">
+      <Name>MenuNappi</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\MenuTausta.png">
+      <Name>MenuTausta</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PeliTausta.png">
+      <Name>PeliTausta</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\Pelitila.png">
+      <Name>Pelitila</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PelitilaShield.png">
+      <Name>PelitilaShield</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection.png">
+      <Name>PlayerSelection</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\Powerup.png">
+      <Name>Powerup</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Images\PlayerSelection-copy-2_0000_Rajat.png">
+      <Name>PlayerSelection-copy-2_0000_Rajat</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection-copy-2_0001_Paina-start-liittyäksesi-peliin.png">
+      <Name>PlayerSelection-copy-2_0001_Paina-start-liittyäksesi-peliin</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection-copy-2_0002_Info7.png">
+      <Name>PlayerSelection-copy-2_0002_Info7</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0000_Rajat.png">
+      <Name>PlayerSelection_0000_Rajat</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0001_Paina-start-liittyäksesi-peliin.png">
+      <Name>PlayerSelection_0001_Paina-start-liittyäksesi-peliin</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0002_Harmaa4.png">
+      <Name>PlayerSelection_0002_Harmaa4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0003_Paina-start-liittyäksesi-peliin.png">
+      <Name>PlayerSelection_0003_Paina-start-liittyäksesi-peliin</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0004_Harmaa3.png">
+      <Name>PlayerSelection_0004_Harmaa3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0005_Paina-start-liittyäksesi-peliin.png">
+      <Name>PlayerSelection_0005_Paina-start-liittyäksesi-peliin</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0006_Harmaa2.png">
+      <Name>PlayerSelection_0006_Harmaa2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0007_Paina-start-liittyäksesi-peliin.png">
+      <Name>PlayerSelection_0007_Paina-start-liittyäksesi-peliin</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0008_Harmaa1.png">
+      <Name>PlayerSelection_0008_Harmaa1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0009_Jakaja2.png">
+      <Name>PlayerSelection_0009_Jakaja2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0010_Jakaja4.png">
+      <Name>PlayerSelection_0010_Jakaja4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0011_Jakaja3.png">
+      <Name>PlayerSelection_0011_Jakaja3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0012_Jakaja1.png">
+      <Name>PlayerSelection_0012_Jakaja1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0013_PressToStart2.png">
+      <Name>PlayerSelection_0013_PressToStart2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0014_PressToStart4.png">
+      <Name>PlayerSelection_0014_PressToStart4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0015_PressToStart3.png">
+      <Name>PlayerSelection_0015_PressToStart3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0016_PressToStart8.png">
+      <Name>PlayerSelection_0016_PressToStart8</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0017_PressToStart7.png">
+      <Name>PlayerSelection_0017_PressToStart7</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0018_PressToStart6.png">
+      <Name>PlayerSelection_0018_PressToStart6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0019_PressToStart5.png">
+      <Name>PlayerSelection_0019_PressToStart5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0020_PressToStart1.png">
+      <Name>PlayerSelection_0020_PressToStart1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0021_Info1.png">
+      <Name>PlayerSelection_0021_Info1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0022_Info4.png">
+      <Name>PlayerSelection_0022_Info4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0023_Info5.png">
+      <Name>PlayerSelection_0023_Info5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0024_Info3.png">
+      <Name>PlayerSelection_0024_Info3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\PlayerSelection_0025_Info8.png">
+      <Name>PlayerSelection_0025_Info8</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Images\TankkiKeltainen1.png">
+      <Name>TankkiKeltainen1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TankkiKeltainen2.png">
+      <Name>TankkiKeltainen2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TurrettiKeltainen1.png">
+      <Name>TurrettiKeltainen1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TurrettiKeltainen1Kilpi.png">
+      <Name>TurrettiKeltainen1Kilpi</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TurrettiKeltainen2.png">
+      <Name>TurrettiKeltainen2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TurrettiKeltainen2Kilpi.png">
+      <Name>TurrettiKeltainen2Kilpi</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Images\TankkiPunainen1.png">
+      <Name>TankkiPunainen1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TankkiPunainen2.png">
+      <Name>TankkiPunainen2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TurrettiPunainen1.png">
+      <Name>TurrettiPunainen1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TurrettiPunainen1Kilpi.png">
+      <Name>TurrettiPunainen1Kilpi</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TurrettiPunainen2.png">
+      <Name>TurrettiPunainen2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TurrettiPunainen2Kilpi.png">
+      <Name>TurrettiPunainen2Kilpi</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Images\TankkiSininen1.png">
+      <Name>TankkiSininen1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TankkiSininen2.png">
+      <Name>TankkiSininen2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TurrettiSininen1.png">
+      <Name>TurrettiSininen1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TurrettiSininen1Kilpi.png">
+      <Name>TurrettiSininen1Kilpi</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TurrettiSininen2.png">
+      <Name>TurrettiSininen2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TurrettiSininen2Kilpi.png">
+      <Name>TurrettiSininen2Kilpi</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Images\TankkiVihreä1.png">
+      <Name>TankkiVihreä1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TankkiVihreä2.png">
+      <Name>TankkiVihreä2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TurrettiVihreä1.png">
+      <Name>TurrettiVihreä1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TurrettiVihreä1Kilpi.png">
+      <Name>TurrettiVihreä1Kilpi</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TurrettiVihreä2.png">
+      <Name>TurrettiVihreä2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\TurrettiVihreä2Kilpi.png">
+      <Name>TurrettiVihreä2Kilpi</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Images\Shield.png">
+      <Name>Shield</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Images\MenuNappiAktiivinen.png">
+      <Name>MenuNappiAktiivinen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
